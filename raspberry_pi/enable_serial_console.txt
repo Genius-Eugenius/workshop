@@ -1,0 +1,20 @@
+Enable serial console on Raspberry PI v3 device.
+
+1. Having Rsapbian Linux being installed on RaPi, power it
+    off, take SD card and connect it to cardreader. Open folder
+    appropriate to /boot folder in Raspbian filesystem.
+2. Edit file config.txt to enable UART interface at boot time.
+    Add to file these:
+
+# Enable UART
+dtparam=uart0=on        # Device uart0 must use UART interface pins on GPIO
+dtparam=uart1=off       # Device uart1 must not
+dtoverlay=disable-bt    # Bluetooth device must not
+
+3. Edit file cmdline.txt to set UART bitrate 9600.
+    Fix bitrate 115200 to 9600. Command line in the file must look like:
+
+dwc_otg.lpm_enable=0 console=serial0,9600 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
+
+4. Safe eject SD card from cardreader, install it on RaPi and turn it on.
+    Console I/O via UART must appear.

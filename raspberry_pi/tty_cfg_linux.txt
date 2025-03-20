@@ -1,0 +1,53 @@
+Configure conserver server and client on linux host
+
+1. Install conserver server and client:
+    sudo apt install conserver-server
+    sudo apt install conserver-client
+2. Connect USB/UART adapter,
+    device with name /dev/ttyUSBX must appear,
+    if not - run 'dmesg' command to see an error
+3. Configure conserver server:
+    open /etc/conserver/conserver.cf to edit,
+    file contents must look like this
+
+config * {
+}
+default full {
+        rw *;
+}
+default * {
+        logfile /var/log/conserver/&.log;
+        timestamp "";
+        include full;
+}
+access * {
+    trusted 127.0.0.1;
+}
+console <name> {
+    master localhost;
+    type device;
+    device /dev/ttyUSBX;
+    baud 9600;
+    parity none;
+}
+    - here <name> is the name of console you've chosen,
+    '/dev/ttyUSBX' is the name of device, e.g. /dev/ttyUSB0,
+    'baud' value is chosen to be 9600, 'parity' will be
+    always 'none' for RaPi UART.
+
+.4 Start conserver-server:
+    sudo /etc/init.d/conserver-server start
+.5 Check that it is running:
+    run 'ps ax|grep cons'
+
+    - something like this must be printed out
+
+   3819 ?        Ss     0:00 /usr/sbin/conserver -d -p 3109
+   3820 ?        S      0:04 /usr/sbin/conserver -d -p 3109
+
+.6 Start client
+    run 'console <name>', where <name> - is console name
+    configured in /etc/conserver/conserver.cf
+.7 To stop conserver server run command
+    sudo /etc/init.d/conserver-server stop
+

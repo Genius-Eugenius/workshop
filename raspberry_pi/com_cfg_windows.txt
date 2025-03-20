@@ -1,0 +1,12 @@
+Configure COM port at windows to get access to
+RaPi UART
+
+.1 Connect USB/UART adapter, riht click on "Windows"
+    button, choose "Manage devices" in the context menu.
+    Appropriate USB device must appear among listed devices.
+    Find "COM/LPT ports" among devices, if not - create it.
+    USB adapter will be automatically reconfigured as COM
+    port with name like COMx. Open device properties
+    and set baud rate to 9600, parity - none.
+.2 Install PuTTY application. Open it, open appropriate
+    device COMx. 

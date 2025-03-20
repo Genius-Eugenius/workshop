@@ -1,0 +1,42 @@
+Set Raspberry PI device to enable automatic connect to
+network at boot time. Ethernet interface eth0 can be used
+in this case for experimental purposes.
+
+1. Edit /etc/wpa_supplicant/wpa_supplicant.conf to configure
+    access point you like to get connection to (may be access
+    point providing by your home router). File contents must
+    look like
+
+ctrl_interface_group=0
+ap_scan=1
+ctrl_interface=DIR=/var/run/wpa_supplicant
+update_config=1
+
+network={
+    ssid="<Access point ESSID name>"
+    key_mgmt=WPA-PSK
+    psk="<Access point password>"
+}
+
+    - here may be several 'network' to provide connection
+    to many access points.
+
+2. Edit /etc/network interfaces to provide automatic start of
+    wpa supplicant and get DHCP lease through WiFi interface,
+    with Ethernet interface eth0 being UP but unconfigured. File
+    contents must be like:
+
+source-directory /etc/network/interfaces.d
+
+auto lo                     # To pull UP
+iface lo inet loopback      # To set 127.0.0.1/8 and ::1/128 on it
+
+auto eth0                   # To pull UP
+iface eth0 inet manual      # To leave IPv4 unconfigured
+iface eth0 inet6 manual     # To leave IPv6 unconfigured
+
+allow-hotplug wlan0         # To configure on going UP
+iface wlan0 inet manual     # To leave IPv4 unconfigured
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf    # supplicant autostart
+iface default inet dhcp     # To get DHCP lease through default interface
+
