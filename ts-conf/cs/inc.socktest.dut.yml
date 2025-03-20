@@ -1,0 +1,8 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+
+- include:
+    - inc.socktest.dut.rsrc.yml
+    - inc.socktest.net_cfg_ifs.yml
+    - inc.socktest.rpcserver_plugin.yml
+    - inc.socktest.l5.yml

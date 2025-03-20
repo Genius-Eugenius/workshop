@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# Tell Onload to use all local addresses as SFC addresses,
+# instead of using the addresses from the SFC interfaces only.
+# In a sense this is an enhancement of --ool=laddr_prefsrc
+export SFC_OOF_LADDR_ALL=1
+
+TE_EXTRA_OPTS="$TE_EXTRA_OPTS --trc-tag=laddr_all"

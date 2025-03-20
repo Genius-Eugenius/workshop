@@ -1,0 +1,17 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+
+- comment: |
+    Linux netconsole configuration support.
+
+
+
+- register:
+
+    - oid: "/agent/netconsole"
+      access: read_create
+      type: string
+      d: |
+        Enable netconsole.
+        Value format is '<local-port>:<remote-host>:<remote-port>'.
+        Name: Arbitrary name. Used just to identify the instance.

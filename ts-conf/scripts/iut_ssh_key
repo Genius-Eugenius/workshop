@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+if test -n "${TE_IUT_SSH_KEY}" ; then
+    test -r "${TE_IUT_SSH_KEY}" ||
+        { echo "TE_IUT_SSH_KEY $TE_IUT_SSH_KEY is not readable" >&2 ; exit ; }
+    TE_IUT_SSH_KEY_COPY="/tmp/te_iut_key.${USER}"
+    cp "${TE_IUT_SSH_KEY}" "${TE_IUT_SSH_KEY_COPY}" || exit
+    chmod 0600 "${TE_IUT_SSH_KEY_COPY}" || exit
+    export TE_IUT_SSH_KEY="${TE_IUT_SSH_KEY_COPY}"
+fi

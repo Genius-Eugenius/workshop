@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+if test "x${SOCKAPI_TS_REMOVE_DISABLE_TS}" != "xyes" ; then
+    export DISABLE_TIMESTAMPS=yes
+
+    TE_EXTRA_OPTS="--trc-tag=disable_timestamps --tester-req=!NO_DISABLE_TIMESTAMPS"
+fi

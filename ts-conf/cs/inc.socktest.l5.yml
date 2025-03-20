@@ -1,0 +1,12 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+
+#
+#
+- cond:
+    if: ${SOCKAPI_TS_CFG_L5_UL_INC} != ""
+    then:
+      - include:
+        - inc.socktest.l5-env.yml
+        - inc.socktest.l5-unix.yml
+        - inc.socktest.l5-ul.yml

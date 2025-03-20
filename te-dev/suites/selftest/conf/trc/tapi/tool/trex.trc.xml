@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<test name="trex" type="package">
+    <objective>TAPI TRex implementation</objective>
+    <iter result="PASSED">
+
+        <test name="trex_prologue">
+            <objective/>
+            <iter result="PASSED"/>
+        </test>
+
+        <test name="trex_nginx">
+            <objective/>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="trex_duration"/>
+                <arg name="trex_multiplier"/>
+                <arg name="nginx_port"/>
+                <results tags="no_trex">
+                    <result value="SKIPPED">
+                        <verdict>Path to TRex exec is not specified in environment</verdict>
+                    </result>
+                </results>
+            </iter>
+        </test>
+
+        <test name="trex_wrk">
+            <objective/>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="trex_duration"/>
+                <arg name="wrk_connections"/>
+                <results tags="no_trex">
+                    <result value="SKIPPED">
+                        <verdict>Path to TRex exec is not specified in environment</verdict>
+                    </result>
+                </results>
+            </iter>
+        </test>
+
+    </iter>
+</test>

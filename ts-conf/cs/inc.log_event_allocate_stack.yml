@@ -1,0 +1,30 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+#
+# Add 'Failed to allocate stack' event to iut parsers
+#
+# Note: see description for TE_LOG_LISTENER_* variables
+# in the cs/inc.log_listener.yml file
+#
+
+- cond:
+    if: ${TE_LOG_LISTENER_IUT} != ""
+    then:
+      - add:
+          - oid: "/agent:${TE_LOG_LISTENER_TA_NAME}/parser:iut/event:allocate_stack"
+            value: "allocate_stack"
+
+          - oid: "/agent:${TE_LOG_LISTENER_TA_NAME}/parser:iut/event:allocate_stack/pattern:1"
+            value: "Failed to allocate stack"
+
+- add:
+    - oid: "/local:/tester:/event:allocate_stack"
+
+    - oid: "/local:/tester:/event:allocate_stack/handler:internal_handler"
+
+- set:
+    - oid: "/local:/tester:/event:allocate_stack/handler:internal_handler/internal:"
+      value: "1"
+
+    - oid: "/local:/tester:/event:allocate_stack/handler:internal_handler/signal:"
+      value: "SIGUSR2"

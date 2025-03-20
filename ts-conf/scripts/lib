@@ -1,0 +1,411 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Note: the script uses functions and variables declared in the make_cmds file,
+# therefore, the make_cmds file must be sourced before using the functions from
+# this script. The same applies to the te_ta_sha_helper script from TE.
+
+export TE_LOG_LISTENER_LOG_LEVEL=WARN
+SOCKAPI_TS_IF_ALIAS_DONE=false
+
+get_random_vlan()
+{
+    echo $(((RANDOM % 4093) + 2))
+}
+
+#
+# Use interface name aliases to avoid combining too long name.
+# An interface name should not exceed 16 bytes length.
+#
+# Do not set aliases if SOCKAPI_TS_IF_ALIAS_DONE=true or bonding is used.
+# Note, if $5=true is set changes will be applied ignoring
+# SOCKAPI_TS_IF_ALIAS_DONE value.
+#
+use_interface_name_aliases()
+{
+    local var="$1"
+    local base="$2"
+    local alias="$3"
+    local suffix="$4"
+    local force=${5:-false}
+
+    if test -n "$SOCKAPI_TS_BOND_NAME"  || \
+       ($SOCKAPI_TS_IF_ALIAS_DONE && ! $force); then
+        export $var="${base}.${suffix}"
+        return
+    fi
+
+    export $var="${alias}.${suffix}"
+
+    echo "Substitute base interface name $base -> $alias: ${!var}"
+}
+
+#
+# Obtain the version of headers installed on agent from linux/version.h,
+# and convert major and minor numbers of it to a single value, e.g.:
+# 4.19.118 -> 419
+# 4.9.210  -> 409
+# Note: if an error occurs (for example, if there is no linux/version.h file),
+# the function outputs an error message to stderr, but does not stop working:
+# the result is '0'.
+#
+# @param $1 TA name (TE_IUT, TE_TST1, TE_TST2, TE_TST3)
+header2num()
+{
+    local ta="$1"
+
+    # Obtain a decimal value from the string "#define LINUX_VERSION_CODE xxxxx"
+    local cmd="
+        cat /usr/include/linux/version.h | \
+            grep LINUX_VERSION_CODE | cut -d ' ' -f 3
+    "
+    local ver="$(te_ta_process_cmd "${ta}" "${cmd}")"
+
+    local num1=$((ver >> 16))
+    local num2=$((ver >> 8 & 0xFF))
+    local header_num=$(($num1 * 100 + $num2))
+
+    echo ${header_num}
+}
+
+#
+# Export headers version
+#
+# @param $1 TA name (TE_IUT, TE_TST1, TE_TST2, TE_TST3)
+#
+export_headers_num()
+{
+    export ${1}_HEADERS_NUM="$(header2num "${1}")"
+}
+
+#
+# Export kernel version number (major version * 100 + minor version).
+# Having version as a single number is convenient when there is a need
+# to check whether kernel is modern enough to support some feature.
+#
+# @param $1   TA name (TE_IUT, TE_TST1, TE_TST2, TE_TST3)
+#
+export_kernel_version_num()
+{
+    local ta="$1"
+
+    local cmd="uname -r | sed \"s/\([0-9]\+[.][0-9]\+\)[.].*$/\1/\""
+    local ver="$(te_ta_process_cmd "${ta}" "${cmd}")"
+
+    local ver_maj=${ver%%.*}
+    local ver_min=${ver##*.}
+    export ${1}_KERNEL_VERSION_NUM=$(($ver_maj * 100 + $ver_min))
+}
+
+#######################################
+# Get interface names of host by driver name. It is assumed
+# that the driver is loaded.
+# Arguments:
+#   TA name (TE_IUT, TE_TST1, TE_TST2, TE_TST3)
+#   Driver name
+# Outputs:
+#   Writes interface names to stdout
+#######################################
+get_ifnames_by_driver() {
+    local ta=$1 ; shift
+    local driver=$1 ; shift
+
+    if [[ "$driver" == "virtio-pci" ]] ; then
+        # In the case of Virtio, PCI device is bound to virtio-pci driver,
+        # but network device is provided by the virtio_net driver which
+        # is provided by the module with exactly the same name.
+        driver="virtio_net"
+    fi
+
+    local cmd="
+        for f in /sys/class/net/*; do
+            if grep -q DRIVER=${driver} \$f/device/uevent 2>/dev/null; then
+                basename \$f;
+            fi;
+        done
+    "
+    local ifs=($(te_ta_process_cmd "$ta" "$cmd"))
+
+    echo "${ifs[@]}"
+}
+
+#######################################
+# Get interface name on TA by vendor/pci IDs and instance number.
+# It is assumed that the driver is loaded.
+# Arguments:
+#   TA name (TE_IUT, TE_TST1, TE_TST2, TE_TST3)
+#   Vendor Id
+#   Device Id
+#   Instance number
+#   NetDev on the instance number (may be empty)
+# Outputs:
+#   Writes interface name to stdout
+#######################################
+get_iface_by_vendor() {
+    local ta=$1 ; shift
+    local vid=$1 ; shift
+    local did=$1 ; shift
+    local inst_num=$1 ; shift
+    local netdev_num=$1
+
+    local to_find="PCI_ID=${vid}:${did}"
+    to_find="${to_find^^}"
+    [[ -n "$netdev_num" ]] || netdev_num=0
+    # numbering starts with one in sed
+    local row=$((netdev_num + 1))
+
+    # virtio-pci stores the 'net' directory inside 'virtioN'
+    local cmd="
+        set -o pipefail;
+        num=0;
+        for d in /sys/bus/pci/devices/*; do
+            if grep -q ${to_find} \$d/uevent 2>/dev/null; then
+                dirname="\${d}/net";
+                altdir="\${d}/virtio*";
+                if ! test -d "\${dirname}" && test -d "\$altdir" ; then
+                    dirname="\${altdir}/net";
+                fi;
+                if test \$num -eq $inst_num ; then
+                    ls -1 \${dirname} | sed -n "${row}p"
+                       || echo 'WARN: is the net driver loaded on ${!ta}?' >&2;
+                    break;
+                fi;
+                num=\$((num + 1));
+            fi;
+        done
+    "
+    te_ta_process_cmd "$ta" "$cmd"
+}
+
+#######################################
+# Get interface names on TA by vendor/pci IDs and instance number with
+# netdev number.
+# It is assumed that the driver is loaded.
+# Arguments:
+#   TA name (TE_IUT, TE_TST1, TE_TST2, TE_TST3)
+#   Vendor Id
+#   Device Id
+#   First instance number
+#   NetDev on the first instance number (may be empty)
+#   Second instance number (may be empty)
+#   NetDev on the second instance number (may be empty)
+# Outputs:
+#   Writes interface names to stdout
+#######################################
+get_ifnames_by_vendor() {
+    local ta=$1 ; shift
+    local vid=$1 ; shift
+    local did=$1 ; shift
+    local inst1_num=$1 ; shift
+    local netdev1_num=$1 ; shift
+    local inst2_num=$1 ; shift
+    local netdev2_num=$1
+
+    get_iface_by_vendor "$ta" "$vid" "$did" "$inst1_num" "$netdev1_num"
+    [[ -z "$inst2_num" ]] \
+        || get_iface_by_vendor "$ta" "$vid" "$did" "$inst2_num" "$netdev2_num"
+}
+
+#######################################
+# Export interface names of IUT/TST1, if this has not already been done.
+# The function searches in PCI devices, if vendor/device IDs and instance
+# number are known. Otherwise, the search is performed by the driver name
+# (which may not work correctly if the driver is used not only for interfaces
+# between IUT and TST1).
+# Globals:
+#   TE_CHOOSE_HWPORT2_FIRST
+#   TE_ENV_IUT_NET_DRIVER
+#   TE_ENV_TST1_NET_DRIVER
+#   TE_IUT
+#   TE_IUT_TST1
+#   TE_IUT_TST1_IUT
+#   TE_PCI_VENDOR_*
+#   TE_PCI_INSTANCE_*
+#   TE_TST1
+#   TE_TST1_IUT
+#   TE_TST1_IUT_IUT
+# Outputs:
+#   Writes interface names to stdout
+#######################################
+export_ifnames() {
+    local ifnames=
+
+    if [[ "$TE_CHOOSE_HWPORT2_FIRST" == "1" ]] ; then
+        if1_id=1
+        if2_id=0
+    else
+        if1_id=0
+        if2_id=1
+    fi
+
+    if [[ -z "${TE_IUT_TST1}${TE_IUT_TST1_IUT}" ]] ; then
+        if [[ -n "$TE_PCI_VENDOR_IUT_TST1" ]] ; then
+            ifnames=( $(get_ifnames_by_vendor "TE_IUT" \
+                    "$TE_PCI_VENDOR_IUT_TST1" "$TE_PCI_DEVICE_IUT_TST1" \
+                    "$TE_PCI_INSTANCE_IUT_TST1" "$TE_PCI_FN_NETDEV_IUT_TST1" \
+                    "$TE_PCI_INSTANCE_IUT_TST1a" "$TE_PCI_FN_NETDEV_IUT_TST1a") )
+        else
+            ifnames=( $(get_ifnames_by_driver "TE_IUT" \
+                    "$TE_ENV_IUT_NET_DRIVER") )
+        fi
+        export TE_IUT_TST1=${ifnames[$if1_id]}
+        export TE_IUT_TST1_IUT=${ifnames[$if2_id]}
+    fi
+
+    if [[ -z "${TE_IUT_TST2}" ]] ; then
+        if [[ -n "$TE_PCI_VENDOR_IUT_TST2" ]] ; then
+            ifnames=( $(get_ifnames_by_vendor "TE_IUT" \
+                    "$TE_PCI_VENDOR_IUT_TST2" "$TE_PCI_DEVICE_IUT_TST2" \
+                    "$TE_PCI_INSTANCE_IUT_TST2" "$TE_PCI_FN_NETDEV_IUT_TST2" \
+                    "" "") )
+            export TE_IUT_TST2=${ifnames[$if1_id]}
+        fi
+    fi
+
+    if [[ -z "${TE_TST1_IUT}${TE_TST1_IUT_IUT}" ]] ; then
+        if [[ -n "$TE_PCI_VENDOR_TST1_IUT" ]] ; then
+            ifnames=( $(get_ifnames_by_vendor "TE_TST1" \
+                    "$TE_PCI_VENDOR_TST1_IUT" "$TE_PCI_DEVICE_TST1_IUT" \
+                    "$TE_PCI_INSTANCE_TST1_IUT" "$TE_PCI_FN_NETDEV_TST1_IUT" \
+                    "$TE_PCI_INSTANCE_TST1a_IUT" "$TE_PCI_FN_NETDEV_TST1a_IUT") )
+        else
+            ifnames=( $(get_ifnames_by_driver "TE_TST1" \
+                    "$TE_ENV_TST1_NET_DRIVER") )
+        fi
+        export TE_TST1_IUT=${ifnames[$if1_id]}
+        export TE_TST1_IUT_IUT=${ifnames[$if2_id]}
+    fi
+
+    if [[ -z "${TE_TST2_IUT}" ]] ; then
+        if [[ -n "$TE_PCI_VENDOR_TST2_IUT" ]] ; then
+            ifnames=( $(get_ifnames_by_vendor "TE_TST2" \
+                    "$TE_PCI_VENDOR_TST2_IUT" "$TE_PCI_DEVICE_TST2_IUT" \
+                    "$TE_PCI_INSTANCE_TST2_IUT" "$TE_PCI_FN_NETDEV_TST2_IUT" \
+                    "" "") )
+            export TE_TST2_IUT=${ifnames[$if1_id]}
+        fi
+    fi
+
+    echo TE_IUT_TST1=${TE_IUT_TST1}
+    [[ -z "$TE_IUT_TST2" ]] || echo TE_IUT_TST2="${TE_IUT_TST2}"
+    [[ -z "${TE_IUT_TST1_IUT}" ]] || echo TE_IUT_TST1_IUT=${TE_IUT_TST1_IUT}
+
+    echo TE_TST1_IUT=${TE_TST1_IUT}
+    [[ -z "$TE_TST2_IUT" ]] || echo TE_TST2_IUT="${TE_TST2_IUT}"
+    [[ -z "${TE_TST1_IUT_IUT}" ]] || echo TE_TST1_IUT_IUT=${TE_TST1_IUT_IUT}
+}
+
+#######################################
+# Export interface firmware version for the host.
+# Globals:
+#   IUT_FW_VERSION
+# Arguments:
+#   Host name
+#   Interface name
+#######################################
+export_iut_fw_version() {
+    local host="$1"
+    local ifname="$2"
+
+    make_cmds_for_host $host
+    fw_version=$(process_ssh_cmd "sudo /sbin/ethtool -i $ifname 2>/dev/null | grep \"firmware-version\" | sed \"s/.*: //\"")
+
+    export IUT_FW_VERSION="$fw_version"
+}
+
+#######################################
+# Check consistency for ool options according to NIC firmware variant
+# on IUT and update the TE_EXTRA_OPTS variable if both options of the
+# firmware variant are omitted.
+# Globals:
+#   cmd_line_opts
+#   IUT_FW_VERSION
+#   TE_EXTRA_OPTS
+#######################################
+check_fw_var_consistency() {
+    local info="check_fw_var_consistency"
+
+    local fw_var="$(echo "$IUT_FW_VERSION" | sed -e "s/.*rx//" \
+                 | sed -e "s/ tx.*//")"
+
+    if [[ "$fw_var" == "0" ]] ; then
+        fw_var="fw_full_featured"
+    elif [[ "$fw_var" == "1" ]] ; then
+        fw_var="fw_low_latency"
+    else
+        echo "Strange variant of FW: '$fw_var'" >&2
+        exit 1
+    fi
+
+    local fw_ff_present=false
+    if [[ "${cmd_line_opts/--script=ool\/config\/fw_full_featured/}" != \
+          "$cmd_line_opts" ]] ; then
+        fw_ff_present=true
+    fi
+    local fw_ll_present=false
+    if [[ "${cmd_line_opts/--script=ool\/config\/fw_low_latency/}" != \
+          "$cmd_line_opts" ]] ; then
+        fw_ll_present=true
+    fi
+
+    if [[ "$fw_ff_present" = true && "$fw_var" == "fw_low_latency" ]] || \
+       [[ "$fw_ll_present" = true && "$fw_var" == "fw_full_featured" ]] ; then
+        fail "$info: ool option and FW variant on NIC is not the same!"
+    fi
+
+    if $fw_ll_present && $fw_ff_present ; then
+        fail "$info: only one of the ool options is allowed."
+    fi
+
+    if [[ "$fw_var" == "fw_full_featured" && "$fw_ff_present" != true ]] || \
+       [[ "$fw_var" == "fw_low_latency" && "$fw_ll_present" != true ]]; then
+        TE_EXTRA_OPTS+=" --script=ool/config/${fw_var}"
+        warn "RING: $info: using --ool=${fw_var}"
+    fi
+}
+
+#######################################
+# Safe "ln -sf": do nothing if the result is the same.
+# Arguments:
+#   Source location
+#   Destination
+#######################################
+ln_sf_safe() {
+    local from="$1" ; shift
+    local to="$1" ; shift
+    local file="$1"
+
+    [[ "$to" -ef "$from" ]] && return
+    [[ -n "$file" && "$to/$file" -ef "$from/$file" ]] && return
+
+    echo "WARNING: Linking: ln -sf \"$from\" \"$to\""
+    # ln -f does not overwrite symbolic link for a directory
+    [[ -d "$to" ]] && rm "$to"
+    ln -sf "$from" "$to"
+}
+
+#######################################
+# Get IUT host name. There are two cases:
+# 1) IUT is real host and TE_IUT variable is exists - use it.
+# 2) IUT is a VM and does not exist until the configurator does its job,
+#    but since TA for IUT are built on an auxiliary host, we can use this
+#    auxiliary host to get some auxiliary information.
+# Globals:
+#   TE_IUT
+#   {TE_IUT_TA_TYPE}_HOST
+# Outputs:
+#   Writes host name to stdout
+#######################################
+get_te_iut_host() {
+    local host="$TE_IUT"
+
+    if test -z "$host" ; then
+        pvar="${TE_IUT_TA_TYPE}_HOST"
+        host="${!pvar}"
+        if test -z "$host" ; then
+            echo "ERROR: get_te_iut_host(): failed to get the te_iut_host:" >&2
+            echo "the values of 'TE_IUT' and '$pvar' variables were checked." >&2
+            exit 1
+        fi
+    fi
+    echo "$host"
+}

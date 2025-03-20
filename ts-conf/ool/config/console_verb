@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Console logging level is explicitly decreased in some tests using macro
+# TAPI_SYS_LOGLEVEL_DEBUG to avoid spawning too much console logs. This
+# scripts/cancels this tuning what can be used for debug purposes.
+export DEBUG_CONSOLE=1

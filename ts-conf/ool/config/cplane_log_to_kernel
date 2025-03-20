@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# This ool options is added automatically in absence of
+# cplane_log_to_default option
+if test "x${SFC_CPLANE_SERVER_PARAMS/-K/}" == "x${SFC_CPLANE_SERVER_PARAMS}" ; then
+    export SFC_CPLANE_SERVER_PARAMS="${SFC_CPLANE_SERVER_PARAMS} -K"
+fi
+
+TE_EXTRA_OPTS="$TE_EXTRA_OPTS --trc-tag=cplane_log_to_kernel"

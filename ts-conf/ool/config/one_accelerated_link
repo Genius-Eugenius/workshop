@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+# We don't guarantee acceleration when using the second interface.
+TE_EXTRA_OPTS="--tester-req=!ENV-2LINKS-IUT"
+TE_EXTRA_OPTS="$TE_EXTRA_OPTS --tester-req=!SECOND_IF_ACCELERATED"

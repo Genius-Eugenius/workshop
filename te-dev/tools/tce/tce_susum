@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+#
+# Test Coverage Estimation
+# Generate a HTML super summary to refer HTML summaries.
+
+import sys
+import os
+import json
+import tce_py.susum as reader
+import tce_py.susum_html as writer
+
+def main(argv):
+    if len(argv) != 3:
+        raise ValueError("invalid cmdline")
+
+    with open(argv[1], "r") as fp:
+        conf = json.load(fp)
+
+    susum = reader.read(conf)
+
+    writer.write(conf, susum, argv[2])
+
+    return 0
+
+if __name__ == "__main__":
+    argv = sys.argv
+    rc = 1
+
+    try:
+        rc = main(argv)
+    except Exception as e:
+        sys.stderr.write("%s: fail to generate susum: %s\n" % (argv[0], e))
+
+    sys.exit(rc)

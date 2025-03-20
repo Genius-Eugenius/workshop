@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<package version="1.0">
+
+    <description>Tests on TAD iSCSI csap functionality.</description>
+
+
+    <req id="TAD_ISCSI" sticky="true"/>
+
+    <session>
+        <var name="ta" handdown="true">
+            <value>Agt_A</value>
+        </var>
+
+        <run>
+            <script name="simple">
+            </script>
+        </run>
+        <run>
+            <script name="double">
+            </script>
+        </run>
+    </session>
+
+</package>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<test name="expand_filters" type="script">
+    <objective>Testing variable expansion with filters.</objective>
+    <notes/>
+    <iter result="PASSED">
+        <arg name="input" />
+        <arg name="filter" />
+        <arg name="filtered" />
+    </iter>
+</test>

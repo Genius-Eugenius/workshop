@@ -1,0 +1,18 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+
+- comment: |
+    Telnet server configuration model.
+
+
+
+- register:
+
+    - oid: "/agent/telnetd"
+      access: read_write
+      type: int32
+      d: |
+         TELNET daemon enabling/disabling.
+         Name:  empty
+         Value: 0 (disabled) or 1 (enabled)
+         Limit: 1

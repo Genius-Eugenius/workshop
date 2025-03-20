@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Detect and export interface names used between IUT/TST1. Interface names
+# are exported only if the corresponding variables are not already defined.
+
+# Do not export interfaces in case of build only
+if [[ "$TE_TS_BUILD_ONLY" != "yes" ]] ; then
+    source "${TE_BASE}/engine/builder/te_ta_ssh_helper"
+    export_ifnames
+fi

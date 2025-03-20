@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<tester_cfg version="1.0">
+
+
+
+    <description>All tests on TAD itself</description>
+
+    <suite name="selftad"/>
+
+    <run>
+        <package name="selftad"/>
+    </run>
+
+</tester_cfg>

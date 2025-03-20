@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+export TE_IUT_EF100_SOC=1
+
+TE_EXTRA_OPTS="${TE_EXTRA_OPTS} --trc-tag=ef100_soc"
+TE_EXTRA_OPTS="${TE_EXTRA_OPTS} --script=dut/ef100"

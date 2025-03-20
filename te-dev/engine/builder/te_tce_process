@@ -1,0 +1,738 @@
+#! /bin/bash
+# SPDX-License-Identifier: Apache-2.0
+#
+# Test Coverage Estimation
+# Process TCE for all NUT images
+#
+#
+
+SCRIPT_DIR=`dirname $0`
+
+. "${SCRIPT_DIR}/te_tce_functions.sh"
+
+TCE_LIST="$1"
+
+tce_set_build_base \
+    || tce_die "failed to locate base directories for builds"
+
+for platform in $TE_BS_PLATFORMS; do
+    tce_list="$(tce_list_components "${platform}")"
+    fake_sbd=
+    if test -n "$tce_list" -a -f "${TE_BUILD}/${platform}.sbd"; then
+        # When shadow build directory is used, GCOV data files will be
+        # created in that directory, instead of the normal build directory.
+        # That's a limitation of GCC+GCOV which in principle can be
+        # circumvented by a combination of GCC scripts and environment
+        # variables, but it seems like this way is simpler and more reliable
+        sbd="$(cat "${TE_BUILD}/${platform}.sbd")"
+        if test "${sbd}" != "${TE_BUILD}"; then
+            te_eval_or_ssh "${platform}" "
+               sudo tar -C '${sbd}' -czf - . ;
+               sudo rm -rf '${sbd}' >/dev/null
+            " | tar -C "${TE_BUILD}" -xzf -
+            # The build directory may contain files with profilable code,
+            # e.g. headers with inline functions.
+            # If a shadow build directory has been used, it will be searched
+            # by gcov, so we create a local fake symlink to it
+            ln -s "${TE_BUILD}" "${sbd}"
+            fake_sbd=1
+        fi
+    fi
+    for tce in $tce_list ; do
+        srcvar="TE_BS_TCE_${platform}_${tce}_SOURCES"
+        if test -z "${!srcvar}"; then
+            echo "warning: TCE component $tce not defined for platform $platform" >&2
+            continue
+        fi
+        buildvar="TE_BS_TCE_${platform}_${tce}_MESON_BUILDDIR"
+        if ! test -d "${!buildvar}" ; then
+            buildvar="TE_BS_TCE_${platform}_${tce}_BUILDDIR"
+            if ! test -d "${!buildvar}" ; then
+                echo "warning: TCE component $tce not built for platform $platform @ ${!buildvar}" >&2
+                continue
+            fi
+        else
+            continue
+        fi
+        find "${!buildvar}" -name '*.da' -o -name '.*.da' -o -name '*.gcda' -o -name '.*.gcda' | \
+            xargs -r -n1 tce_gcov "${!buildvar}" || exit 1
+        find "${!buildvar}" -name '*.gcov' -o -name '.*.gcov' | sort | \
+            xargs -r -n1 tce_report >${TE_LOG_DIR}/tce_log_${platform}_${tce}.tce || exit 1
+        mkdir -p ${TE_LOG_DIR}/tce_log_${platform}_${tce}_files
+        excludevar="TE_BS_TCE_${platform}_${tce}_EXCLUDESRC"
+        (cd "${!buildvar}";
+         tce_summary -vEXCLUDE="${!excludevar}" -vSORTMODE=coverage \
+                     -vDATADIR=${TE_LOG_DIR}/tce_log_${platform}_${tce}_files \
+                     ${TE_LOG_DIR}/tce_log_${platform}_${tce}.tce > \
+                     ${TE_LOG_DIR}/tce_log_${platform}_${tce}.html)
+    done
+    test -n "$fake_sbd" && rm -f "$sbd"
+done
+
+tce_set_type_comp_build
+
+#######################################
+# List cpio files.
+# Arguments:
+#   The directory to list the files within.
+# Outputs:
+#   The names of cpio files.
+# Returns:
+#   0 if succeeds, non-zero on error.
+#######################################
+function tce_list_cpios() {
+    local base="$1"
+    local cpios=
+
+    pushd "${base}" &> /dev/null || return 1
+
+    cpios="$(find . -type f -name \*.cpio 2> /dev/null)" || return 1
+
+    popd > /dev/null
+
+    echo "${cpios}" | sed "s/\.\///;s/\.cpio//" | sort
+}
+
+#######################################
+# Locate TCE saves
+#
+# RCF/ contollers store cpio with gcda files for components within the saves
+# directory. Let a component COMP is built on the host TYPE. Then for TA agent
+# NAME the gcda files could be saved on the path TYPE/COMP/NAME/XXXX.cpio.
+# Where # XXXX is unique for each save.
+#
+# The operation sets the following dependencies:
+# - tce_types: COMP -> TYPEs
+# - tce_name: TYPE, COMP -> NAMEs
+# - tce_saves: TYPE, COMP, NAME -> saves
+#
+# Globals:
+#   IFS
+#   TCE_WS
+#   tce_types
+#   tce_names
+#   tce_saves
+# Arguments:
+#   None
+# Outputs:
+#   Outputs a message on error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_locate_saves() {
+    local base="${TCE_WS}/saves"
+    local ifs="$IFS"
+    local cpios=
+    local sp=
+    local se=
+    local t=
+    local c=
+    local n=
+    local s=
+    declare -gA tce_types
+    declare -gA tce_names
+    declare -gA tce_saves
+
+    [[ -d "${base}" ]] || return 0
+
+    cpios=$(tce_list_cpios "${base}") \
+        || tce_die "fail to list TCE saves"
+
+    while read sp ; do
+        [[ -z "${sp}" ]] && continue
+
+        grep -q -F " " <<< "${sp}" \
+            && tce_die "invalid TCE save '${sp}', no spaces are expected"
+
+        IFS="/" ; se=( ${sp} ); IFS="${ifs}"
+        [[ "${#se[@]}" -eq 4 ]] \
+            || tce_die "invalid TCE save '${sp}', type, comp, name, save " \
+                       "are expected"
+
+        t="${se[0]}" ; c="${se[1]}"; n="${se[2]}"; s="${se[3]}"
+
+        if ! grep -q -F " ${n}" <<< "${tce_names[${t}_${c}]}" ; then
+            grep -a -F " ${t}" <<< "${tce_types[${c}]}" \
+                || tce_types["${c}"]+=" ${t}"
+
+            tce_names["${t}_${c}"]+=" ${n}"
+        fi
+
+        tce_saves["${t}_${c}_${n}"]+=" ${s}"
+    done < <(echo "${cpios}")
+}
+
+tce_locate_saves
+
+#######################################
+# Extract gcda files from a save.
+# Globals:
+#   TCE_WS
+# Arguments:
+#   The name of the save.
+#   The location of the save.
+#   The location to extract the save.
+# Outputs:
+#   Outputs a message on error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_extract_save() {
+    local save="$1"
+    local sbase="$2"
+    local dbase="$3"
+    local dest="${dbase}/${save}/build"
+
+    mkdir -p "${TCE_WS}/${dest}" 2> /dev/null \
+        || tce_die "failed to create "${dest}" for TCE save ${sbase}/${save}"
+
+    cat "${TCE_WS}/${sbase}/${save}.cpio" 2> /dev/null \
+        | cpio -i -D "${TCE_WS}/${dest}" -d 2> /dev/null \
+        || tce_die "failed to extract TCE save ${sbase}/${save}"
+}
+
+function rsync_fnmatch_from
+{
+    local fnm="$1"
+    local platform="$2"
+    local src="$3"
+    local dst="$4"
+    local p_ssh="${platform}_SSH"
+    local ssh="${!p_ssh}"
+    local rsync="rsync -a --include=${fnm} --include=*/ --exclude=*"
+
+    if test -n "${ssh}" ; then
+        ${rsync} -e "${ssh% *}" "${ssh##* }:${src}/" "${dst}/"
+    else
+        ${rsync} "${src}/" "${dst}/"
+    fi
+}
+
+function rsync_fnmatch_to
+{
+    local fnm="$1"
+    local platform="$2"
+    local src="$3"
+    local dst="$4"
+    local p_ssh="${platform}_SSH"
+    local ssh="${!p_ssh}"
+    local rsync="rsync -a --include=${fnm} --include=*/ --exclude=*"
+
+    if test -n "${ssh}" ; then
+        ${rsync} -e "${ssh% *}" "${src}/" "${ssh##* }:${dst}/"
+    else
+        ${rsync} "${src}/" "${dst}/"
+    fi
+}
+
+#######################################
+# Clean TCE files on the build host.
+# Globals:
+#   tce_build_base
+#   tce_type_comp_build
+# Arguments:
+#   The TA type.
+#   The name of a TA component.
+# Outputs:
+#   Outputs a message on an error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_clean_on_host() {
+    local type="$1"
+    local comp="$2"
+    local hbase="${tce_build_base[${type}]}"
+    local hdest="${hbase}/destdir/${TE_INSTALL}/${type}"
+    local build="${tce_type_comp_build["${type}_${comp}"]}"
+
+    te_eval_or_ssh "${type}" "
+                   export PATH=\"${hdest}/bin:\${PATH}\" ;
+                   te_clean_gcov.sh \"${hbase}/${build}\"
+                   " \
+        || tce_die "failed to clean ${type}/${comp} on build host"
+}
+
+#######################################
+# Process gcda files on the build host
+# Globals:
+#   TE_INSTALL
+#   TCE_WS
+#   tce_build_base
+#   tce_type_comp_build
+# Arguments:
+#   The TA type.
+#   The name of a TA component.
+#   The destination of gcda files.
+# Outputs:
+#   Outputs a message on an error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_process_gcda_on_host() {
+    local type="$1"
+    local comp="$2"
+    local dest="$3"
+    local hbase="${tce_build_base[${type}]}"
+    local hdest="${hbase}/destdir/${TE_INSTALL}/${type}"
+    local build="${tce_type_comp_build[${type}_${comp}]}"
+
+    tce_clean_on_host "${type}" "${comp}"
+
+    rsync_fnmatch_to "*.gcda" "${type}" "${TCE_WS}/${dest}/build" \
+                     "${hbase}/${build}" \
+        || tce_die "failed to place ${dest} on ${type}/${comp} build host"
+
+    te_eval_or_ssh "${type}" "
+                   export PATH=\"${hdest}/bin:\${PATH}\" ;
+                   te_process_gcov.sh \"${hbase}/${build}\" " \
+        || tce_die "failed to process ${dest} on ${type}/${comp} build host"
+
+    rsync_fnmatch_from "*.gcov" "${type}" "${hbase}/${build}" \
+                       "${TCE_WS}/${dest}/build" \
+        || tce_die "failed to fetch ${dest} from ${type}/${comp} build host"
+}
+
+#######################################
+# Link the source directory to be relative to the build.
+# Globals:
+#   TE_BS_TCE_${type}_${comp}_SOURCES
+#   TE_BUILD
+#   tce_type_comp_build
+# Arguments:
+#   The TA type of build.
+#   The name of a TA component.
+# Outputs:
+#   Outputs a message on an error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_link_src_on_build() {
+    local type="$1"
+    local comp="$2"
+    local build="${tce_type_comp_build[${type}_${comp}]}"
+    local pbase="${TE_BUILD}/platforms/${type}"
+    local psrc="TE_BS_TCE_${type}_${comp}_SOURCES"
+
+    [[ -d "${pbase}/${build}/../src" ]] && return 0
+
+    [[ -d "${!psrc}" ]] \
+        || tce_die "failed to locate src for ${type}/${comp}"
+
+    ln -s "${!psrc}" "${pbase}/${build}/../src" \
+        || tce_die "failed to link src for ${type}/${comp}"
+}
+
+#######################################
+# Link the inst directory to be relative to the build.
+# Globals:
+#   TE_BUILD
+#   TE_INSTALL
+#   tce_type_comp_build
+# Arguments:
+#   The TA type of build.
+#   The name of a TA component.
+# Outputs:
+#   Outputs a message on an error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_link_inst_on_build() {
+    local type="$1"
+    local comp="$2"
+    local build="${tce_type_comp_build[${type}_${comp}]}"
+    local pbase="${TE_BUILD}/platforms/${type}"
+    local inst="$(realpath "${pbase}/${build}/../inst")"
+
+    [[ -d "${inst}" ]] && return 0
+
+    [[ -d "${TE_INSTALL}/${type}" ]] \
+        || tce_die "failed to locate inst for ${type}/${comp}"
+
+    ln -s "${TE_INSTALL}/${type}" "${inst}" \
+        || tce_die "failed to link inst for ${type}/${comp}"
+}
+
+#######################################
+# Resolve gcov sources to be relative to the build
+# Globals:
+#   TE_BUILD
+#   TE_INSTALL
+#   TCE_WS
+#   tce_build_base
+#   tce_type_comp_build
+# Arguments:
+#   The TA type of build.
+#   The name of a TA component.
+#   The destination of gcov files.
+# Outputs:
+#   Outputs a message on an error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_resolve_gcov_on_build() {
+    local type="$1"
+    local comp="$2"
+    local dest="$3"
+    local hbase="${tce_build_base[${type}]}"
+    local build="${tce_type_comp_build[${type}_${comp}]}"
+    local pbase="${TE_BUILD}/platforms/${type}"
+    local conf="${TCE_WS}/${dest}/tce.conf"
+
+    cat 2> /dev/null > "${conf}" << EOF
+{
+    "build" : "${build}",
+    "inst" : "../inst",
+    "plat_build" : "${pbase}/${build}",
+    "host_build" : "${hbase}/${build}",
+    "host_inst" : "${hbase}/destdir/${TE_INSTALL}/${type}",
+    "unres" : "unres.txt"
+}
+EOF
+    (( $? == 0 )) \
+        || tce_die "failed to write ${dest} configuration for ${type}/${comp}"
+
+    tce_resolve_gcov.py "${conf}" \
+        || tce_die "failed to resolve ${dest} gcov files for ${type}/${comp}"
+}
+
+tce_py="${TE_INSTALL}/${TE_HOST}/lib"
+export PYTHONPATH="${tce_py}:${PYTHONPATH}"
+
+#######################################
+# Clean gcda and gcov files on the build.
+# Globals:
+#   TE_BUILD
+#   tce_type_comp_build
+# Arguments:
+#   The TA type of build.
+#   The name of a TA component.
+# Outputs:
+#   Outputs a message on an error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_clean_on_build() {
+    local type="$1"
+    local comp="$2"
+    local pbase="${TE_BUILD}/platforms/${type}"
+    local build="${tce_type_comp_build[${type}_${comp}]}"
+    local files=
+    local f=
+
+    pushd "${pbase}/${build}" &> /dev/null \
+        || tce_die "failed to locate ${type}/${comp} build"
+
+    files="$(find . -name \*.gcda -o -name \*.gcov 2> /dev/null)" \
+        || tce_die "failed to locate gcda/gcov files on ${type}/${comp} build"
+
+    while read f ; do
+        [[ -z "$f" ]] && continue
+
+        rm --interactive=never "$f" 2> /dev/null \
+            || tce_die "failed to remove $f on ${type}/${comp} build"
+    done < <(echo "${files}")
+
+    popd > /dev/null
+}
+
+#######################################
+# Copy gcov files to the build.
+# Globals:
+#   TE_BUILD
+#   TCE_WS
+#   tce_type_comp_build
+# Arguments:
+#   The TA type of build.
+#   The name of a TA component.
+#   The destination of gcov files.
+# Outputs:
+#   Outputs a message on an error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_copy_gcov_to_build() {
+    local type="$1"
+    local comp="$2"
+    local dest="$3"
+    local pbase="${TE_BUILD}/platforms/${type}"
+    local build="${tce_type_comp_build[${type}_${comp}]}"
+
+    tce_clean_on_build "${type}" "${comp}"
+
+    [[ -d "${TCE_WS}/${dest}/build" ]] \
+        || tce_die "failed to locate ${dest} gcov files for ${type}/${comp} " \
+                   "build"
+
+    rsync -a --include=\*.gcov --include=\*/ --exclude=\* \
+          "${TCE_WS}/${dest}/build/" "${pbase}/${build}/" 2> /dev/null \
+        || tce_die "failed to place ${dest} gcov files on ${type}/${comp} build"
+}
+
+#######################################
+# Generate the TCE report.
+# Globals:
+#   TE_BUILD
+#   TCE_WS
+#   tce_type_comp_build
+# Arguments:
+#   The TA type of build.
+#   The name of a TA component.
+#   The destination of gcov files.
+# Outputs:
+#   Outputs a message on an error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_create_report() {
+    local type="$1"
+    local comp="$2"
+    local dest="$3"
+    local pbase="${TE_BUILD}/platforms/${type}"
+    local build="${tce_type_comp_build[${type}_${comp}]}"
+    local report="${TCE_WS}/${dest}/report.tce"
+    local files=
+    local f=
+
+    > "${report}" \
+        || tce_die "failed to clean TCE report for ${type}/${comp}"
+
+    pushd "${pbase}/${build}" &> /dev/null \
+        || tce_die "failed to locate build for ${type}/${comp}"
+
+    files="$(find . -name \*.gcov 2> /dev/null)" \
+        || tce_die "failed to list gcov files for ${type}/${comp}"
+
+    while read f ; do
+        [[ -z "$f" ]] && continue
+
+        cat "$f" | tce_report >> "${report}" \
+            || tce_die "failed to report TCE file $f for ${type}/${comp}"
+    done < <(echo "${files}" | sort)
+
+    popd > /dev/null
+}
+
+#######################################
+# Generate a TCE summary.
+# Globals:
+#   TCE_WS
+#   TE_BS_TCE_${type}_${comp}_EXCLUDESRC
+#   TE_BUILD
+#   TE_LOG_DIR
+#   tce_type_comp_build
+# Arguments:
+#   The TA type of build.
+#   The name of a TA component.
+#   The directory with a TCE report.
+#   The base name for the summary.
+# Outputs:
+#   Outputs a message on an error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_summarise() {
+    local type="$1"
+    local comp="$2"
+    local src="$3"
+    local dest="$4"
+    local pbase="${TE_BUILD}/platforms/${type}"
+    local build="${tce_type_comp_build[${type}_${comp}]}"
+    local p_excl="TE_BS_TCE_${type}_${comp}_EXCLUDESRC"
+    local excl="${!p_excl}"
+    local report="${TCE_WS}/${src}/report.tce"
+    local resbase="${TE_LOG_DIR}/${dest}"
+
+    [[ -d "${resbase}_files" ]] && rm -r "${resbase}_files"
+    mkdir -p "${resbase}_files"
+
+    [[ -f "${report}" ]] \
+        || tce_die "failed to locate TCE report for ${src}"
+
+    pushd "${pbase}/${build}" > /dev/null \
+        || tce_die "failed to locate build to summarise TCE for ${src}"
+
+    tce_summary -vEXCLUDE="${excl}" -vSORTMODE=coverage \
+                -vDATADIR="${resbase}_files" \
+                "${report}" > \
+                "${resbase}.html" \
+        || tce_die "failed to create TCE summary for ${src}"
+
+    popd > /dev/null
+}
+
+#######################################
+# Merge a TCE report.
+# Globals:
+#   TCE_WS
+# Arguments:
+#   The directory with the report to be merged.
+#   The directory to merge into.
+# Outputs:
+#   Outputs a message on an error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_merge_report() {
+    local src="$1"
+    local dest="$2"
+    local conf="${TCE_WS}/${src}/tce.conf"
+    local rep="${TCE_WS}/${src}/report.tce"
+    local mconf="${TCE_WS}/${dest}/tce.conf"
+    local mrep="${TCE_WS}/${dest}/report.tce"
+
+    if [[ ! -f "${mrep}" ]] ; then
+        mkdir -p "${TCE_WS}/${dest}" 2> /dev/null
+        touch "${mrep}" 2> /dev/null
+        cp "${conf}" "${mconf}" \
+            || tce_die "failed to copy TCE conf from ${src}"
+    fi
+
+    tce_merge_report.py "${mconf}" "${mrep}" "${conf}" "${rep}" \
+        || tce_die "failed to merge TCE report from ${src}"
+}
+
+#######################################
+# Process the TCE information for a specific TA agent.
+#
+# It is an auxiliary function provided to group some TCE processing operations:
+# - extract saves,
+# - process gcda files on the build host,
+# - resolve the sources of gcov files,
+# - generate the TCE report.
+#
+# Globals:
+#   TCE_WS
+#   TE_BUILD
+#   TE_INSTALL
+#   tce_build_base
+#   tce_saves
+#   tce_type_comp_build
+# Arguments:
+#   The TA type of build.
+#   The name of a TA component.
+#   The name of a TA agent.
+#   The auxiliary directory.
+# Outputs:
+#   Outputs a message on an error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_process_ta() {
+    local type="$1"
+    local comp="$2"
+    local name="$3"
+    local dbase="$4"
+    local sbase="saves/${type}/${comp}/${name}"
+
+    for save in ${tce_saves["${type}_${comp}_${name}"]} ; do
+        tce_extract_save "${save}" "${sbase}" "${dbase}"
+        tce_process_gcda_on_host "${type}" "${comp}" "${dbase}/${save}"
+
+        tce_link_src_on_build "${type}" "${comp}"
+        tce_link_inst_on_build "${type}" "${comp}"
+        tce_resolve_gcov_on_build "${type}" "${comp}" "${dbase}/${save}"
+
+        tce_copy_gcov_to_build "${type}" "${comp}" "${dbase}/${save}"
+        tce_create_report "${type}" "${comp}" "${dbase}/${save}"
+
+        tce_merge_report "${dbase}/${save}" "${dbase}"
+    done
+}
+
+#######################################
+# Add a TCE summary into the list of TCE summaries.
+# Globals:
+#   tce_sums
+# Arguments:
+#   The name of the TCE summary.
+#   The TCE summary file.
+#######################################
+function tce_susum_add() {
+    local name="$1"
+    local file="$2"
+    declare -gA tce_sums
+
+    tce_sums["${name}"]="${file}"
+}
+
+#######################################
+# Generate the TCE super summary document.
+# Globals:
+#   TCE_WS
+#   TE_LOG_DIR
+#   tce_sums
+# Arguments:
+#   None
+# Outputs:
+#   Outputs a message on an error.
+# Returns:
+#   This function never returns on an error.
+#######################################
+function tce_susum_gen() {
+    local conf="${TCE_WS}/susum.conf"
+    local name=
+    local file=
+    local sp=
+
+    cat > "${conf}" << EOF
+{
+    "base" : "${TE_LOG_DIR}",
+    "sums" : [
+EOF
+
+    for name in "${!tce_sums[@]}" ; do
+        file="${tce_sums["${name}"]}"
+        cat >> "${conf}" << EOF
+        ${sp}{
+           "name" : "${name}",
+           "file" : "${file}.html"
+        }
+EOF
+
+        sp=", "
+    done
+
+    cat >> "${conf}" << EOF
+    ]
+}
+EOF
+
+    tce_susum "${conf}" "tce_log_susum.html" || \
+        die "failed to generate Super Summary"
+}
+
+for comp in "${!tce_types[@]}" ; do
+    for type in ${tce_types["${comp}"]} ; do
+        for name in ${tce_names["${type}_${comp}"]} ; do
+            tce_process_ta "${type}" "${comp}" "${name}" \
+                           "${comp}/${type}/${name}"
+
+            tce_merge_report "${comp}/${type}/${name}" "${comp}/${type}"
+        done
+
+        tce_merge_report "${comp}/${type}" "${comp}"
+
+        tce_clean_on_host "${type}" "${comp}"
+        tce_clean_on_build "${type}" "${comp}"
+    done
+done
+
+for comp in "${!tce_types[@]}" ; do
+    mtype=
+
+    for type in ${tce_types["${comp}"]} ; do
+        [[ -z "${mtype}" ]] && mtype="${type}"
+
+        for name in ${tce_names["${type}_${comp}"]} ; do
+            tce_summarise "${type}" "${comp}" "${comp}/${type}/${name}" \
+                          "tce_log_${type}_${comp}_${name}"
+            tce_susum_add "${comp}/${type}/${name}" \
+                          "tce_log_${type}_${comp}_${name}"
+        done
+    done
+
+    tce_summarise "${mtype}" "${comp}" "${comp}" "tce_log_${comp}"
+    tce_susum_add "${comp}" "tce_log_${comp}"
+done
+
+tce_susum_gen

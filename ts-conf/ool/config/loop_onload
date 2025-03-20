@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+# Loopback is accelerated with Onload
+TE_EXTRA_OPTS="--trc-tag=ool_loop_onload --tester-req=!NO_LOOP_ONLOAD"

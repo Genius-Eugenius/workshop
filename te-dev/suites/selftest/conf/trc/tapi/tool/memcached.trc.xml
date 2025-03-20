@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<test name="memcached" type="package">
+    <objective>TAPI memcached implementation</objective>
+    <iter result="PASSED">
+        <test name="memcached">
+            <objective/>
+            <iter result="PASSED">
+                <arg name="env"/>
+            </iter>
+        </test>
+        <test name="memaslap">
+            <objective/>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="key_len_min"/>
+                <arg name="key_len_max"/>
+                <arg name="value_len_min"/>
+                <arg name="value_len_max"/>
+            </iter>
+        </test>
+        <test name="memtier">
+            <objective>Use memtier TAPI to run memtier_benchmark tool and test memcached server.</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <results tags="no_memtier">
+                    <result value="SKIPPED">
+                        <verdict>Path to memtier_benchmark is not specified in environment</verdict>
+                    </result>
+                </results>
+            </iter>
+        </test>
+    </iter>
+</test>

@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+export EF_TCP_SERVER_LOOPBACK=0
+export EF_TCP_CLIENT_LOOPBACK=0
+
+TE_EXTRA_OPTS="--trc-tag=ool_loop:0 --tester-req=!NO_LOOP0"
+

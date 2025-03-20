@@ -1,0 +1,16 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+
+- comment: |
+    SSH server configuration model.
+
+
+
+- register:
+
+    - oid: "/agent/sshd"
+      access: read_create
+      type: none
+      d: |
+         SSH daemon.
+         Name:  port

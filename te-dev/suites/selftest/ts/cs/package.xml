@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<package version="1.0">
+    <description>Tests on Configurator functionality.</description>
+
+
+    <session track_conf="silent">
+
+        <var name="env.peer2peer">
+            <value>{
+                {
+                  {'pco_iut':IUT},
+                   addr:'iut_addr':inet:unicast,
+                   if:'iut_if'
+                },
+                {
+                  {'pco_tst':tester},
+                  addr:'tst_addr':inet:unicast,
+                  if:'tst_if'
+                }
+            }</value>
+        </var>
+
+        <run>
+            <script name="changed">
+            </script>
+        </run>
+
+        <run>
+            <script name="loop" />
+            <arg name="env">
+                <value>{{{'pco_iut':IUT}}}</value>
+            </arg>
+            <arg name="blockdev">
+                <value>loop0</value>
+            </arg>
+            <arg name="length">
+                <value>10M</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="dir" />
+            <arg name="env">
+                <value>{{{'pco_iut':IUT}}}</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="key"/>
+            <arg name="env">
+                <value>{{{'pco_iut':IUT}}}</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="oid">
+            </script>
+        </run>
+
+        <run>
+            <script name="partial_restore"/>
+            <arg name="env" ref="env.peer2peer"/>
+            <arg name="oid_name">
+                <value>/selftest:/incr_obj:/a</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="pci"/>
+            <arg name="env">
+                <value>{{{'pco_iut':IUT}}}</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="set_restore" track_conf="yes"/>
+            <arg name="env">
+                <value>{{{'pco_iut':IUT}}}</value>
+            </arg>
+            <arg name="oid_name">
+                <value>/sys:/net:/core:/somaxconn</value>
+                <value>/sys:/net:/core:/busy_read</value>
+                <value>/sys:/net:/core:/busy_poll</value>
+                <value>/sys:/net:/core:/optmem_max</value>
+            </arg>
+            <arg name="restore" type="boolean"/>
+            <arg name="rollback">
+                <value>none</value>
+                <value>backup</value>
+                <value>nohistory</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="vlans">
+                <req id="CS_VLAN"/>
+                <req id="BROKEN"/>
+            </script>
+            <arg name="env">
+                <value>{'host_csap'{if:'csap_if'}}</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="phy" track_conf="nohistory">
+                <req id="BROKEN"/>
+            </script>
+            <arg name="ta">
+                <value>Agt_A</value>
+            </arg>
+            <arg name="speed">
+                <value>10</value>
+            </arg>
+            <arg name="duplex">
+                <value>0</value>
+            </arg>
+            <arg name="speed_adver">
+                <value>100</value>
+            </arg>
+            <arg name="duplex_adver">
+                <value>1</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="vm">
+                <req id="BROKEN"/>
+            </script>
+        </run>
+
+        <run>
+            <script name="process">
+            </script>
+        </run>
+
+        <run>
+            <script name="process_autorestart"/>
+        </run>
+
+        <run>
+            <script name="process_ping"/>
+        </run>
+
+        <run>
+            <script name="uname"/>
+            <arg name="env">
+                <value>{{{'pco_iut':IUT}}}</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="loadavg"/>
+        </run>
+
+        <run>
+            <script name="num_jobs" />
+            <arg name="env">
+                <value>{{{'pco_iut':IUT}}}</value>
+            </arg>
+            <arg name="value" list="">
+                <value>4</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+            </arg>
+            <arg name="factor" list="">
+                <value>0</value>
+                <value>0</value>
+                <value>2</value>
+                <value>2</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>2</value>
+            </arg>
+            <arg name="type" list="">
+                <value>-</value>
+                <value>ncores</value>
+                <value>nproc</value>
+                <value>nproc</value>
+                <value>ncores</value>
+                <value>ncores</value>
+                <value>nproc</value>
+                <value>nproc</value>
+                <value>ncores</value>
+                <value>ncores</value>
+                <value>nproc</value>
+            </arg>
+            <arg name="divisor" list="">
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>2</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>3</value>
+            </arg>
+            <arg name="displacement" list="">
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>-5</value>
+                <value>2</value>
+                <value>0</value>
+                <value>6</value>
+                <value>0</value>
+                <value>5</value>
+                <value>2</value>
+            </arg>
+            <arg name="max" list="">
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>5</value>
+                <value>5</value>
+                <value>0</value>
+                <value>0</value>
+                <value>5</value>
+            </arg>
+            <arg name="min" list="">
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>0</value>
+                <value>3</value>
+                <value>3</value>
+                <value>2</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="unused_backup"/>
+            <arg name="env">
+                <value>{{{'pco_iut':IUT}}}</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="user"/>
+            <arg name="env">
+                <value>{{{'pco_iut':IUT}}}</value>
+            </arg>
+            <arg name="uid">
+                <value>99999</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="ts_subtree"/>
+            <arg name="env">
+                <value>{{{'pco_iut':IUT}}}</value>
+            </arg>
+        </run>
+
+    </session>
+</package>

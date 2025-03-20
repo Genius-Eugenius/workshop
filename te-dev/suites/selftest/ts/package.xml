@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<package version="1.0">
+    <description>TE Self Tests</description>
+
+
+    <session track_conf="silent">
+        <prologue>
+            <script name="prologue"/>
+            <arg name="env">
+                <value>{{{'iut_rpcs':IUT}}}</value>
+            </arg>
+        </prologue>
+
+        <run>
+            <package name="minimal"/>
+        </run>
+
+        <run>
+            <package name="tools"/>
+        </run>
+
+        <run>
+            <package name="cs"/>
+        </run>
+
+        <run>
+            <package name="tapi"/>
+        </run>
+
+        <run>
+            <package name="rpc"/>
+        </run>
+
+        <run>
+            <package name="apps"/>
+        </run>
+
+        <run>
+            <package name="tad"/>
+        </run>
+    </session>
+
+</package>

@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+export SOCKAPI_TS_SCALABLE_IF="any"
+TE_EXTRA_OPTS="--trc-tag=scalable_any"

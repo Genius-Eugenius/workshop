@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+
+if [ -z $EF_TCP_URG_MODE ] ; then
+    val=$(find_ef_default "EF_TCP_URG_MODE")
+    if test $val -eq 0 ; then
+        TE_EXTRA_OPTS="$TE_EXTRA_OPTS --script=ool/config/urg_allow"
+    else
+        TE_EXTRA_OPTS="$TE_EXTRA_OPTS --script=ool/config/urg_ignore"
+    fi
+fi

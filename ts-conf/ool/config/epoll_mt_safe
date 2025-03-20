@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+export EF_EPOLL_MT_SAFE=1
+
+TE_EXTRA_OPTS="--tester-req=!EPOLL_NON_MT_SAFE --trc-tag=epoll_mt_safe"

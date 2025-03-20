@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<package version="1.0">
+    <description>Tests on RCF RPC functionality.</description>
+
+    <session track_conf="silent">
+        <var name="env.peer2peer">
+            <value>{
+                {
+                  {'pco_iut':IUT},
+                   addr:'iut_addr':inet:unicast,
+                   if:'iut_if'
+                },
+                {
+                  {'pco_tst':tester},
+                  addr:'tst_addr':inet:unicast,
+                  if:'tst_if'
+                }
+            }</value>
+        </var>
+
+        <prologue>
+            <script name="rpc_server_prologue"/>
+        </prologue>
+
+        <run>
+            <script name="rpctest"/>
+            <arg name="env" ref="env.peer2peer"/>
+        </run>
+
+        <run>
+            <script name="rs_threads_sr"/>
+            <arg name="env" ref="env.peer2peer"/>
+        </run>
+
+    </session>
+</package>

@@ -1,0 +1,10 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+
+- cond:
+    if: ${SOCKAPI_TS_MAC_OR_IP_VLAN_OVER_VLAN} != ""
+    then:
+      - include:
+        - inc.socktest.vlan.yml
+        - inc.socktest.macvlan.yml
+        - inc.socktest.ipvlan.yml

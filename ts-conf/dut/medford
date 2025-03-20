@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+export EF_IUT_MEDFORD=true
+export EF_IUT_ZF_ALTS=true
+
+# It is recursion, but dut/ef10 options are included correctly
+TE_EXTRA_OPTS="${TE_EXTRA_OPTS} --script=dut/ef10"
+
+TE_EXTRA_OPTS="${TE_EXTRA_OPTS} --trc-tag=medford"

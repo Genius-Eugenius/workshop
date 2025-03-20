@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+export TE_TEST_BEHAVIOUR_CLEANUP_FD_CLOSE_ENFORCE_LIBC=1
+
+TE_EXTRA_OPTS="--trc-tag=libc_close"

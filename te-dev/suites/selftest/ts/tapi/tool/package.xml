@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<package version="1.0">
+    <description>Check TAPI tool implementation</description>
+
+
+    <session>
+        <run>
+            <package name="haproxy"/>
+        </run>
+
+        <run>
+            <package name="memcached"/>
+        </run>
+
+        <run>
+            <package name="nptcp"/>
+        </run>
+
+        <run>
+            <package name="perf"/>
+        </run>
+
+        <run>
+            <package name="redis"/>
+        </run>
+
+        <run>
+            <package name="torrent"/>
+        </run>
+
+        <run>
+            <package name="trex"/>
+        </run>
+    </session>
+</package>

@@ -1,0 +1,747 @@
+doc/dox_resources/DoxygenLayout.xml:23: warning: the type 'dirs' is not supported for the entry tag within a navindex! Check your layout file!
+
+/home/pkg/te-dev/lib/tools/te_enum.h:366: warning: Reached end of file while still inside a (nested) comment. Nesting level 1 (probable line reference: 206)
+/home/pkg/te-dev/lib/tools/te_enum.h:366: warning: reached end of file while inside a 'code' block!
+The command that should end the block seems to be missing!
+
+/home/pkg/te-dev/lib/tools/te_enum.h:366: warning: end of file while inside a group
+/home/pkg/te-dev/engine/builder/builder.m4:19: warning: Found ';' while parsing initializer list! (doxygen could be confused by a macro call without semicolon)
+/home/pkg/te-dev/include/rpcconv.m4:19: warning: Found ';' while parsing initializer list! (doxygen could be confused by a macro call without semicolon)
+/home/pkg/te-dev/lib/tapi/tapi_cfg_bridge.h:99: warning: end of file while inside a group
+/home/pkg/te-dev/lib/tapi/tapi_cfg_tap.h:46: warning: end of file while inside a group
+/home/pkg/te-dev/lib/tapi/tapi_cfg_tunnel.h:120: warning: end of file while inside a group
+/home/pkg/te-dev/lib/tools/te_json.h:49: warning: documentation for unknown define TE_JSON_MAX_NEST found.
+
+/home/pkg/te-dev/lib/tools/te_json.h:108: warning: documentation for unknown define TE_JSON_INIT_STR found.
+
+/home/pkg/te-dev/lib/tools/te_json.h:123: warning: documentation for unknown define TE_JSON_INIT_FILE found.
+
+/home/pkg/te-dev/lib/tools/te_pci.h:22: warning: Documentation for undefined enum 'te_pci_class' found.
+/home/pkg/te-dev/lib/tools/te_pci.h:31: warning: Documentation for undefined enum 'te_pci_class' found.
+/home/pkg/te-dev/lib/tools/te_pci.h:42: warning: Documentation for undefined enum 'te_pci_prog_interface' found.
+/home/pkg/te-dev/lib/comm_net_engine/comm_net_engine.h:70: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/engine/configurator/conf_db.h:31: warning: argument '_hnld' of command @param is not found in the argument list of CFG_NEW_INST_HANDLE(_hndl, _idx)
+/home/pkg/te-dev/engine/configurator/conf_db.h:36: warning: The following parameter of CFG_NEW_INST_HANDLE(_hndl, _idx) is not documented:
+  parameter '_hndl'
+/home/pkg/te-dev/agents/unix/conf/tc/conf_qdisc_params.h:16: warning: argument 'qdisc' of command @param is not found in the argument list of conf_qdisc_param_set(unsigned int gid, const char *oid, const char *value, const char *if_name, const char *tc, const char *qdisc_str, const char *param)
+/home/pkg/te-dev/agents/unix/conf/tc/conf_qdisc_params.h:28: warning: The following parameter of conf_qdisc_param_set(unsigned int gid, const char *oid, const char *value, const char *if_name, const char *tc, const char *qdisc_str, const char *param) is not documented:
+  parameter 'qdisc_str'
+/home/pkg/te-dev/lib/tad/csap_id.h:68: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/tools/rgt/rgt-core/flow_tree.h:56: warning: The following parameters of flow_tree_add_node(node_id_t parent_id, node_id_t node_id, node_type_t new_node_type, char *node_name, uint32_t *timestamp, void *user_data, int *err_code) are not documented:
+  parameter 'new_node_type'
+  parameter 'node_name'
+  parameter 'timestamp'
+  parameter 'user_data'
+  parameter 'err_code'
+/home/pkg/te-dev/tools/rgt/rgt-core/flow_tree.h:72: warning: The following parameters of flow_tree_close_node(node_id_t parent_id, node_id_t node_id, uint32_t *timestamp, int *err_code) are not documented:
+  parameter 'timestamp'
+  parameter 'err_code'
+/home/pkg/te-dev/lib/tad/forw/forwarder.h:64: warning: The following parameter of tadf_forw_packet(csap_p csap_descr, const char *forw_name, const uint8_t *pkt, size_t pkt_len) is not documented:
+  parameter 'csap_descr'
+/home/pkg/te-dev/lib/loggerta/logger_ta_fast.h:158: warning: argument 'argl1..' of command @param is not found in the argument list of ta_log_message_fast(unsigned int level, const char *user, const char *fmt, int argl1, ta_log_arg arg1, int argl2, ta_log_arg arg2, int argl3, ta_log_arg arg3, int argl4, ta_log_arg arg4, int argl5, ta_log_arg arg5, int argl6, ta_log_arg arg6, int argl7, ta_log_arg arg7, int argl8, ta_log_arg arg8, int argl9, ta_log_arg arg9, int argl10, ta_log_arg arg10, int argl11, ta_log_arg arg11, int argl12, ta_log_arg arg12, int argl13)
+/home/pkg/te-dev/lib/loggerta/logger_ta_fast.h:158: warning: argument 'arg1..' of command @param is not found in the argument list of ta_log_message_fast(unsigned int level, const char *user, const char *fmt, int argl1, ta_log_arg arg1, int argl2, ta_log_arg arg2, int argl3, ta_log_arg arg3, int argl4, ta_log_arg arg4, int argl5, ta_log_arg arg5, int argl6, ta_log_arg arg6, int argl7, ta_log_arg arg7, int argl8, ta_log_arg arg8, int argl9, ta_log_arg arg9, int argl10, ta_log_arg arg10, int argl11, ta_log_arg arg11, int argl12, ta_log_arg arg12, int argl13)
+/home/pkg/te-dev/lib/loggerta/logger_ta_fast.h:171: warning: The following parameters of ta_log_message_fast(unsigned int level, const char *user, const char *fmt, int argl1, ta_log_arg arg1, int argl2, ta_log_arg arg2, int argl3, ta_log_arg arg3, int argl4, ta_log_arg arg4, int argl5, ta_log_arg arg5, int argl6, ta_log_arg arg6, int argl7, ta_log_arg arg7, int argl8, ta_log_arg arg8, int argl9, ta_log_arg arg9, int argl10, ta_log_arg arg10, int argl11, ta_log_arg arg11, int argl12, ta_log_arg arg12, int argl13) are not documented:
+  parameter 'argl1'
+  parameter 'arg1'
+  parameter 'argl2'
+  parameter 'arg2'
+  parameter 'argl3'
+  parameter 'arg3'
+  parameter 'argl4'
+  parameter 'arg4'
+  parameter 'argl5'
+  parameter 'arg5'
+  parameter 'argl6'
+  parameter 'arg6'
+  parameter 'argl7'
+  parameter 'arg7'
+  parameter 'argl8'
+  parameter 'arg8'
+  parameter 'argl9'
+  parameter 'arg9'
+  parameter 'argl10'
+  parameter 'arg10'
+  parameter 'argl11'
+  parameter 'arg11'
+/home/pkg/te-dev/lib/loggerten/logger_ten_int.h:98: warning: The following parameters of log_message_va(te_log_msg_raw_data *out, const char *file, unsigned int line, te_log_ts_sec sec, te_log_ts_usec usec, unsigned int level, const char *entity, const char *user, const char *fmt, va_list ap) are not documented:
+  parameter 'file'
+  parameter 'line'
+  parameter 'sec'
+  parameter 'usec'
+  parameter 'level'
+  parameter 'entity'
+  parameter 'user'
+  parameter 'fmt'
+/home/pkg/te-dev/lib/ndn/ndn_internal.h:52: warning: The following parameter of NDN_DATA_UNIT_WITH_RANGE_TYPE(id, asn_t, asn_bt_txt_id) is not documented:
+  parameter 'asn_bt_txt_id'
+/home/pkg/te-dev/lib/ndn/ndn_iscsi.h:98: warning: argument 'segment_data' of command @param is not found in the argument list of bin_data2asn(uint8_t *data, uint32_t data_len, asn_value **value)
+/home/pkg/te-dev/lib/ndn/ndn_iscsi.h:107: warning: The following parameter of bin_data2asn(uint8_t *data, uint32_t data_len, asn_value **value) is not documented:
+  parameter 'value'
+/home/pkg/te-dev/lib/netconf/netconf.h:993: warning: argument 'ifname' of command @param is not found in the argument list of netconf_geneve_add(netconf_handle nh, const netconf_geneve *geneve)
+/home/pkg/te-dev/lib/netconf/netconf.h:1000: warning: The following parameter of netconf_geneve_add(netconf_handle nh, const netconf_geneve *geneve) is not documented:
+  parameter 'geneve'
+/home/pkg/te-dev/lib/netconf/netconf.h:1018: warning: argument 'ifname' of command @param is not found in the argument list of netconf_vxlan_add(netconf_handle nh, const netconf_vxlan *vxlan)
+/home/pkg/te-dev/lib/netconf/netconf.h:1025: warning: The following parameter of netconf_vxlan_add(netconf_handle nh, const netconf_vxlan *vxlan) is not documented:
+  parameter 'vxlan'
+/home/pkg/te-dev/lib/netconf/netconf_internal.h:455: warning: argument 'nh' of command @param is not found in the argument list of netconf_parse_link(struct nlmsghdr *h, struct rtattr **rta_arr, int max)
+/home/pkg/te-dev/lib/netconf/netconf_internal.h:461: warning: The following parameter of netconf_parse_link(struct nlmsghdr *h, struct rtattr **rta_arr, int max) is not documented:
+  parameter 'h'
+/home/pkg/te-dev/lib/netconf/netconf_internal.h:233: warning: argument 'len' of command @param is not found in the argument list of netconf_parse_rtattr_nested(struct rtattr *rta, struct rtattr **rta_arr, int max)
+/home/pkg/te-dev/lib/netconf/netconf_internal.h:380: warning: argument 'node' of command @param is not found in the argument list of netconf_udp_tunnel_free(netconf_udp_tunnel *udp_tunnel)
+/home/pkg/te-dev/lib/netconf/netconf_internal.h:384: warning: The following parameter of netconf_udp_tunnel_free(netconf_udp_tunnel *udp_tunnel) is not documented:
+  parameter 'udp_tunnel'
+/home/pkg/te-dev/tools/trc/lib/re_subst.h:131: warning: The following parameter of trc_re_key_substs(const char *name, const char *key, FILE *f) is not documented:
+  parameter 'name'
+/home/pkg/te-dev/tools/trc/lib/re_subst.h:103: warning: argument 'substs' of command @param is not found in the argument list of trc_re_namespaces_read(const char *file, trc_re_namespaces *namespaces)
+/home/pkg/te-dev/tools/trc/lib/re_subst.h:110: warning: The following parameter of trc_re_namespaces_read(const char *file, trc_re_namespaces *namespaces) is not documented:
+  parameter 'namespaces'
+/home/pkg/te-dev/lib/rpcc_dpdk/rte_flow_ndn.h:140: warning: The following parameter of rpc_rte_flow_prepend_opaque_actions(rcf_rpc_server *rpcs, rpc_rte_flow_action_p flow_actions, rpc_rte_flow_action_p opaque_actions, unsigned int nb_opaque_actions, rpc_rte_flow_action_p *united_actions) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/rte_flow_ndn.h:162: warning: The following parameter of rpc_rte_flow_prepend_opaque_items(rcf_rpc_server *rpcs, rpc_rte_flow_item_p flow_items, rpc_rte_flow_item_p opaque_items, unsigned int nb_opaque_items, rpc_rte_flow_item_p *united_items) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/rte_flow_ndn.h:108: warning: The following parameter of rpc_rte_free_flow_rule(rcf_rpc_server *rpcs, rpc_rte_flow_attr_p attr, rpc_rte_flow_item_p pattern, rpc_rte_flow_action_p actions) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/rte_flow_ndn.h:125: warning: The following parameter of rpc_rte_insert_flow_rule_items(rcf_rpc_server *rpcs, rpc_rte_flow_item_p *pattern, const asn_value *items, int index) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/rte_flow_ndn.h:93: warning: The following parameter of rpc_rte_mk_flow_rule_components(rcf_rpc_server *rpcs, const asn_value *flow_rule_components, rpc_rte_flow_attr_p *attr, rpc_rte_flow_item_p *pattern, rpc_rte_flow_action_p *actions) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/tad/tad_csap_support.h:187: warning: argument 'pkt' of command @param is not found in the argument list of csap_layer_match_do_cb_t(csap_p csap, unsigned int layer, const asn_value *ptrn_pdu, void *ptrn_opaque, tad_recv_pkt *meta_pkt, tad_pkt *pdu, tad_pkt *sdu)
+/home/pkg/te-dev/lib/tad/tad_csap_support.h:187: warning: argument 'payload' of command @param is not found in the argument list of csap_layer_match_do_cb_t(csap_p csap, unsigned int layer, const asn_value *ptrn_pdu, void *ptrn_opaque, tad_recv_pkt *meta_pkt, tad_pkt *pdu, tad_pkt *sdu)
+/home/pkg/te-dev/lib/tad/tad_csap_support.h:187: warning: argument 'parsed_packet' of command @param is not found in the argument list of csap_layer_match_do_cb_t(csap_p csap, unsigned int layer, const asn_value *ptrn_pdu, void *ptrn_opaque, tad_recv_pkt *meta_pkt, tad_pkt *pdu, tad_pkt *sdu)
+/home/pkg/te-dev/lib/tad/tad_pkt.h:695: warning: argument 'mask' of command @param is not found in the argument list of tad_pkt_match_bytes(const tad_pkt *pkt, size_t len, const uint8_t *payload, bool exact_len)
+/home/pkg/te-dev/lib/tad/tad_pkt.h:705: warning: The following parameter of tad_pkt_match_bytes(const tad_pkt *pkt, size_t len, const uint8_t *payload, bool exact_len) is not documented:
+  parameter 'payload'
+/home/pkg/te-dev/lib/tad/tad_pkt.h:410: warning: The following parameter of tad_pkt_next_seg(const tad_pkt *pkt, const tad_pkt_seg *seg) is not documented:
+  parameter 'seg'
+/home/pkg/te-dev/lib/tad/tad_pkt.h:427: warning: The following parameter of tad_pkt_prev_seg(const tad_pkt *pkt, const tad_pkt_seg *seg) is not documented:
+  parameter 'seg'
+/home/pkg/te-dev/lib/tad/tad_recv.h:150: warning: argument 'pattern' of command @param is not found in the argument list of tad_recv_prepare(csap_p csap, asn_value *ptrn_unit, unsigned int num, unsigned int timeout, const tad_reply_context *reply_ctx)
+/home/pkg/te-dev/lib/tad/tad_recv.h:161: warning: The following parameter of tad_recv_prepare(csap_p csap, asn_value *ptrn_unit, unsigned int num, unsigned int timeout, const tad_reply_context *reply_ctx) is not documented:
+  parameter 'ptrn_unit'
+/home/pkg/te-dev/lib/tad/tad_reply_rcf.h:27: warning: argument 'pfx' of command @param is not found in the argument list of tad_reply_rcf_init(tad_reply_context *ctx, rcf_comm_connection *rcfc, const char *answer_pfx, size_t pfx_len)
+/home/pkg/te-dev/lib/tad/tad_reply_rcf.h:36: warning: The following parameter of tad_reply_rcf_init(tad_reply_context *ctx, rcf_comm_connection *rcfc, const char *answer_pfx, size_t pfx_len) is not documented:
+  parameter 'pfx_len'
+/home/pkg/te-dev/lib/tad/tad_send.h:79: warning: argument 'template' of command @param is not found in the argument list of tad_send_prepare(csap_p csap, asn_value *tmpl_unit, const tad_reply_context *reply_ctx)
+/home/pkg/te-dev/lib/tad/tad_send.h:88: warning: The following parameter of tad_send_prepare(csap_p csap, asn_value *tmpl_unit, const tad_reply_context *reply_ctx) is not documented:
+  parameter 'tmpl_unit'
+/home/pkg/te-dev/lib/tad/tad_send.h:114: warning: argument 'pld_type' of command @param is not found in the argument list of tad_send_prepare_bin(csap_p csap, asn_value *nds, const struct tad_tmpl_arg_t *args, size_t arg_num, tad_payload_spec_t *pld_data, void **layer_opaque, tad_pkts *pkts_per_layer)
+/home/pkg/te-dev/lib/tad/tad_send.h:132: warning: The following parameter of tad_send_prepare_bin(csap_p csap, asn_value *nds, const struct tad_tmpl_arg_t *args, size_t arg_num, tad_payload_spec_t *pld_data, void **layer_opaque, tad_pkts *pkts_per_layer) is not documented:
+  parameter 'layer_opaque'
+/home/pkg/te-dev/lib/tad/tad_types.h:223: warning: explicit link request to 'plain' could not be resolved
+/home/pkg/te-dev/lib/tad/tad_types.h:223: warning: explicit link request to 'bytes' could not be resolved
+/home/pkg/te-dev/lib/tapi/tapi_cfg_nginx.h:346: warning: argument 'ta' from the argument list of tapi_cfg_nginx_evt_accept_mutex_disable has multiple @param documentation sections
+/home/pkg/te-dev/lib/tapi/tapi_cfg_nginx.h:346: warning: argument 'inst_name' from the argument list of tapi_cfg_nginx_evt_accept_mutex_disable has multiple @param documentation sections
+/home/pkg/te-dev/lib/tapi_dns/tapi_dns_unbound_cfg.h:23: warning: argument 'pathname' of command @param is not found in the argument list of tapi_dns_unbound_cfg_create(const char *ta, const tapi_dns_unbound_cfg_opt *opt, const char *base_dir, const char *filename, char **result_pathname)
+/home/pkg/te-dev/lib/tapi_dns/tapi_dns_unbound_cfg.h:39: warning: The following parameter of tapi_dns_unbound_cfg_create(const char *ta, const tapi_dns_unbound_cfg_opt *opt, const char *base_dir, const char *filename, char **result_pathname) is not documented:
+  parameter 'filename'
+/home/pkg/te-dev/lib/tapi_nvme/tapi_nvme_internal.h:34: warning: The following parameter of tapi_nvme_internal_file_append(rcf_rpc_server *rpcs, unsigned int timeout_sec, const char *string, const char *fmt,...) is not documented:
+  parameter 'timeout_sec'
+/home/pkg/te-dev/lib/tapi_tool/tapi_redis_benchmark.h:3: warning: Found unknown command '@prief'
+/home/pkg/te-dev/lib/tapi_bpf/tapi_rpc_bpf.h:57: warning: Found unknown command '@oaram'
+/home/pkg/te-dev/lib/tapi_bpf/tapi_rpc_bpf.h:62: warning: The following parameter of rpc_xsk_socket__create(rcf_rpc_server *rpcs, const char *if_name, uint32_t queue_id, rpc_ptr umem, bool shared_umem, tarpc_xsk_socket_config *config, rpc_ptr *sock) is not documented:
+  parameter 'config'
+/home/pkg/te-dev/lib/tapi_rpc/tapi_rpc_client_server.h:378: warning: The following parameters of rpc_gen_connection_wild(rcf_rpc_server *srvr, rcf_rpc_server *clnt, rpc_socket_type sock_type, rpc_socket_proto proto, const struct sockaddr *srvr_addr, const struct sockaddr *clnt_addr, int *srvr_s, int *clnt_s, bool srvr_connect, bool bind_wildcard) are not documented:
+  parameter 'srvr_connect'
+  parameter 'bind_wildcard'
+/home/pkg/te-dev/lib/tapi_job/tapi_rpc_job.h:327: warning: explicit link request to 'TAPI_RPC_JOB_BIG_TIMEOUT_MS' could not be resolved
+/home/pkg/te-dev/lib/tapi_job/tapi_rpc_job.h:220: warning: explicit link request to 'TAPI_RPC_JOB_BIG_TIMEOUT_MS' could not be resolved
+/home/pkg/te-dev/lib/tapi_job/tapi_rpc_job.h:242: warning: explicit link request to 'TAPI_RPC_JOB_BIG_TIMEOUT_MS' could not be resolved
+/home/pkg/te-dev/lib/tapi_job/tapi_rpc_job.h:267: warning: explicit link request to 'TAPI_RPC_JOB_BIG_TIMEOUT_MS' could not be resolved
+/home/pkg/te-dev/lib/tapi_job/tapi_rpc_job.h:67: warning: explicit link request to 'TAPI_RPC_JOB_BIG_TIMEOUT_MS' could not be resolved
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rte_mbuf.h:219: warning: The following parameter of tapi_rte_get_mbuf_data(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, size_t offset, size_t *bytes_read) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rte_mbuf.h:107: warning: The following parameter of tapi_rte_mk_mbuf_eth(rcf_rpc_server *rpcs, rpc_rte_mempool_p mp, const uint8_t *dst_addr, const uint8_t *src_addr, const uint16_t ether_type, const uint8_t *payload, size_t len) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rte_mbuf.h:131: warning: The following parameter of tapi_rte_mk_mbuf_ip(rcf_rpc_server *rpcs, rpc_rte_mempool_p mp, const uint8_t *eth_dst_addr, const uint8_t *eth_src_addr, const struct sockaddr *ip_dst_addr, const struct sockaddr *ip_src_addr, const uint8_t next_hdr, const uint8_t *payload, const size_t payload_len, const int cksum_opt) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rte_mbuf.h:246: warning: The following parameter of tapi_rte_mk_mbuf_mk_ptrn_by_tmpl(rcf_rpc_server *rpcs, asn_value *template, rpc_rte_mempool_p mp, send_transform *transform, rpc_rte_mbuf_p **mbufs_out, unsigned int *n_mbufs_out, asn_value **ptrn_out) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rte_mbuf.h:192: warning: The following parameter of tapi_rte_mk_mbuf_tcp(rcf_rpc_server *rpcs, rpc_rte_mempool_p mp, const uint8_t *eth_dst_addr, const uint8_t *eth_src_addr, const struct sockaddr *tcp_dst_addr, const struct sockaddr *tcp_src_addr, const uint32_t th_seq, const uint32_t th_ack, const uint8_t th_off, const uint8_t th_flags, const uint16_t th_win, const uint16_t th_urp, const uint8_t *payload, const size_t payload_len, const int cksum_opt) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rte_mbuf.h:157: warning: The following parameter of tapi_rte_mk_mbuf_udp(rcf_rpc_server *rpcs, rpc_rte_mempool_p mp, const uint8_t *eth_dst_addr, const uint8_t *eth_src_addr, const struct sockaddr *udp_dst_addr, const struct sockaddr *udp_src_addr, const uint8_t *payload, const size_t payload_len, const int cksum_opt) is not documented:
+  parameter 'rpcs'
+<unknown>:1: warning: explicit link request to 'ifTable' could not be resolved
+<unknown>:1: warning: explicit link request to 'ipAddrTable' could not be resolved
+<unknown>:1: warning: explicit link request to 'ipAddressTable' could not be resolved
+<unknown>:1: warning: explicit link request to 'ipCidrRouteTable' could not be resolved
+<unknown>:1: warning: explicit link request to 'ipNetToMediaTable' could not be resolved
+/home/pkg/te-dev/agents/win32/tarpc_server.h:392: warning: argument 'argument' of command @param is not found in the argument list of thread_exit(void *ret)
+/home/pkg/te-dev/agents/win32/tarpc_server.h:397: warning: The following parameter of thread_exit(void *ret) is not documented:
+  parameter 'ret'
+/home/pkg/te-dev/include/te_compiler.h:92: warning: Illegal command \xrefitem as part of a \c command
+/home/pkg/te-dev/include/te_param.h:48: warning: The following parameter of te_var_name2env(const char *name, char *env, int env_size) is not documented:
+  parameter 'env_size'
+/home/pkg/te-dev/lib/rpc_types/te_rpc_sys_mman.h:134: warning: unable to resolve reference to 'rpc_madvise_value' for \ref command
+/home/pkg/te-dev/lib/rpc_types/te_rpc_sys_mman.h:131: warning: unable to resolve reference to 'rpc_madvise_value' for \ref command
+/home/pkg/te-dev/lib/rpc_types/te_rpc_sys_socket.h:111: warning: unable to resolve reference to 'cmsghdr' for \ref command
+/home/pkg/te-dev/include/te_upnp.h:206: warning: The following parameter of JSON_ARRAY_CREATE(_arr, _rc, _lbl) is not documented:
+  parameter '_rc'
+/home/pkg/te-dev/engine/tester/tester_conf.h:509: warning: The following parameter of test_entity_value_enum_error_cb(const test_entity_value *value, te_errno status, void *opaque) is not documented:
+  parameter 'value'
+/home/pkg/te-dev/engine/tester/tester_reqs.h:87: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/engine/tester/tester_run.h:317: warning: The following parameter of tester_run(testing_scenario *scenario, const struct logic_expr *targets, const struct tester_cfgs *cfgs, struct test_paths *paths, const te_trc_db *trc_db, const tqh_strings *trc_tags, const tester_flags flags, const char *verdict) is not documented:
+  parameter 'verdict'
+/home/pkg/te-dev/engine/tester/tester_serial_thread.h:48: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/tools/trc/lib/trc_html.h:56: warning: The following parameter of trc_exp_result_to_html(FILE *f, const trc_exp_result *result, unsigned int flags, tqh_strings *tags) is not documented:
+  parameter 'tags'
+/home/pkg/te-dev/tools/rgt/rgt-format/xml2multi_common.h:115: warning: argument 'ctx' of command @param is not found in the argument list of rgt_xml2multi_match_node(rgt_xml2multi_opts *opts, const char *tin, const char *node_id, uint32_t depth, uint32_t seq)
+/home/pkg/te-dev/tools/rgt/rgt-format/xml2multi_common.h:126: warning: The following parameter of rgt_xml2multi_match_node(rgt_xml2multi_opts *opts, const char *tin, const char *node_id, uint32_t depth, uint32_t seq) is not documented:
+  parameter 'opts'
+/home/pkg/te-dev/lib/tools/te_alloc.h:232: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/tools/te_alloc.h:248: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/tools/te_alloc.h:268: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/tools/te_alloc.h:187: warning: Unsupported xml/html tag <cite> found
+/home/pkg/te-dev/lib/tools/te_alloc.h:187: warning: Unsupported xml/html tag </cite> found
+/home/pkg/te-dev/lib/tools/te_alloc.h:214: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/tools/te_exec_child.h:151: warning: argument 'out_fd' from the argument list of te_exec_child has multiple @param documentation sections
+/home/pkg/te-dev/lib/tools/te_exec_child.h:151: warning: The following parameter of te_exec_child(const char *file, char *const argv[], char *const envp[], uid_t uid, int *in_fd, int *out_fd, int *err_fd, const te_exec_param *exec_param) is not documented:
+  parameter 'err_fd'
+/home/pkg/te-dev/lib/tools/te_hex_diff_dump.h:97: warning: The following parameters of te_hex_diff_log(const void *expected, size_t exp_len, const void *actual, size_t actual_len, size_t offset, const char *file, int line, unsigned int level, const char *entity, const char *user) are not documented:
+  parameter 'file'
+  parameter 'line'
+/home/pkg/te-dev/lib/tools/te_log_stack.h:17: warning: unable to resolve reference to 'logger_stack' for \ref command
+/home/pkg/te-dev/lib/tools/te_numeric.h:131: warning: argument 'out' of command @param is not found in the argument list of te_scalar_type_fit_size(bool is_signed, size_t size, te_scalar_type *type)
+/home/pkg/te-dev/lib/tools/te_sockaddr.h:485: warning: argument 'in' of command @param is not found in the argument list of te_netaddr2te_str(const struct sockaddr *sa, te_string *str)
+/home/pkg/te-dev/lib/tools/te_sockaddr.h:485: warning: argument 'out' of command @param is not found in the argument list of te_netaddr2te_str(const struct sockaddr *sa, te_string *str)
+/home/pkg/te-dev/lib/tools/te_str.h:482: warning: argument 'input' of command @param is not found in the argument list of te_strtol_raw_silent(const char *str, char **endptr, int base, long int *result)
+/home/pkg/te-dev/lib/tools/te_str.h:491: warning: The following parameter of te_strtol_raw_silent(const char *str, char **endptr, int base, long int *result) is not documented:
+  parameter 'str'
+/home/pkg/te-dev/lib/tools/te_string.h:553: warning: Illegal command \n as part of a \c command
+/home/pkg/te-dev/lib/tools/te_string.h:553: warning: Illegal command \r as part of a \c command
+/home/pkg/te-dev/lib/tools/te_tree.h:149: warning: Found unknown command '@oaram'
+/home/pkg/te-dev/lib/tools/te_tree.h:135: warning: Found unknown command '@oaram'
+/home/pkg/te-dev/lib/tools/te_tree.h:140: warning: The following parameter of te_tree_add_attr_va(te_tree *tree, const char *attr, const char *value_fmt, va_list va) is not documented:
+  parameter 'va'
+/home/pkg/te-dev/lib/tools/te_tree.h:557: warning: argument 'attr' of command @param is not found in the argument list of te_tree_child_by_attrs(const te_tree *tree, const te_kvpair_h *attrs)
+/home/pkg/te-dev/lib/tools/te_tree.h:557: warning: argument 'value' of command @param is not found in the argument list of te_tree_child_by_attrs(const te_tree *tree, const te_kvpair_h *attrs)
+/home/pkg/te-dev/lib/tools/te_tree.h:567: warning: The following parameter of te_tree_child_by_attrs(const te_tree *tree, const te_kvpair_h *attrs) is not documented:
+  parameter 'attrs'
+/home/pkg/te-dev/lib/tools/te_tree.h:313: warning: Found unknown command '@xc'
+/home/pkg/te-dev/lib/tools/te_tree.h:609: warning: The following parameter of te_tree_traverse(const te_tree *tree, unsigned int minlevel, unsigned int maxlevel, te_tree_traverse_fn *pre_cb, te_tree_traverse_fn *post_cb, void *data) is not documented:
+  parameter 'data'
+/home/pkg/te-dev/lib/tools/tq_string.h:53: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/rcfpch/rcf_ch_api.h:595: warning: argument 'results' of command @param is not found in the argument list of rcf_ch_trsend_recv(struct rcf_comm_connection *handle, char *cbuf, size_t buflen, size_t answer_plen, const uint8_t *ba, size_t cmdlen, csap_handle_t csap, unsigned int timeout, unsigned int flags)
+/home/pkg/te-dev/lib/rcfpch/rcf_ch_api.h:948: warning: unable to resolve reference to 'te_agents' for \ref command
+/home/pkg/te-dev/lib/rcfpch/rcf_ch_api.h:949: warning: unable to resolve reference to 'te_agents_conf' for \ref command
+/home/pkg/te-dev/lib/rcfpch/rcf_ch_api.h:1174: warning: The following parameters of RCF_PCH_CFG_NODE_RW_COLLECTION_WITH_SUBST(_name, _subid, _son, _brother, _f_get, _f_set, _f_add, _f_del, _f_list, _f_commit, _subst) are not documented:
+  parameter '_f_get'
+  parameter '_f_set'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_dpdk.h:35: warning: The following parameter of rpc_dpdk_find_representors(rcf_rpc_server *rpcs, unsigned int *n_rep, uint16_t **rep_port_ids) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_dpdk.h:46: warning: The following parameter of rpc_rte_eth_representor_info_get(rcf_rpc_server *rpcs, uint16_t port_id, struct tarpc_rte_eth_representor_info *info) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_eal.h:140: warning: The following parameter of rpc_rte_eal_hotplug_add(rcf_rpc_server *rpcs, const char *busname, const char *devname, const char *devargs) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_eal.h:164: warning: The following parameter of rpc_rte_eal_hotplug_remove(rcf_rpc_server *rpcs, const char *busname, const char *devname) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_eal.h:74: warning: The following parameters of tapi_rte_make_eal_args(tapi_env *env, rcf_rpc_server *rpcs, const char *program_name, const lcore_mask_t *lcore_mask_override, int argc, const char **argv, int *out_argc, char ***out_argv) are not documented:
+  parameter 'out_argc'
+  parameter 'out_argv'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ethdev.h:575: warning: The following parameter of rpc_dpdk_eth_await_link_up(rcf_rpc_server *rpcs, uint16_t port_id, unsigned int nb_attempts, unsigned int wait_int_ms, unsigned int after_up_ms) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ethdev.h:678: warning: The following parameter of rpc_rte_eth_dev_fw_version_get(rcf_rpc_server *rpcs, uint16_t port_id, char *fw_version, size_t fw_size) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ethdev.h:732: warning: The following parameter of rpc_rte_eth_dev_get_name_by_port(rcf_rpc_server *rpcs, uint16_t port_id, char *name) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ethdev.h:717: warning: The following parameter of rpc_rte_eth_dev_get_port_by_name(rcf_rpc_server *rpcs, const char *name, uint16_t *port_id) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ethdev.h:832: warning: The following parameter of rpc_rte_eth_dev_get_reg_info(rcf_rpc_server *rpcs, uint16_t port_id, struct tarpc_rte_dev_reg_info *info) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ethdev.h:744: warning: The following parameter of rpc_rte_eth_dev_rx_offload_name(rcf_rpc_server *rpcs, uint64_t offload) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ethdev.h:755: warning: The following parameter of rpc_rte_eth_dev_tx_offload_name(rcf_rpc_server *rpcs, uint64_t offload) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ethdev.h:691: warning: The following parameter of rpc_rte_eth_dev_udp_tunnel_port_add(rcf_rpc_server *rpcs, uint16_t port_id, struct tarpc_rte_eth_udp_tunnel *tunnel_udp) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ethdev.h:704: warning: The following parameter of rpc_rte_eth_dev_udp_tunnel_port_delete(rcf_rpc_server *rpcs, uint16_t port_id, struct tarpc_rte_eth_udp_tunnel *tunnel_udp) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ethdev.h:810: warning: The following parameter of rpc_rte_eth_fec_get(rcf_rpc_server *rpcs, uint16_t port_id, uint32_t *fec_capa) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ethdev.h:797: warning: The following parameter of rpc_rte_eth_fec_get_capability(rcf_rpc_server *rpcs, uint16_t port_id, struct tarpc_rte_eth_fec_capa *speed_fec_capa, unsigned int num) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ethdev.h:821: warning: The following parameter of rpc_rte_eth_fec_set(rcf_rpc_server *rpcs, uint16_t port_id, uint32_t fec_capa) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ethdev.h:589: warning: The following parameter of rpc_rte_eth_stats_get(rcf_rpc_server *rpcs, uint16_t port_id, struct tarpc_rte_eth_stats *stats) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_flow.h:58: warning: The following parameter of rpc_rte_flow_create(rcf_rpc_server *rpcs, uint16_t port_id, rpc_rte_flow_attr_p attr, rpc_rte_flow_item_p pattern, rpc_rte_flow_action_p actions, tarpc_rte_flow_error *error) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_flow.h:74: warning: The following parameter of rpc_rte_flow_destroy(rcf_rpc_server *rpcs, uint16_t port_id, rpc_rte_flow_p flow, tarpc_rte_flow_error *error) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_flow.h:118: warning: The following parameter of rpc_rte_flow_isolate(rcf_rpc_server *rpcs, uint16_t port_id, int set, struct tarpc_rte_flow_error *error) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_flow.h:194: warning: The following parameter of rpc_rte_flow_pick_transfer_proxy(rcf_rpc_server *rpcs, uint16_t port_id, uint16_t *proxy_port_id, tarpc_rte_flow_error *error) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_flow.h:90: warning: The following parameter of rpc_rte_flow_query(rcf_rpc_server *rpcs, uint16_t port_id, rpc_rte_flow_p flow, rpc_rte_flow_action_p action, tarpc_rte_flow_query_data *data, tarpc_rte_flow_error *error) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_flow.h:40: warning: The following parameter of rpc_rte_flow_validate(rcf_rpc_server *rpcs, uint16_t port_id, rpc_rte_flow_attr_p attr, rpc_rte_flow_item_p pattern, rpc_rte_flow_action_p actions, tarpc_rte_flow_error *error) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:364: warning: The following parameter of rpc_rte_pktmbuf_adj(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, uint16_t len) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:87: warning: The following parameter of rpc_rte_pktmbuf_alloc(rcf_rpc_server *rpcs, rpc_rte_mempool_p mp) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:198: warning: The following parameter of rpc_rte_pktmbuf_alloc_bulk(rcf_rpc_server *rpcs, rpc_rte_mempool_p mp, rpc_rte_mbuf_p *bulk, unsigned int count) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:117: warning: The following parameter of rpc_rte_pktmbuf_append_data(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, const uint8_t *buf, size_t len) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:490: warning: The following parameter of rpc_rte_pktmbuf_calc_packet_crc(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, bool crc_in_data, uint32_t *crc) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:211: warning: The following parameter of rpc_rte_pktmbuf_chain(rcf_rpc_server *rpcs, rpc_rte_mbuf_p head, rpc_rte_mbuf_p tail) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:145: warning: The following parameter of rpc_rte_pktmbuf_clone(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, rpc_rte_mempool_p mp) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:95: warning: The following parameter of rpc_rte_pktmbuf_free(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:104: warning: The following parameter of rpc_rte_pktmbuf_free_array(rcf_rpc_server *rpcs, rpc_rte_mbuf_p *mbufs, unsigned int count) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:250: warning: The following parameter of rpc_rte_pktmbuf_get_data_len(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:406: warning: The following parameter of rpc_rte_pktmbuf_get_fdir_id(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:299: warning: The following parameter of rpc_rte_pktmbuf_get_flags(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:221: warning: The following parameter of rpc_rte_pktmbuf_get_nb_segs(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:169: warning: The following parameter of rpc_rte_pktmbuf_get_next(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:373: warning: The following parameter of rpc_rte_pktmbuf_get_packet_type(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, struct tarpc_rte_pktmbuf_packet_type *p_type) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:179: warning: The following parameter of rpc_rte_pktmbuf_get_pkt_len(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:321: warning: The following parameter of rpc_rte_pktmbuf_get_pool(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:231: warning: The following parameter of rpc_rte_pktmbuf_get_port(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:396: warning: The following parameter of rpc_rte_pktmbuf_get_rss_hash(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:414: warning: The following parameter of rpc_rte_pktmbuf_get_tx_offload(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, struct tarpc_rte_pktmbuf_tx_offload *tx_offload) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:260: warning: The following parameter of rpc_rte_pktmbuf_get_vlan_tci(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:279: warning: The following parameter of rpc_rte_pktmbuf_get_vlan_tci_outer(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:331: warning: The following parameter of rpc_rte_pktmbuf_headroom(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:45: warning: The following parameter of rpc_rte_pktmbuf_pool_create(rcf_rpc_server *rpcs, const char *name, uint32_t n, uint32_t cache_size, uint16_t priv_size, uint16_t data_room_size, int socket_id) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:71: warning: The following parameter of rpc_rte_pktmbuf_pool_create_by_ops(rcf_rpc_server *rpcs, const char *name, uint32_t n, uint32_t cache_size, uint16_t priv_size, uint16_t data_room_size, int socket_id, const char *ops_name) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:158: warning: The following parameter of rpc_rte_pktmbuf_prepend_data(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, uint8_t *buf, size_t len) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:132: warning: The following parameter of rpc_rte_pktmbuf_read_data(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, size_t offset, size_t count, uint8_t *buf, size_t rbuflen) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:456: warning: The following parameter of rpc_rte_pktmbuf_redist_multi(rcf_rpc_server *rpcs, rpc_rte_mbuf_p *m, rpc_rte_mempool_p *mp_multi, unsigned int mp_multi_nb_items, struct tarpc_pktmbuf_seg_group *seg_groups, uint8_t nb_seg_groups) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:434: warning: The following parameter of rpc_rte_pktmbuf_refcnt_update(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, int16_t v) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:310: warning: The following parameter of rpc_rte_pktmbuf_set_flags(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, uint64_t ol_flags) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:385: warning: The following parameter of rpc_rte_pktmbuf_set_packet_type(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, const struct tarpc_rte_pktmbuf_packet_type *p_type) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:240: warning: The following parameter of rpc_rte_pktmbuf_set_port(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, uint16_t port) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:423: warning: The following parameter of rpc_rte_pktmbuf_set_tx_offload(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, const struct tarpc_rte_pktmbuf_tx_offload *tx_offload) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:269: warning: The following parameter of rpc_rte_pktmbuf_set_vlan_tci(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, uint16_t vlan_tci) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:288: warning: The following parameter of rpc_rte_pktmbuf_set_vlan_tci_outer(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, uint16_t vlan_tci_outer) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:341: warning: The following parameter of rpc_rte_pktmbuf_tailroom(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf.h:352: warning: The following parameter of rpc_rte_pktmbuf_trim(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m, uint16_t len) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf_ndn.h:60: warning: The following parameter of rpc_rte_mbuf_match_pattern(rcf_rpc_server *rpcs, const asn_value *pattern, rpc_rte_mbuf_p *mbufs, unsigned int count, asn_value ***packets, unsigned int *matched) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf_ndn.h:139: warning: The following parameter of rpc_rte_mbuf_match_tx_rx(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m_tx, rpc_rte_mbuf_p *rx_burst, unsigned int nb_rx, struct tarpc_rte_mbuf_report *reportp) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf_ndn.h:102: warning: The following parameter of rpc_rte_mbuf_match_tx_rx_pre(rcf_rpc_server *rpcs, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mbuf_ndn.h:43: warning: The following parameter of rpc_rte_mk_mbuf_from_template(rcf_rpc_server *rpcs, const asn_value *template, rpc_rte_mempool_p mp, rpc_rte_mbuf_p **mbufs, unsigned int *count) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mempool.h:52: warning: The following parameter of rpc_rte_mempool_free(rcf_rpc_server *rpcs, rpc_rte_mempool_p mp) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mempool.h:44: warning: The following parameter of rpc_rte_mempool_in_use_count(rcf_rpc_server *rpcs, rpc_rte_mempool_p mp) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_mempool.h:34: warning: The following parameter of rpc_rte_mempool_lookup(rcf_rpc_server *rpcs, const char *name) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ring.h:42: warning: The following parameter of rpc_rte_ring_create(rcf_rpc_server *rpcs, const char *name, unsigned count, int socket_id, unsigned flags) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ring.h:53: warning: The following parameter of rpc_rte_ring_free(rcf_rpc_server *rpcs, rpc_rte_ring_p ring) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ring.h:75: warning: The following parameter of rte_ring_dequeue_mbuf(rcf_rpc_server *rpcs, rpc_rte_ring_p ring) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/rpcc_dpdk/tapi_rpc_rte_ring.h:64: warning: The following parameter of rte_ring_enqueue_mbuf(rcf_rpc_server *rpcs, rpc_rte_ring_p ring, rpc_rte_mbuf_p m) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_arl.h:78: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/tapi/tapi_cfg_arl.h:94: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/tapi/tapi_cfg_iptables.h:133: warning: The following parameter of tapi_cfg_iptables_chain_add(const char *ta, const char *ifname, unsigned int af, const char *table, const char *chain, bool enable) is not documented:
+  parameter 'af'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_iptables.h:150: warning: The following parameter of tapi_cfg_iptables_chain_del(const char *ta, const char *ifname, unsigned int af, const char *table, const char *chain) is not documented:
+  parameter 'af'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_iptables.h:115: warning: The following parameter of tapi_cfg_iptables_chain_set(const char *ta, const char *ifname, unsigned int af, const char *table, const char *chain, bool enable) is not documented:
+  parameter 'af'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_iptables.h:45: warning: The following parameter of tapi_cfg_iptables_cmd(const char *ta, const char *ifname, unsigned int af, const char *table, const char *chain, const char *rule) is not documented:
+  parameter 'af'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_iptables.h:64: warning: The following parameter of tapi_cfg_iptables_cmd_fmt(const char *ta, const char *ifname, unsigned int af, const char *table, const char *chain, const char *rule,...) is not documented:
+  parameter 'af'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_l2tp.h:118: warning: argument 'ta' from the argument list of tapi_cfg_l2tp_lns_add has multiple @param documentation sections
+/home/pkg/te-dev/lib/tapi/tapi_cfg_l2tp.h:118: warning: argument 'lns' from the argument list of tapi_cfg_l2tp_lns_add has multiple @param documentation sections
+/home/pkg/te-dev/lib/tapi/tapi_cfg_l2tp.h:475: warning: argument 'opt' of command @param is not found in the argument list of tapi_cfg_l2tp_lns_pppopt_add(const char *ta, const char *lns, const char *pparam)
+/home/pkg/te-dev/lib/tapi/tapi_cfg_l2tp.h:483: warning: The following parameter of tapi_cfg_l2tp_lns_pppopt_add(const char *ta, const char *lns, const char *pparam) is not documented:
+  parameter 'pparam'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_l2tp.h:487: warning: argument 'opt' of command @param is not found in the argument list of tapi_cfg_l2tp_lns_pppopt_del(const char *ta, const char *lns, const char *pparam)
+/home/pkg/te-dev/lib/tapi/tapi_cfg_l2tp.h:495: warning: The following parameter of tapi_cfg_l2tp_lns_pppopt_del(const char *ta, const char *lns, const char *pparam) is not documented:
+  parameter 'pparam'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_pci.h:162: warning: argument 'pci_instance' of command @param is not found in the argument list of tapi_cfg_pci_fn_netdev_rsrc_name(const cfg_oid *oid)
+/home/pkg/te-dev/lib/tapi/tapi_cfg_pci.h:169: warning: The following parameter of tapi_cfg_pci_fn_netdev_rsrc_name(const cfg_oid *oid) is not documented:
+  parameter 'oid'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_xen.h:427: warning: The following parameter of tapi_cfg_xen_dom_u_bridge_get_accel(char const *ta, char const *dom_u, char const *bridge, bool *accel) is not documented:
+  parameter 'bridge'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_xen.h:397: warning: The following parameter of tapi_cfg_xen_dom_u_bridge_get_mac_addr(char const *ta, char const *dom_u, char const *bridge, uint8_t *mac) is not documented:
+  parameter 'bridge'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_xen.h:442: warning: The following parameter of tapi_cfg_xen_dom_u_bridge_set_accel(char const *ta, char const *dom_u, char const *bridge, bool accel) is not documented:
+  parameter 'bridge'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_xen.h:382: warning: The following parameter of tapi_cfg_xen_dom_u_bridge_set_ip_addr(char const *ta, char const *dom_u, char const *bridge, struct sockaddr const *ip_addr) is not documented:
+  parameter 'bridge'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_xen.h:412: warning: The following parameter of tapi_cfg_xen_dom_u_bridge_set_mac_addr(char const *ta, char const *dom_u, char const *bridge, uint8_t const *mac) is not documented:
+  parameter 'bridge'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_xen.h:52: warning: argument 'dom_u' of command @param is not found in the argument list of tapi_cfg_xen_get_rcf_port(char const *ta, unsigned int *port)
+/home/pkg/te-dev/lib/tapi/tapi_cfg_xen.h:52: warning: argument 'size' of command @param is not found in the argument list of tapi_cfg_xen_get_rcf_port(char const *ta, unsigned int *port)
+/home/pkg/te-dev/lib/tapi/tapi_cfg_xen.h:60: warning: The following parameter of tapi_cfg_xen_get_rcf_port(char const *ta, unsigned int *port) is not documented:
+  parameter 'port'
+/home/pkg/te-dev/lib/tapi/tapi_cfg_xen.h:76: warning: argument 'dom_u' of command @param is not found in the argument list of tapi_cfg_xen_get_rpc_br(char const *ta, char *br_name)
+/home/pkg/te-dev/lib/tapi/tapi_cfg_xen.h:64: warning: argument 'dom_u' of command @param is not found in the argument list of tapi_cfg_xen_set_rcf_port(char const *ta, unsigned int port)
+/home/pkg/te-dev/lib/tapi/tapi_cfg_xen.h:64: warning: argument 'size' of command @param is not found in the argument list of tapi_cfg_xen_set_rcf_port(char const *ta, unsigned int port)
+/home/pkg/te-dev/lib/tapi/tapi_cfg_xen.h:72: warning: The following parameter of tapi_cfg_xen_set_rcf_port(char const *ta, unsigned int port) is not documented:
+  parameter 'port'
+/home/pkg/te-dev/lib/tapi/tapi_jmp.h:156: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/tapi/tapi_route_gw.h:275: warning: The following parameter of tapi_route_gateway_set_forwarding(tapi_route_gateway *gw, bool enabled) is not documented:
+  parameter 'enabled'
+/home/pkg/te-dev/lib/tapi/tapi_sh_env.h:237: warning: argument 'force' of command @param is not found in the argument list of tapi_sh_env_save_set_int(rcf_rpc_server *pco, const char *env_name, int env_value, bool restart, bool *existed, int *old_value)
+/home/pkg/te-dev/lib/tapi/tapi_test.h:392: warning: unable to resolve reference to 'te_engine_tester' for \ref command
+/home/pkg/te-dev/lib/tapi/tapi_test.h:840: warning: The following parameter of TEST_GET_INT_LIST_PARAM(var_name_, var_len_) is not documented:
+  parameter 'var_len_'
+/home/pkg/te-dev/lib/tapi/tapi_test.h:816: warning: The following parameter of TEST_GET_STRING_LIST_PARAM(var_name_, var_len_) is not documented:
+  parameter 'var_len_'
+/home/pkg/te-dev/lib/tapi/tapi_test.h:1721: warning: The following parameters of tapi_asn_param_value_parse(char *pwd, char **s, const asn_type *type, asn_value **parsed_val, int *parsed_syms, char *ns) are not documented:
+  parameter 'pwd'
+  parameter 's'
+  parameter 'type'
+  parameter 'parsed_val'
+  parameter 'parsed_syms'
+/home/pkg/te-dev/lib/tapi/tapi_test.h:1145: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/tapi/tapi_test.h:1241: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/tapi/tapi_test.h:1287: warning: argument 'argc' from the argument list of test_get_int64_param has multiple @param documentation sections
+/home/pkg/te-dev/lib/tapi/tapi_test.h:1287: warning: The following parameter of test_get_int64_param(int argc, char **argv, const char *name) is not documented:
+  parameter 'argv'
+<unknown>:1: warning: unable to resolve reference to 'TAPI_BPF_MAP_TYPE_LPM_TRIE' for \ref command
+/home/pkg/te-dev/lib/tapi_bpf/tapi_bpf.h:273: warning: argument 'prog_count' of command @param is not found in the argument list of tapi_bpf_map_get_list(const char *ta, unsigned int bpf_id, char ***map, unsigned int *map_count)
+/home/pkg/te-dev/lib/tapi_bpf/tapi_bpf.h:284: warning: The following parameter of tapi_bpf_map_get_list(const char *ta, unsigned int bpf_id, char ***map, unsigned int *map_count) is not documented:
+  parameter 'map_count'
+/home/pkg/te-dev/lib/tapi_bpf/tapi_bpf.h:565: warning: argument 'fname' of command @param is not found in the argument list of tapi_bpf_obj_init(const char *ta, const char *path, tapi_bpf_prog_type type, unsigned int *bpf_id)
+/home/pkg/te-dev/lib/tapi_bpf/tapi_bpf.h:579: warning: The following parameter of tapi_bpf_obj_init(const char *ta, const char *path, tapi_bpf_prog_type type, unsigned int *bpf_id) is not documented:
+  parameter 'path'
+/home/pkg/te-dev/lib/tapi_dpdk/tapi_dpdk.h:154: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/tapi_env/tapi_env.h:274: warning: The following parameter of TEST_GET_BR(if_, br_) is not documented:
+  parameter 'if_'
+/home/pkg/te-dev/lib/tapi_env/tapi_env.h:289: warning: The following parameter of TEST_GET_PH(if_, ph_) is not documented:
+  parameter 'if_'
+/home/pkg/te-dev/lib/tapi_job/tapi_job_opt.h:626: warning: unable to resolve reference to 'size_t' for \ref command
+/home/pkg/te-dev/lib/tapi_job/tapi_job_opt.h:657: warning: unable to resolve reference to 'size_t' for \ref command
+/home/pkg/te-dev/lib/tapi_job/tapi_job_opt.h:490: warning: unable to resolve reference to 'char' for \ref command
+/home/pkg/te-dev/lib/tapi_job/tapi_job_opt.h:491: warning: Unsupported xml/html tag <quotation_mark> found
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:29: warning: argument 'rps' of command @param is not found in the argument list of rpc_nc_libssh_thread_verbosity(rcf_rpc_server *rpcs, rpc_nc_verb_level level)
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:34: warning: The following parameter of rpc_nc_libssh_thread_verbosity(rcf_rpc_server *rpcs, rpc_nc_verb_level level) is not documented:
+  parameter 'rpcs'
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:149: warning: explicit link request to 'NC_MSG_REPLY' could not be resolved
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:149: warning: explicit link request to 'NC_MSG_REPLY_ERR_MSGID' could not be resolved
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:152: warning: explicit link request to 'RPC_NC_MSG_REPLY' could not be resolved
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:153: warning: explicit link request to 'RPC_NC_MSG_WOULDBLOCK' could not be resolved
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:154: warning: explicit link request to 'RPC_NC_MSG_ERROR' could not be resolved
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:155: warning: explicit link request to 'RPC_NC_MSG_NOTIF' could not be resolved
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:157: warning: explicit link request to 'RPC_NC_MSG_REPLY_ERR_MSGID' could not be resolved
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:196: warning: Unsupported xml/html tag <get> found
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:111: warning: argument 'msgid' of command @param is not found in the argument list of rpc_nc_send_rpc(rcf_rpc_server *rpcs, struct rpc_nc_session *session, struct rpc_nc_rpc *rpc, int timeout, uint64_t *msg_id)
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:121: warning: explicit link request to 'RPC_NC_MSG_RPC' could not be resolved
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:122: warning: explicit link request to 'RPC_NC_MSG_WOULDBLOCK' could not be resolved
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:123: warning: explicit link request to 'RPC_NC_MSG_ERROR' could not be resolved
+/home/pkg/te-dev/lib/tapi_netconf/tapi_rpc_netconf.h:125: warning: The following parameter of rpc_nc_send_rpc(rcf_rpc_server *rpcs, struct rpc_nc_session *session, struct rpc_nc_rpc *rpc, int timeout, uint64_t *msg_id) is not documented:
+  parameter 'msg_id'
+/home/pkg/te-dev/lib/tapi_nvme/tapi_nvme.h:378: warning: The following parameter of tapi_nvme_initiator_get_feature(tapi_nvme_host_ctrl *host_ctrl, int feature) is not documented:
+  parameter 'feature'
+/home/pkg/te-dev/lib/tapi_nvme/tapi_nvme_kern_target.h:51: warning: The following parameter of tapi_nvme_kern_target_init(struct tapi_nvme_target *target, void *opts) is not documented:
+  parameter 'opts'
+/home/pkg/te-dev/lib/tapi_performance/tapi_performance.h:279: warning: The following parameter of tapi_perf_client_method_get_report(tapi_perf_client *client, tapi_perf_report_kind kind, tapi_perf_report *report) is not documented:
+  parameter 'kind'
+/home/pkg/te-dev/lib/tapi_performance/tapi_performance.h:219: warning: The following parameter of tapi_perf_server_method_get_report(tapi_perf_server *server, tapi_perf_report_kind kind, tapi_perf_report *report) is not documented:
+  parameter 'kind'
+/home/pkg/te-dev/lib/tapi_performance/tapi_performance.h:519: warning: The following parameter of tapi_perf_client_create(tapi_perf_bench bench, const tapi_perf_opts *options, tapi_job_factory_t *factory) is not documented:
+  parameter 'factory'
+/home/pkg/te-dev/lib/tapi_performance/tapi_performance.h:377: warning: The following parameter of tapi_perf_server_create(tapi_perf_bench bench, const tapi_perf_opts *options, tapi_job_factory_t *factory) is not documented:
+  parameter 'factory'
+/home/pkg/te-dev/lib/tapi_rpc/tapi_rpc_socket.h:921: warning: The following parameter of rpc_getsockopt_gen(rcf_rpc_server *rpcs, int s, rpc_socklevel level, rpc_sockopt optname, void *optval, void *raw_optval, socklen_t *raw_optlen, socklen_t raw_roptlen) is not documented:
+  parameter 'raw_optval'
+/home/pkg/te-dev/lib/tapi_rpc/tapi_rpc_socket.h:629: warning: The following parameter of rpc_recvbuf_gen(rcf_rpc_server *rpcs, int fd, rpc_ptr buf, size_t buf_off, size_t count, rpc_send_recv_flags flags) is not documented:
+  parameter 'count'
+/home/pkg/te-dev/lib/tapi_rpc/tapi_rpc_unistd.h:912: warning: argument 'arg' of command @param is not found in the argument list of rpc_fcntl(rcf_rpc_server *rpcs, int fd, int cmd,...)
+/home/pkg/te-dev/lib/tapi_rpc/tapi_rpc_unistd.h:445: warning: argument 'len' of command @param is not found in the argument list of rpc_iovec_cmp_strict(rpc_iovec *iov1, rpc_iovec *iov2, size_t iovcnt)
+/home/pkg/te-dev/lib/tapi_rpc/tapi_rpc_unistd.h:455: warning: The following parameter of rpc_iovec_cmp_strict(rpc_iovec *iov1, rpc_iovec *iov2, size_t iovcnt) is not documented:
+  parameter 'iovcnt'
+/home/pkg/te-dev/lib/tapi_rpc/tapi_rpc_unistd.h:335: warning: argument 'count' of command @param is not found in the argument list of rpc_lseek(rcf_rpc_server *rpcs, int fd, tarpc_off_t pos, rpc_lseek_mode mode)
+/home/pkg/te-dev/lib/tapi_rpc/tapi_rpc_unistd.h:344: warning: The following parameter of rpc_lseek(rcf_rpc_server *rpcs, int fd, tarpc_off_t pos, rpc_lseek_mode mode) is not documented:
+  parameter 'mode'
+/home/pkg/te-dev/lib/tapi_rpc/tapi_rpc_unistd.h:1207: warning: The following parameter of rpc_malloc_off(rcf_rpc_server *rpcs, size_t size, rpc_ptr_off **buf) is not documented:
+  parameter 'buf'
+/home/pkg/te-dev/lib/tapi_rpc/tapi_rpc_unistd.h:319: warning: The following parameter of rpc_readbuf_gen(rcf_rpc_server *rpcs, int fd, rpc_ptr buf, size_t buf_off, size_t count) is not documented:
+  parameter 'buf_off'
+/home/pkg/te-dev/lib/tapi_rpc/tapi_rpc_unistd.h:223: warning: The following parameter of rpc_writebuf_gen(rcf_rpc_server *rpcs, int fd, rpc_ptr buf, size_t buf_off, size_t count) is not documented:
+  parameter 'buf_off'
+/home/pkg/te-dev/lib/tapi_rpc/tapi_rpc_winsock2.h:1275: warning: argument 'flag' of command @param is not found in the argument list of rpc_wsa_join_leaf(rcf_rpc_server *rpcs, int s, const struct sockaddr *addr, rpc_ptr caller_wsabuf, rpc_ptr callee_wsabuf, rpc_qos *sqos, rpc_join_leaf_flags flags)
+/home/pkg/te-dev/lib/tapi_rpc/tapi_rpc_winsock2.h:1299: warning: The following parameter of rpc_wsa_join_leaf(rcf_rpc_server *rpcs, int s, const struct sockaddr *addr, rpc_ptr caller_wsabuf, rpc_ptr callee_wsabuf, rpc_qos *sqos, rpc_join_leaf_flags flags) is not documented:
+  parameter 'flags'
+/home/pkg/te-dev/lib/tapi_rpc/tapi_sockets.h:78: warning: argument 'iov_len' of command @param is not found in the argument list of tapi_sock_raw_tcpv4_send(rcf_rpc_server *rpcs, rpc_iovec *iov, int iovlen, int ifindex, int raw_socket, bool remove_vlan_hdr)
+/home/pkg/te-dev/lib/tapi_rpc/tapi_sockets.h:93: warning: The following parameter of tapi_sock_raw_tcpv4_send(rcf_rpc_server *rpcs, rpc_iovec *iov, int iovlen, int ifindex, int raw_socket, bool remove_vlan_hdr) is not documented:
+  parameter 'iovlen'
+/home/pkg/te-dev/lib/tapi_storage/tapi_storage_client.h:76: warning: argument 'service' of command @param is not found in the argument list of tapi_storage_client_method_ls(tapi_storage_client *client, const char *path, tapi_local_file_list *files)
+/home/pkg/te-dev/lib/tapi_storage/tapi_storage_client.h:84: warning: The following parameter of tapi_storage_client_method_ls(tapi_storage_client *client, const char *path, tapi_local_file_list *files) is not documented:
+  parameter 'client'
+/home/pkg/te-dev/lib/tapi_storage/tapi_storage_client.h:258: warning: argument 'service' of command @param is not found in the argument list of tapi_storage_client_ls(tapi_storage_client *client, const char *path, tapi_local_file_list *files)
+/home/pkg/te-dev/lib/tapi_storage/tapi_storage_client.h:267: warning: The following parameter of tapi_storage_client_ls(tapi_storage_client *client, const char *path, tapi_local_file_list *files) is not documented:
+  parameter 'client'
+/home/pkg/te-dev/lib/tapi_tad/arp/tapi_arp.h:344: warning: argument 'payload' of command @param is not found in the argument list of tapi_arp_frame_callback(const tapi_arp_frame_t *header, void *userdata)
+/home/pkg/te-dev/lib/tapi_tad/arp/tapi_arp.h:344: warning: argument 'plen' of command @param is not found in the argument list of tapi_arp_frame_callback(const tapi_arp_frame_t *header, void *userdata)
+/home/pkg/te-dev/lib/tapi_tad/bridge/tapi_stp.h:77: warning: argument 'header' of command @param is not found in the argument list of tapi_stp_bpdu_callback(const ndn_stp_bpdu_t *bpdu, const struct timeval *time_stamp, void *userdata)
+/home/pkg/te-dev/lib/tapi_tad/bridge/tapi_stp.h:77: warning: argument 'payload' of command @param is not found in the argument list of tapi_stp_bpdu_callback(const ndn_stp_bpdu_t *bpdu, const struct timeval *time_stamp, void *userdata)
+/home/pkg/te-dev/lib/tapi_tad/bridge/tapi_stp.h:77: warning: argument 'plen' of command @param is not found in the argument list of tapi_stp_bpdu_callback(const ndn_stp_bpdu_t *bpdu, const struct timeval *time_stamp, void *userdata)
+/home/pkg/te-dev/lib/tapi_tad/bridge/tapi_stp.h:86: warning: The following parameters of tapi_stp_bpdu_callback(const ndn_stp_bpdu_t *bpdu, const struct timeval *time_stamp, void *userdata) are not documented:
+  parameter 'bpdu'
+  parameter 'time_stamp'
+/home/pkg/te-dev/lib/tapi_tad/cli/tapi_cli.h:415: warning: The following parameters of TAPI_CLI_CSAP_CREATE_SHELL(ta_name, sid, shell_args, cprompt, lprompt, user, pprompt, pwd, cli_csap) are not documented:
+  parameter 'lprompt'
+  parameter 'pprompt'
+/home/pkg/te-dev/lib/tapi_tad/flow/tapi_flow.h:36: warning: argument 'platfrom_config' of command @param is not found in the argument list of TEST_GET_FLOW_CONFIG(_flow, _do_preprocess)
+/home/pkg/te-dev/lib/tapi_tad/flow/tapi_flow.h:42: warning: The following parameters of TEST_GET_FLOW_CONFIG(_flow, _do_preprocess) are not documented:
+  parameter '_flow'
+  parameter '_do_preprocess'
+/home/pkg/te-dev/lib/tapi_tad/flow/tapi_flow.h:163: warning: The following parameter of tapi_flow_conf_get(int argc, char **argv, bool do_preprocess, tapi_flow_t *flow) is not documented:
+  parameter 'do_preprocess'
+/home/pkg/te-dev/lib/tapi_tad/igmp/tapi_igmp.h:275: warning: argument 'tos' of command @param is not found in the argument list of tapi_igmp_add_ip4_eth_pdu(asn_value **tmpl_or_ptrn, asn_value **pdu, bool is_pattern, in_addr_t dst_addr, in_addr_t src_addr, uint8_t *eth_src)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_icmp4.h:67: warning: argument 'src_mac' of command @param is not found in the argument list of tapi_ipproto_ip4_icmp_ip4_eth_csap_create(const char *ta_name, int sid, const char *eth_dev, unsigned int receive_mode, const uint8_t *eth_src, const uint8_t *eth_dst, in_addr_t src_addr, in_addr_t dst_addr, in_addr_t msg_src_addr, in_addr_t msg_dst_addr, int msg_src_port, int msg_dst_port, int ip_proto, csap_handle_t *ip_proto_csap)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_icmp4.h:67: warning: argument 'dst_mac' of command @param is not found in the argument list of tapi_ipproto_ip4_icmp_ip4_eth_csap_create(const char *ta_name, int sid, const char *eth_dev, unsigned int receive_mode, const uint8_t *eth_src, const uint8_t *eth_dst, in_addr_t src_addr, in_addr_t dst_addr, in_addr_t msg_src_addr, in_addr_t msg_dst_addr, int msg_src_port, int msg_dst_port, int ip_proto, csap_handle_t *ip_proto_csap)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_icmp4.h:88: warning: The following parameters of tapi_ipproto_ip4_icmp_ip4_eth_csap_create(const char *ta_name, int sid, const char *eth_dev, unsigned int receive_mode, const uint8_t *eth_src, const uint8_t *eth_dst, in_addr_t src_addr, in_addr_t dst_addr, in_addr_t msg_src_addr, in_addr_t msg_dst_addr, int msg_src_port, int msg_dst_port, int ip_proto, csap_handle_t *ip_proto_csap) are not documented:
+  parameter 'eth_src'
+  parameter 'eth_dst'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_icmp4.h:106: warning: argument 'src_mac' of command @param is not found in the argument list of tapi_tcp_ip4_icmp_ip4_eth_csap_create(const char *ta_name, int sid, const char *eth_dev, unsigned int receive_mode, const uint8_t *eth_src, const uint8_t *eth_dst, in_addr_t src_addr, in_addr_t dst_addr, in_addr_t msg_src_addr, in_addr_t msg_dst_addr, int msg_src_port, int msg_dst_port, csap_handle_t *tcp_csap)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_icmp4.h:106: warning: argument 'dst_mac' of command @param is not found in the argument list of tapi_tcp_ip4_icmp_ip4_eth_csap_create(const char *ta_name, int sid, const char *eth_dev, unsigned int receive_mode, const uint8_t *eth_src, const uint8_t *eth_dst, in_addr_t src_addr, in_addr_t dst_addr, in_addr_t msg_src_addr, in_addr_t msg_dst_addr, int msg_src_port, int msg_dst_port, csap_handle_t *tcp_csap)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_icmp4.h:126: warning: The following parameters of tapi_tcp_ip4_icmp_ip4_eth_csap_create(const char *ta_name, int sid, const char *eth_dev, unsigned int receive_mode, const uint8_t *eth_src, const uint8_t *eth_dst, in_addr_t src_addr, in_addr_t dst_addr, in_addr_t msg_src_addr, in_addr_t msg_dst_addr, int msg_src_port, int msg_dst_port, csap_handle_t *tcp_csap) are not documented:
+  parameter 'eth_src'
+  parameter 'eth_dst'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_icmp4.h:143: warning: argument 'src_mac' of command @param is not found in the argument list of tapi_udp_ip4_icmp_ip4_eth_csap_create(const char *ta_name, int sid, const char *eth_dev, unsigned int receive_mode, const uint8_t *eth_src, const uint8_t *eth_dst, in_addr_t src_addr, in_addr_t dst_addr, in_addr_t msg_src_addr, in_addr_t msg_dst_addr, int msg_src_port, int msg_dst_port, csap_handle_t *udp_csap)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_icmp4.h:143: warning: argument 'dst_mac' of command @param is not found in the argument list of tapi_udp_ip4_icmp_ip4_eth_csap_create(const char *ta_name, int sid, const char *eth_dev, unsigned int receive_mode, const uint8_t *eth_src, const uint8_t *eth_dst, in_addr_t src_addr, in_addr_t dst_addr, in_addr_t msg_src_addr, in_addr_t msg_dst_addr, int msg_src_port, int msg_dst_port, csap_handle_t *udp_csap)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_icmp4.h:163: warning: The following parameters of tapi_udp_ip4_icmp_ip4_eth_csap_create(const char *ta_name, int sid, const char *eth_dev, unsigned int receive_mode, const uint8_t *eth_src, const uint8_t *eth_dst, in_addr_t src_addr, in_addr_t dst_addr, in_addr_t msg_src_addr, in_addr_t msg_dst_addr, int msg_src_port, int msg_dst_port, csap_handle_t *udp_csap) are not documented:
+  parameter 'eth_src'
+  parameter 'eth_dst'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_ip4.h:156: warning: argument 'proto' of command @param is not found in the argument list of tapi_ip4_csap_create(const char *ta_name, int sid, in_addr_t loc_ip4_addr, in_addr_t rem_ip4_addr, int ip_proto, csap_handle_t *ip4_csap)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_ip4.h:169: warning: The following parameter of tapi_ip4_csap_create(const char *ta_name, int sid, in_addr_t loc_ip4_addr, in_addr_t rem_ip4_addr, int ip_proto, csap_handle_t *ip4_csap) is not documented:
+  parameter 'ip_proto'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_ip4.h:127: warning: argument 'proto' of command @param is not found in the argument list of tapi_ip4_eth_csap_create(const char *ta_name, int sid, const char *eth_dev, unsigned int receive_mode, const uint8_t *loc_mac_addr, const uint8_t *rem_mac_addr, in_addr_t loc_ip4_addr, in_addr_t rem_ip4_addr, int ip_proto, csap_handle_t *ip4_csap)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_ip4.h:144: warning: The following parameter of tapi_ip4_eth_csap_create(const char *ta_name, int sid, const char *eth_dev, unsigned int receive_mode, const uint8_t *loc_mac_addr, const uint8_t *rem_mac_addr, in_addr_t loc_ip4_addr, in_addr_t rem_ip4_addr, int ip_proto, csap_handle_t *ip4_csap) is not documented:
+  parameter 'ip_proto'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_ip_common.h:48: warning: argument 'proto' of command @param is not found in the argument list of tapi_ip_eth_csap_create(const char *ta_name, int sid, const char *eth_dev, unsigned int receive_mode, const uint8_t *loc_mac_addr, const uint8_t *rem_mac_addr, int af, const void *loc_ip_addr, const void *rem_ip_addr, int ip_proto, csap_handle_t *ip_csap)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_ip_common.h:64: warning: The following parameter of tapi_ip_eth_csap_create(const char *ta_name, int sid, const char *eth_dev, unsigned int receive_mode, const uint8_t *loc_mac_addr, const uint8_t *rem_mac_addr, int af, const void *loc_ip_addr, const void *rem_ip_addr, int ip_proto, csap_handle_t *ip_csap) is not documented:
+  parameter 'ip_proto'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_socket.h:90: warning: argument 'tcp_csap' of command @param is not found in the argument list of tapi_socket_recv(const char *ta_name, int sid, csap_handle_t csap, unsigned int timeout, csap_handle_t forward, bool exact, uint8_t *buf, size_t *length)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_socket.h:112: warning: The following parameter of tapi_socket_recv(const char *ta_name, int sid, csap_handle_t csap, unsigned int timeout, csap_handle_t forward, bool exact, uint8_t *buf, size_t *length) is not documented:
+  parameter 'csap'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_socket.h:119: warning: argument 'tcp_csap' of command @param is not found in the argument list of tapi_socket_send(const char *ta_name, int sid, csap_handle_t csap, uint8_t *buf, size_t length)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_socket.h:129: warning: The following parameter of tapi_socket_send(const char *ta_name, int sid, csap_handle_t csap, uint8_t *buf, size_t length) is not documented:
+  parameter 'csap'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:210: warning: argument 'tcp_message' of command @param is not found in the argument list of ndn_tcp4_message_to_plain(asn_value *pkt, struct tcp4_message **tcp_msg)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:220: warning: The following parameter of ndn_tcp4_message_to_plain(asn_value *pkt, struct tcp4_message **tcp_msg) is not documented:
+  parameter 'tcp_msg'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:1233: warning: argument 'start_time' of command @param is not found in the argument list of tapi_tcp_conn_enable_ts(tapi_tcp_handler_t handler, bool enable, uint32_t start_value)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:1246: warning: The following parameter of tapi_tcp_conn_enable_ts(tapi_tcp_handler_t handler, bool enable, uint32_t start_value) is not documented:
+  parameter 'start_value'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:1357: warning: argument 'hrds_len' of command @param is not found in the argument list of tapi_tcp_get_hdrs_payload_len(asn_value *pkt, unsigned int *hdrs_len, unsigned int *pld_len)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:1374: warning: The following parameter of tapi_tcp_get_hdrs_payload_len(asn_value *pkt, unsigned int *hdrs_len, unsigned int *pld_len) is not documented:
+  parameter 'hdrs_len'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:691: warning: argument 'enc_llc' of command @param is not found in the argument list of tapi_tcp_init_connection_enc(const char *agt, tapi_tcp_mode_t mode, const struct sockaddr *local_addr, const struct sockaddr *remote_addr, const char *local_iface, const uint8_t *local_mac, const uint8_t *remote_mac, int window, bool enc_vlan, bool enc_snap, tapi_tcp_handler_t *handler)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:699: warning: The following parameters of tapi_tcp_init_connection_enc(const char *agt, tapi_tcp_mode_t mode, const struct sockaddr *local_addr, const struct sockaddr *remote_addr, const char *local_iface, const uint8_t *local_mac, const uint8_t *remote_mac, int window, bool enc_vlan, bool enc_snap, tapi_tcp_handler_t *handler) are not documented:
+  parameter 'agt'
+  parameter 'mode'
+  parameter 'local_addr'
+  parameter 'remote_addr'
+  parameter 'local_iface'
+  parameter 'local_mac'
+  parameter 'remote_mac'
+  parameter 'window'
+  parameter 'enc_snap'
+  parameter 'handler'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:885: warning: argument 'payload' of command @param is not found in the argument list of tapi_tcp_recv_msg(tapi_tcp_handler_t handler, int timeout, tapi_tcp_protocol_mode_t ack_mode, uint8_t *buffer, size_t *len, tapi_tcp_pos_t *seqn_got, tapi_tcp_pos_t *ackn_got, uint8_t *flags)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:900: warning: The following parameter of tapi_tcp_recv_msg(tapi_tcp_handler_t handler, int timeout, tapi_tcp_protocol_mode_t ack_mode, uint8_t *buffer, size_t *len, tapi_tcp_pos_t *seqn_got, tapi_tcp_pos_t *ackn_got, uint8_t *flags) is not documented:
+  parameter 'buffer'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:857: warning: argument 'payload' of command @param is not found in the argument list of tapi_tcp_recv_msg_gen(tapi_tcp_handler_t handler, int timeout, tapi_tcp_protocol_mode_t ack_mode, uint8_t *buffer, size_t *len, tapi_tcp_pos_t *seqn_got, tapi_tcp_pos_t *ackn_got, uint8_t *flags, bool no_unexp_seqn)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:875: warning: The following parameter of tapi_tcp_recv_msg_gen(tapi_tcp_handler_t handler, int timeout, tapi_tcp_protocol_mode_t ack_mode, uint8_t *buffer, size_t *len, tapi_tcp_pos_t *seqn_got, tapi_tcp_pos_t *ackn_got, uint8_t *flags, bool no_unexp_seqn) is not documented:
+  parameter 'buffer'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:1114: warning: argument 'sid' of command @param is not found in the argument list of tapi_tcp_reset_hack_catch(const char *ta_name, int session, tapi_tcp_reset_hack_t *context)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:1125: warning: The following parameter of tapi_tcp_reset_hack_catch(const char *ta_name, int session, tapi_tcp_reset_hack_t *context) is not documented:
+  parameter 'session'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:1144: warning: argument 'sid' of command @param is not found in the argument list of tapi_tcp_reset_hack_clear(const char *ta_name, int session, tapi_tcp_reset_hack_t *context)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:1152: warning: The following parameter of tapi_tcp_reset_hack_clear(const char *ta_name, int session, tapi_tcp_reset_hack_t *context) is not documented:
+  parameter 'session'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:1095: warning: argument 'sid' of command @param is not found in the argument list of tapi_tcp_reset_hack_init(const char *ta_name, int session, const char *iface, bool dir_out, tapi_tcp_reset_hack_t *context)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:1109: warning: The following parameter of tapi_tcp_reset_hack_init(const char *ta_name, int session, const char *iface, bool dir_out, tapi_tcp_reset_hack_t *context) is not documented:
+  parameter 'session'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:1129: warning: argument 'sid' of command @param is not found in the argument list of tapi_tcp_reset_hack_send(const char *ta_name, int session, tapi_tcp_reset_hack_t *context, size_t received, size_t sent)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:1139: warning: The following parameter of tapi_tcp_reset_hack_send(const char *ta_name, int session, tapi_tcp_reset_hack_t *context, size_t received, size_t sent) is not documented:
+  parameter 'session'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:811: warning: The following parameters of tapi_tcp_send_msg(tapi_tcp_handler_t handler, uint8_t *payload, size_t len, tapi_tcp_protocol_mode_t seq_mode, tapi_tcp_pos_t seqn, tapi_tcp_protocol_mode_t ack_mode, tapi_tcp_pos_t ackn, tapi_ip_frag_spec *frags, size_t frag_num) are not documented:
+  parameter 'frags'
+  parameter 'frag_num'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_tcp.h:778: warning: argument 'timeout' of command @param is not found in the argument list of tapi_tcp_send_rst(tapi_tcp_handler_t handler)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_udp.h:46: warning: argument 'dst_addr' of command @param is not found in the argument list of tapi_udp_add_pdu(asn_value **tmpl_or_ptrn, asn_value **pdu, bool is_pattern, int src_port, int dst_port)
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_udp.h:64: warning: The following parameter of tapi_udp_add_pdu(asn_value **tmpl_or_ptrn, asn_value **pdu, bool is_pattern, int src_port, int dst_port) is not documented:
+  parameter 'dst_port'
+/home/pkg/te-dev/lib/tapi_tad/ipstack/tapi_udp.h:112: warning: The following parameters of tapi_udp_ip4_csap_create(const char *ta_name, int sid, const char *ifname, in_addr_t loc_addr, in_addr_t rem_addr, int loc_port, int rem_port, csap_handle_t *udp_csap) are not documented:
+  parameter 'sid'
+  parameter 'ifname'
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:49: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:49: warning: argument 'ta' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:49: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:49: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:49: warning: argument 'target_id' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:49: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:49: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:49: warning: argument 'param_name' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:49: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:49: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:49: warning: argument 'value' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:49: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:58: warning: The following parameters of ISCSI_INITIATOR_SET_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_) are not documented:
+  parameter '_ta_'
+  parameter '_target_id_'
+  parameter '_cid_'
+  parameter '_param_name_'
+  parameter '_value_'
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:78: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_NOT_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:78: warning: argument 'ta' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_NOT_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:78: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_NOT_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:78: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_NOT_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:78: warning: argument 'target_id' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_NOT_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:78: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_NOT_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:78: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_NOT_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:78: warning: argument 'param_name' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_NOT_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:78: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_NOT_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:78: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_NOT_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:78: warning: argument 'value' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_NOT_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:78: warning: argument 'em' of command @param is not found in the argument list of ISCSI_INITIATOR_SET_NOT_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:87: warning: The following parameters of ISCSI_INITIATOR_SET_NOT_ADVERTIZE(_ta_, _target_id_, _cid_, _param_name_, _value_) are not documented:
+  parameter '_ta_'
+  parameter '_target_id_'
+  parameter '_cid_'
+  parameter '_param_name_'
+  parameter '_value_'
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:316: warning: argument 'sid' of command @param is not found in the argument list of tapi_iscsi_exchange_until_pattern(const char *ta, int session, csap_handle_t csap_a, csap_handle_t csap_b, asn_value *pattern, uint8_t *buffer, size_t *length, unsigned int timeout)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:332: warning: The following parameter of tapi_iscsi_exchange_until_pattern(const char *ta, int session, csap_handle_t csap_a, csap_handle_t csap_b, asn_value *pattern, uint8_t *buffer, size_t *length, unsigned int timeout) is not documented:
+  parameter 'session'
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:297: warning: argument 'sid' of command @param is not found in the argument list of tapi_iscsi_exchange_until_silent(const char *ta, int session, csap_handle_t csap_a, csap_handle_t csap_b, unsigned int timeout)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:309: warning: The following parameter of tapi_iscsi_exchange_until_silent(const char *ta, int session, csap_handle_t csap_a, csap_handle_t csap_b, unsigned int timeout) is not documented:
+  parameter 'session'
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:276: warning: argument 'ta' of command @param is not found in the argument list of tapi_iscsi_forward_all(const char *ta_name, int session, csap_handle_t csap_rcv, csap_handle_t csap_fwd, unsigned int timeout, unsigned int *forwarded)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:276: warning: argument 'sid' of command @param is not found in the argument list of tapi_iscsi_forward_all(const char *ta_name, int session, csap_handle_t csap_rcv, csap_handle_t csap_fwd, unsigned int timeout, unsigned int *forwarded)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:289: warning: The following parameters of tapi_iscsi_forward_all(const char *ta_name, int session, csap_handle_t csap_rcv, csap_handle_t csap_fwd, unsigned int timeout, unsigned int *forwarded) are not documented:
+  parameter 'ta_name'
+  parameter 'session'
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:673: warning: The following parameters of tapi_iscsi_initiator_advertize_set(const char *ta, iscsi_target_id target_id, iscsi_cid cid, tapi_iscsi_parameter param, bool advertize) are not documented:
+  parameter 'cid'
+  parameter 'advertize'
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:1297: warning: argument 'data' of command @param is not found in the argument list of tapi_iscsi_initiator_read_file(iscsi_io_handle_t *ioh, iscsi_io_taskid *taskid, const char *fname)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:1307: warning: The following parameter of tapi_iscsi_initiator_read_file(iscsi_io_handle_t *ioh, iscsi_io_taskid *taskid, const char *fname) is not documented:
+  parameter 'taskid'
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:688: warning: The following parameters of tapi_iscsi_initiator_set_parameter(const char *ta, iscsi_target_id target_id, iscsi_cid cid, tapi_iscsi_parameter param, const char *value, bool advertize) are not documented:
+  parameter 'cid'
+  parameter 'advertize'
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:1281: warning: argument 'data' of command @param is not found in the argument list of tapi_iscsi_initiator_write_file(iscsi_io_handle_t *ioh, iscsi_io_taskid *taskid, const char *fname)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:217: warning: argument 'n_csaps' of command @param is not found in the argument list of tapi_iscsi_recv_polled_pkt(rcf_trpoll_csap *the_csap, iscsi_target_params_t *params, uint8_t *buffer, size_t *length)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:217: warning: argument 'csaps' of command @param is not found in the argument list of tapi_iscsi_recv_polled_pkt(rcf_trpoll_csap *the_csap, iscsi_target_params_t *params, uint8_t *buffer, size_t *length)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:217: warning: argument 'timeout' of command @param is not found in the argument list of tapi_iscsi_recv_polled_pkt(rcf_trpoll_csap *the_csap, iscsi_target_params_t *params, uint8_t *buffer, size_t *length)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:217: warning: argument 'ready_index' of command @param is not found in the argument list of tapi_iscsi_recv_polled_pkt(rcf_trpoll_csap *the_csap, iscsi_target_params_t *params, uint8_t *buffer, size_t *length)
+/home/pkg/te-dev/lib/tapi_tad/iscsi/tapi_iscsi.h:231: warning: The following parameter of tapi_iscsi_recv_polled_pkt(rcf_trpoll_csap *the_csap, iscsi_target_params_t *params, uint8_t *buffer, size_t *length) is not documented:
+  parameter 'the_csap'
+/home/pkg/te-dev/lib/tapi_tad/ppp/tapi_ppp.h:41: warning: The following parameter of tapi_ppp_add_csap_layer(asn_value **csap_spec, uint16_t protocol) is not documented:
+  parameter 'protocol'
+/home/pkg/te-dev/lib/tapi_tad/ppp/tapi_ppp.h:45: warning: argument 'group_addr' of command @param is not found in the argument list of tapi_ppp_add_pdu(asn_value **tmpl_or_ptrn, asn_value **pdu, bool is_pattern, uint16_t protocol)
+/home/pkg/te-dev/lib/tapi_tad/ppp/tapi_ppp.h:56: warning: The following parameter of tapi_ppp_add_pdu(asn_value **tmpl_or_ptrn, asn_value **pdu, bool is_pattern, uint16_t protocol) is not documented:
+  parameter 'protocol'
+/home/pkg/te-dev/lib/tapi_tad/ppp/tapi_pppoe.h:41: warning: The following parameters of tapi_pppoe_add_csap_layer(asn_value **csap_spec, uint8_t version, uint8_t type, uint8_t code, uint16_t session_id, uint16_t length) are not documented:
+  parameter 'version'
+  parameter 'type'
+  parameter 'code'
+  parameter 'session_id'
+  parameter 'length'
+/home/pkg/te-dev/lib/tapi_tad/ppp/tapi_pppoe.h:49: warning: argument 'group_addr' of command @param is not found in the argument list of tapi_pppoe_add_pdu(asn_value **tmpl_or_ptrn, asn_value **pdu, bool is_pattern, uint8_t version, uint8_t type, uint8_t code, uint16_t session_id, uint16_t length)
+/home/pkg/te-dev/lib/tapi_tad/ppp/tapi_pppoe.h:60: warning: The following parameters of tapi_pppoe_add_pdu(asn_value **tmpl_or_ptrn, asn_value **pdu, bool is_pattern, uint8_t version, uint8_t type, uint8_t code, uint16_t session_id, uint16_t length) are not documented:
+  parameter 'version'
+  parameter 'type'
+  parameter 'code'
+  parameter 'session_id'
+  parameter 'length'
+/home/pkg/te-dev/lib/tapi_tcp_states/tapi_tcp_states.h:328: warning: The following parameter of tsa_state_cur_set(tsa_session *ss, rpc_tcp_state state) is not documented:
+  parameter 'state'
+/home/pkg/te-dev/lib/tapi_tool/tapi_haproxy.h:99: warning: argument 'signum' of command @param is not found in the argument list of tapi_haproxy_kill(tapi_haproxy_app *app, int signo)
+/home/pkg/te-dev/lib/tapi_tool/tapi_haproxy.h:106: warning: The following parameter of tapi_haproxy_kill(tapi_haproxy_app *app, int signo) is not documented:
+  parameter 'signo'
+/home/pkg/te-dev/lib/tapi_tool/tapi_redis_benchmark.h:202: warning: The following parameter of tapi_redis_benchmark_report_mi_log(te_mi_logger *logger, tapi_redis_benchmark_report *report) is not documented:
+  parameter 'logger'
+/home/pkg/te-dev/lib/tapi_tool/tapi_trex.h:1071: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/tapi_tool/tapi_trex.h:1077: warning: argument 'app' of command @param is not found in the argument list of tapi_trex_opt_flt_srv_get(tapi_trex_report *report, const char *name, uint64_t *value)
+/home/pkg/te-dev/lib/tapi_tool/tapi_trex.h:1085: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/tapi_tool/tapi_trex.h:1087: warning: The following parameter of tapi_trex_opt_flt_srv_get(tapi_trex_report *report, const char *name, uint64_t *value) is not documented:
+  parameter 'report'
+/home/pkg/te-dev/lib/tapi_tool/tapi_trex.h:1055: warning: unexpected token in comment block while parsing the argument of command retval
+/home/pkg/te-dev/lib/tapi_upnp/tapi_upnp_content_directory.h:151: warning: argument 'container' of command @param is not found in the argument list of cd_handler(tapi_upnp_cd_container_node *, void *)
+/home/pkg/te-dev/tools/rgt/rgt-core/rgt_common.h:203: warning: Unsupported xml/html tag <meta> found
+/home/pkg/te-dev/lib/tools/te_iscsi.h:730: warning: explicit link request to 'define' could not be resolved
+/home/pkg/te-dev/lib/tapi_bpf/tapi_bpf.h:104: warning: unable to resolve reference to 'TAPI_BPF_MAP_TYPE_LPM_TRIE' for \ref command
+/home/pkg/te-dev/lib/tapi_tad/snmp/tapi_snmp_iftable.h:13: warning: explicit link request to 'ifTable' could not be resolved
+/home/pkg/te-dev/lib/tapi_tad/snmp/tapi_snmp_defs.h:52: warning: explicit link request to 'ipAddrTable' could not be resolved
+/home/pkg/te-dev/lib/tapi_tad/snmp/tapi_snmp_ip_mibs.h:13: warning: explicit link request to 'ipAddressTable' could not be resolved
+/home/pkg/te-dev/lib/tapi_tad/snmp/tapi_snmp_ip_mibs.h:41: warning: explicit link request to 'ipCidrRouteTable' could not be resolved
+/home/pkg/te-dev/lib/tapi_tad/snmp/tapi_snmp_ip_mibs.h:30: warning: explicit link request to 'ipNetToMediaTable' could not be resolved
+/home/pkg/te-dev/lib/mainpage.dox:4: warning: Found unknown command '@copyright_notice'
+/home/pkg/te-dev/lib/mainpage.dox:18: warning: unable to resolve reference to 'confapi' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:19: warning: unable to resolve reference to 'loggerten' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:20: warning: unable to resolve reference to 'rcfapi' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:21: warning: unable to resolve reference to 'rcfrpc' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:22: warning: unable to resolve reference to 'asn' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:23: warning: unable to resolve reference to 'tapi' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:24: warning: unable to resolve reference to 'tapi_arp' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:26: warning: unable to resolve reference to 'tapi_bridge' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:27: warning: unable to resolve reference to 'tapi_cli' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:28: warning: unable to resolve reference to 'tapi_eth' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:29: warning: unable to resolve reference to 'tapi_ipstack' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:30: warning: unable to resolve reference to 'tapi_media' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:33: warning: unable to resolve reference to 'tapi_rpc' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:34: warning: unable to resolve reference to 'tapi_snmp' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:35: warning: unable to resolve reference to 'tapi_storage' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:37: warning: unable to resolve reference to 'tapi_tcp_states' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:38: warning: unable to resolve reference to 'tapi_upnp' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:39: warning: unable to resolve reference to 'tapi_wifi' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:4: warning: Found unknown command '@copyright_notice'
+/home/pkg/te-dev/lib/mainpage.dox:18: warning: unable to resolve reference to 'confapi' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:19: warning: unable to resolve reference to 'loggerten' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:20: warning: unable to resolve reference to 'rcfapi' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:21: warning: unable to resolve reference to 'rcfrpc' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:22: warning: unable to resolve reference to 'asn' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:23: warning: unable to resolve reference to 'tapi' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:24: warning: unable to resolve reference to 'tapi_arp' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:26: warning: unable to resolve reference to 'tapi_bridge' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:27: warning: unable to resolve reference to 'tapi_cli' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:28: warning: unable to resolve reference to 'tapi_eth' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:29: warning: unable to resolve reference to 'tapi_ipstack' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:30: warning: unable to resolve reference to 'tapi_media' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:33: warning: unable to resolve reference to 'tapi_rpc' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:34: warning: unable to resolve reference to 'tapi_snmp' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:35: warning: unable to resolve reference to 'tapi_storage' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:37: warning: unable to resolve reference to 'tapi_tcp_states' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:38: warning: unable to resolve reference to 'tapi_upnp' for \ref command
+/home/pkg/te-dev/lib/mainpage.dox:39: warning: unable to resolve reference to 'tapi_wifi' for \ref command

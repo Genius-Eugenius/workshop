@@ -1,0 +1,31 @@
+#! /bin/bash
+# SPDX-License-Identifier: Apache-2.0
+#
+# Helper scripts to build x3-net-linux as part of TE build
+# Based on build-sfc-linux-net script.
+#
+
+MAKE_ARGS="${@}"
+
+set -e
+
+LIB_MOD_DIR="lib/modules/$(uname -r)"
+
+rsync -av --delete --exclude='*.o' --exclude='*.mod.c' --exclude='*.ko' \
+    --exclude='*.mod' --exclude='*.cmd' --exclude='*.d' --exclude='*.a' \
+    --exclude=autocompat.h --exclude=config.h --exclude=modules.order \
+    --exclude=Module.symvers --exclude=.kpath "${EXT_SOURCES}"/ .
+
+# It assumes the cns-auxiliary-bus already built: see scripts/build-cns-auxiliary-bus
+export AUX_BUS_PATH="${EXT_SOURCES}/../../cns_auxiliary_bus/build"
+
+if make ${MAKE_ARGS} ; then
+    for ta_type in ${TE_TA_TYPES} ; do
+        DST="${TE_AGENTS_INST}/${ta_type}/${LIB_MOD_DIR}"
+        mkdir -p "$DST"
+        find . -name '*.ko' -exec cp -a {} "${DST}/" \;
+    done
+    exit 0
+else
+    exit 1
+fi

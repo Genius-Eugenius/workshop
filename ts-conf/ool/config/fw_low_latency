@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Tx mcast UDP loopback is not supported on EF10 NICs in 'low latency' mode.
+TE_EXTRA_OPTS="${TE_EXTRA_OPTS} --trc-tag=no_hw_tx_mcast_loop"
+
+TE_EXTRA_OPTS="${TE_EXTRA_OPTS} --trc-tag=fw_low"

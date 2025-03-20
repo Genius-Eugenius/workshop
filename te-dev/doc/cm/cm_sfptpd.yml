@@ -1,0 +1,48 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+
+- comment: |
+    sfptpd configuration model.
+
+
+
+- register:
+
+    - oid: "/agent/sfptpd"
+      access: read_create
+      type: none
+      d: |
+         Root object for sfptpd settings
+         Name: empty
+
+    - oid: "/agent/sfptpd/path"
+      access: read_write
+      type: string
+      d: |
+         Shell command to run sfptpd.
+         Name: empty
+         Value: full path with file name to sfptpd
+
+    - oid: "/agent/sfptpd/config"
+      access: read_write
+      type: string
+      d: |
+         Name of the configuration file of sfptpd.
+         Name: empty
+         Value: full path with file name to configuration file
+
+    - oid: "/agent/sfptpd/ifname"
+      access: read_write
+      type: string
+      d: |
+         Interface name to use with sfptpd.
+         Name: empty
+         Value: network interface name
+
+    - oid: "/agent/sfptpd/enable"
+      access: read_write
+      type: int32
+      d: |
+         Enable state for sfptpd
+         Name: empty
+         Value: 0 (disabled) or 1 (enabled)

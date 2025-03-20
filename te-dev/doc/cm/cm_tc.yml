@@ -1,0 +1,109 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+
+- comment: |
+    Traffic Control interfaces on Test Agents.
+
+
+
+- register:
+
+    - oid: "/agent/interface/tc"
+      access: read_only
+      type: none
+      d: |
+         WEP key0: Double-quoted string of hex digits
+         Name: empty
+
+    - oid: "/agent/interface/tc/qdisc"
+      access: read_only
+      type: none
+      d: |
+         Queuing Disciplines entry
+         Name: empty
+
+    - oid: "/agent/interface/tc/qdisc/enabled"
+      access: read_write
+      type: int32
+      d: |
+         Queuing Disciplines disable/enable
+         Name: empty
+         Value: 0 (disabled) or 1 (enabled)
+
+    - oid: "/agent/interface/tc/qdisc/kind"
+      access: read_write
+      type: string
+      volatile: true
+      d: |
+         Queuing Disciplines kind: "netem", "tbf", "clsact"
+         Name: empty
+         Value: netem - Network Emulation functionality,
+                tbf - Token Bucket Filter functionality,
+                clsact - dummy qdisc to attach bpf programs
+
+    - oid: "/agent/interface/tc/qdisc/parent"
+      access: read_only
+      type: string
+      d: |
+         Queuing Disciplines parent: "root"
+         Name: empty
+         Value: root - The primary and more common is the egress qdisc
+
+    - oid: "/agent/interface/tc/qdisc/handle"
+      access: read_only
+      type: string
+      d: |
+         Queuing Disciplines handle: "1:0"
+         Name: empty
+         Value: 1:0 - Unique ID for qdisc
+
+    - oid: "/agent/interface/tc/qdisc/param"
+      access: read_create
+      type: string
+      depends:
+        - oid: "/agent/interface/tc/qdisc/kind"
+      d: |
+         Queuing Disciplines kind specific parameters
+         Name:  Available parameters if kind is "netem":
+                delay                   - Packet delay in micro seconds
+                jitter                  - Packet delay jitter in micro seconds
+                delay_correlation       - Packet delay correlation probability
+                                          [0.00 - 100.00]%
+
+                loss                    - Packet loss probability
+                                          [0.00 - 100.00]%
+                loss_correlation        - Packet loss correlation probability
+                                          [0.00 - 100.00]%
+
+                duplicate               - Packet duplication probability
+                                          [0.00 - 100.00]%
+                duplicate_correlation   - Packet duplication probability
+                                          [0.00 - 100.00]%
+
+                limit                   - Limit in bytes
+                gap                     - Re-ordering gap in packets
+                reorder_probability     - Re-ordering probability
+                                          [0.00 - 100.00]%
+                reorder_correlation     - Re-ordering correlation probability
+                                          [0.00 - 100.00]%
+
+                corruption_probability  - Corruption probability
+                                          [0.00 - 100.00]%
+                corruption_correlation  - Corruption correlation probability
+                                          [0.00 - 100.00]%
+                Available parameters if kind is "tbf":
+                rate                    - Rate of TBF qdisc in bytes per second
+                bucket                  - Size of the bucket in bytes
+                cell                    - Size of a rate cell
+                limit                   - Limit in bytes
+                latency                 - Limit by latency in micro seconds
+
+                Available parameters if kind is "clsact":
+                bpf_ingress      - Link to BPF program which is attached
+                                   to TC ingress hook on the interface,
+                                   such as /agent:Agt_A/bpf:0/program:foo
+                bpf_egress       - Link to BPF program in Configurator tree
+                                   (e.g. /agent:Agt_A/bpf:0/program:foo),
+                                   which needs to be attached to TC egress hook
+                                   on the interface.
+

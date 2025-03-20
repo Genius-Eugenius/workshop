@@ -1,0 +1,47 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Export variables that provide info about known NIC models.
+
+# Known NIC models
+declare -A NIC_MODELS
+NIC_MODELS["1924:0903"]="ef10"
+NIC_MODELS["1924:0a03"]="medford"
+NIC_MODELS["1924:0b03"]="medford"
+
+# Mellanox Technologies MT27800 Family [ConnectX-5]
+NIC_MODELS["15b3:1017"]="mcx5"
+# Mellanox MT28908 Family [ConnectX-6]
+NIC_MODELS["15b3:101b"]="mcx6"
+
+# Intel Corporation Ethernet Controller X710 for 10GbE SFP+
+NIC_MODELS["8086:1572"]="x710"
+# Intel Corporation Device [8086:159b] (rev 02)
+NIC_MODELS["8086:159b"]="e810"
+
+# Red Hat, Inc. Virtio network device
+NIC_MODELS["1af4:1000"]="virtio_net"
+
+#######################################
+# Export varibale with NIC model by the provided Vendor/Device IDs.
+# Globals:
+#   NIC_MODELS
+# Arguments:
+#   Vendor ID
+#   Device ID
+#   Varibale name to export
+#######################################
+export_nic_model() {
+    local vid="$1" ; shift
+    local did="$1" ; shift
+    local var="$1" ; shift
+
+    local key="${vid}:${did}"
+    local val="${NIC_MODELS[${key}]}"
+
+    [[ -z "$val" ]] || export ${var}="$val"
+}
+
+export_nic_model $TE_PCI_VENDOR_IUT_TST1 $TE_PCI_DEVICE_IUT_TST1 \
+    TE_ENV_IUT_DUT
+export_nic_model $TE_PCI_VENDOR_TST1_IUT $TE_PCI_DEVICE_TST1_IUT \
+    TE_ENV_TST1_DUT

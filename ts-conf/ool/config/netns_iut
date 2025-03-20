@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# Run IUT agent in the second network namespace.
+# Move only the top IUT interfaces to the namespace.
+
+. $SF_TS_CONFDIR/scripts/lib.netns
+
+TE_EXTRA_OPTS="$TE_EXTRA_OPTS --trc-tag=netns_iut"

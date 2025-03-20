@@ -1,0 +1,19 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+
+- comment: |
+    slapd (LDAP) daemon configuration model.
+
+
+
+- register:
+
+    - oid: "/agent/slapd"
+      access: read_create
+      type: string
+      depends:
+        - oid: "/agent/rsrc"
+      d: |
+         LDAP daemon
+         Name: port
+         Value: name of file with LDIF

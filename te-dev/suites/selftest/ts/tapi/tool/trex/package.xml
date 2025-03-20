@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<package version="1.0">
+
+    <description>Test Suite to test TAPI TRex implementation</description>
+
+
+    <session track_conf="silent">
+
+        <var name="env.peer2peer">
+            <value>{
+                {
+                  {'pco_iut':IUT},
+                   addr:'iut_addr':inet:unicast,
+                   if:'iut_if'
+                },
+                {
+                  {'pco_tst':tester},
+                  addr:'tst_addr':inet:unicast,
+                  if:'tst_if'
+                }
+            }</value>
+        </var>
+
+        <prologue>
+            <script name="trex_prologue"/>
+        </prologue>
+
+        <run>
+            <script name="trex_nginx"/>
+            <arg name="env" ref="env.peer2peer"/>
+            <arg name="trex_duration">
+                <!-- TRex run duration, in seconds. -->
+                <value>60</value>
+            </arg>
+            <arg name="trex_multiplier">
+                <!-- TRex rate multiplier. -->
+                <value>8</value>
+            </arg>
+            <arg name="nginx_port">
+                <!-- Nginx port to bind. -->
+                <value>80</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="trex_wrk"/>
+            <arg name="env" ref="env.peer2peer"/>
+            <arg name="trex_duration">
+                <!-- TRex run duration, in seconds. -->
+                <value>30</value>
+            </arg>
+            <arg name="wrk_connections">
+                <!-- Wrk number of connections. -->
+                <value>20</value>
+            </arg>
+        </run>
+
+    </session>
+</package>

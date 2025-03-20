@@ -1,0 +1,173 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+
+- add:
+    - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm"
+    - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/drive:root"
+
+- cond:
+    if: |
+        ${TE_HYPERVISOR_TOTAL_HUGEPAGES} != "" &
+        ${TE_HYPERVISOR_TOTAL_HUGEPAGES} > 0
+    then:
+      - set:
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/mem:/path:"
+            value: /dev/hugepages
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/mem:/prealloc:"
+            value: 1
+
+- cond:
+    if: ${TE_LOG_LISTENER_IUT} = netconsole
+    then:
+      - set:
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/serial:"
+            value: "udp:${TE_LOG_LISTENER}:${TE_LOG_LISTENER_NETCONSOLE_PORT_IUT}"
+
+- set:
+    - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/mgmt_net_device:"
+      value: "${TE_IUT_VM_MGMT_NET_DEV}"
+    - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/cpu:/num:"
+      value: "${TE_IUT_VM_CPU_NUM:-2}"
+    - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/mem:/size:"
+      value: "${TE_IUT_VM_MEM_SIZE:-2048}"
+    - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/drive:root/file:"
+      value: "${TE_IUT_VM_DRIVE:-${TE_VM_DRIVE}}"
+    - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/drive:root/snapshot:"
+      value: "1"
+
+- cond:
+    if: ${TE_IUT_VM_PCI_PT} != ""
+    then:
+      - cond:
+          if: ${TE_PCI_INSTANCE_IUT_TST1} != ""
+          then:
+            - add:
+                - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/rsrc:pci_fn:${TE_PCI_VENDOR_IUT_TST1}:${TE_PCI_DEVICE_IUT_TST1}:${TE_PCI_INSTANCE_IUT_TST1}"
+                  value: "/agent:${TE_HYPERVISOR_TA_NAME}/hardware:/pci:/vendor:${TE_PCI_VENDOR_IUT_TST1}/device:${TE_PCI_DEVICE_IUT_TST1}/instance:${TE_PCI_INSTANCE_IUT_TST1}"
+            - get:
+                - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/hardware:/pci:/vendor:${TE_PCI_VENDOR_IUT_TST1}/device:${TE_PCI_DEVICE_IUT_TST1}/instance:${TE_PCI_INSTANCE_IUT_TST1}"
+                  value: "IF_IUT_PCI0_OID"
+                - oid: "${IF_IUT_PCI0_OID}/domain:"
+                  value: "IF_IUT_PCI0_DOMAIN"
+                - oid: "${IF_IUT_PCI0_OID}/bus:"
+                  value: "IF_IUT_PCI0_BUS"
+                - oid: "${IF_IUT_PCI0_OID}/slot:"
+                  value: "IF_IUT_PCI0_SLOT"
+                - oid: "${IF_IUT_PCI0_OID}/fn:"
+                  value: "IF_IUT_PCI0_FN"
+            - set:
+                - oid: "${IF_IUT_PCI0_OID}/driver:"
+                  value: "vfio-pci"
+            - add:
+                - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/pci_pt:iut_fn0"
+                  value: "${IF_IUT_PCI0_DOMAIN}:${IF_IUT_PCI0_BUS}:${IF_IUT_PCI0_SLOT}.${IF_IUT_PCI0_FN}"
+      - cond:
+          if: ${TE_PCI_INSTANCE_IUT_TST1a} != ""
+          then:
+            - add:
+                - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/rsrc:pci_fn:${TE_PCI_VENDOR_IUT_TST1}:${TE_PCI_DEVICE_IUT_TST1}:${TE_PCI_INSTANCE_IUT_TST1a}"
+                  value: "/agent:${TE_HYPERVISOR_TA_NAME}/hardware:/pci:/vendor:${TE_PCI_VENDOR_IUT_TST1}/device:${TE_PCI_DEVICE_IUT_TST1}/instance:${TE_PCI_INSTANCE_IUT_TST1a}"
+            - get:
+                - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/hardware:/pci:/vendor:${TE_PCI_VENDOR_IUT_TST1}/device:${TE_PCI_DEVICE_IUT_TST1}/instance:${TE_PCI_INSTANCE_IUT_TST1a}"
+                  value: "IF_IUT_PCI1_OID"
+                - oid: "${IF_IUT_PCI1_OID}/domain:"
+                  value: "IF_IUT_PCI1_DOMAIN"
+                - oid: "${IF_IUT_PCI1_OID}/bus:"
+                  value: "IF_IUT_PCI1_BUS"
+                - oid: "${IF_IUT_PCI1_OID}/slot:"
+                  value: "IF_IUT_PCI1_SLOT"
+                - oid: "${IF_IUT_PCI1_OID}/fn:"
+                  value: "IF_IUT_PCI1_FN"
+            - set:
+                - oid: "${IF_IUT_PCI1_OID}/driver:"
+                  value: "vfio-pci"
+            - add:
+                - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/pci_pt:iut_fn1"
+                  value: "${IF_IUT_PCI1_DOMAIN}:${IF_IUT_PCI1_BUS}:${IF_IUT_PCI1_SLOT}.${IF_IUT_PCI1_FN}"
+    else:
+      - add:
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/net:iut_tst1"
+      - set:
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/net:iut_tst1/type:"
+            value: "tap"
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/net:iut_tst1/type_spec:"
+            value: "${TE_HYPERVISOR_IUT:-${TE_IUT_TST1_TAP}}"
+      - add:
+          - if: ${TE_IUT_TST1_TAP_NETDEV_OPT_VHOST} != ""
+            oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/net:iut_tst1/netdev_opt:vhost"
+            value: "${TE_IUT_TST1_TAP_NETDEV_OPT_VHOST}"
+          - if: ${TE_IUT_TST1_TAP_NETDEV_OPT_QUEUES} != ""
+            oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/net:iut_tst1/netdev_opt:queues"
+            value: "${TE_IUT_TST1_TAP_NETDEV_OPT_QUEUES}"
+          - if: ${TE_IUT_TST1_TAP_DEVICE_OPT_MQ} != ""
+            oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/net:iut_tst1/device_opt:mq"
+            value: "${TE_IUT_TST1_TAP_DEVICE_OPT_MQ}"
+
+- set:
+    - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/status:"
+      value: "1"
+
+- get:
+    - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/ssh_port:/host:"
+      value: "TE_IUT_SSH_PORT"
+    - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm/rcf_port:"
+      value: "TE_IUT_PORT"
+
+- add:
+    - oid: "/rcf:/agent:${TE_IUT_TA_NAME}"
+      value: "${TE_IUT_TA_TYPE}"
+
+- set:
+    - oid: "/rcf:/agent:${TE_IUT_TA_NAME}/vm:"
+      value: "/agent:${TE_HYPERVISOR_TA_NAME}/vm:iut_vm"
+    - oid: "/rcf:/agent:${TE_IUT_TA_NAME}/rebootable:"
+      value: "1"
+    - oid: "/rcf:/agent:${TE_IUT_TA_NAME}/rcflib:"
+      value: "rcfunix"
+
+- add:
+    - oid: "/rcf:/agent:${TE_IUT_TA_NAME}/conf:host"
+      value: "${TE_IUT:-127.0.0.1}"
+    - oid: "/rcf:/agent:${TE_IUT_TA_NAME}/conf:port"
+      value: "${TE_IUT_PORT}"
+    - oid: "/rcf:/agent:${TE_IUT_TA_NAME}/conf:user"
+      value: "${TE_IUT_SSH_USER}"
+    - oid: "/rcf:/agent:${TE_IUT_TA_NAME}/conf:key"
+      value: "${TE_IUT_SSH_KEY}"
+    - oid: "/rcf:/agent:${TE_IUT_TA_NAME}/conf:ssh_proxy"
+      value: "${TE_HYPERVISOR}"
+    - oid: "/rcf:/agent:${TE_IUT_TA_NAME}/conf:ssh_port"
+      value: "${TE_IUT_SSH_PORT}"
+    - oid: "/rcf:/agent:${TE_IUT_TA_NAME}/conf:copy_tries"
+      value: "10"
+
+- set:
+    - oid: "/rcf:/agent:${TE_IUT_TA_NAME}/status:"
+      value: "1"
+
+- cond:
+    if: ${TE_IUT_VM_BR} != ""
+    then:
+        # Add bridge agent startup to be sure that tap interface is already in place
+      - add:
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/rsrc:${TE_IUT_VM_BR}"
+            value: "/agent:${TE_HYPERVISOR_TA_NAME}/interface:${TE_IUT_VM_BR}"
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/rsrc:${TE_IUT_TST1_TAP}"
+            value: "/agent:${TE_HYPERVISOR_TA_NAME}/interface:${TE_IUT_TST1_TAP}"
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/rsrc:${TE_IUT_TST1}"
+            value: "/agent:${TE_HYPERVISOR_TA_NAME}/interface:${TE_IUT_TST1}"
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/bridge:${TE_IUT_VM_BR}"
+
+      - set:
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/interface:${TE_IUT_VM_BR}/status:"
+            value: 1
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/interface:${TE_IUT_TST1_TAP}/status:"
+            value: 1
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/interface:${TE_IUT_TST1}/status:"
+            value: 1
+
+      - add:
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/bridge:${TE_IUT_VM_BR}/port:${TE_IUT_TST1_TAP}"
+            value: "/agent:${TE_HYPERVISOR_TA_NAME}/interface:${TE_IUT_TST1_TAP}"
+          - oid: "/agent:${TE_HYPERVISOR_TA_NAME}/bridge:${TE_IUT_VM_BR}/port:${TE_IUT_TST1}"
+            value: "/agent:${TE_HYPERVISOR_TA_NAME}/interface:${TE_IUT_TST1}"

@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+--script=env/site.xce
+--tester-req=!CHANGE_DEFAULT_ROUTE

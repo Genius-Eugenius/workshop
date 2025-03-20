@@ -1,0 +1,23 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+
+- comment: |
+    VNC configuration model.
+
+
+
+- register:
+
+    - oid: "/agent/vncserver"
+      access: read_create
+      type: none
+      d: |
+         VNC server.
+         Name: display number
+
+    - oid: "/agent/vncpasswd"
+      access: read_only
+      type: string
+      d: |
+         VNC server password.
+         Name: empty

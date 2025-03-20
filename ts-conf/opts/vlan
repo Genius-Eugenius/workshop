@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# Platform-agnostic options that are used in vlan test configurations.
+
+--tester-req=!NO_VLAN
+--trc-tag=vlan
+
+--script=scripts/make-vlan

@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+export TE_RPC_DEFAULT_IOMUX=pselect
+
+# ST-1008 ST-2187
+TE_EXTRA_OPTS="--tester-req=!OUT_OF_RESOURCES --tester-req=!NO_DEFAULT_SELECT"

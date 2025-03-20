@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+# This ool option exists to prevent automatic adding of
+# cplane_log_to_kernel option.

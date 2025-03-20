@@ -1,0 +1,2 @@
+# SPDX-License-Identifier: Apache-2.0
+TE_EXTRA_OPTS="--script=ool/profile:latency --trc-tag=latency_profile"

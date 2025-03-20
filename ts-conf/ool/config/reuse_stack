@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+export EF_NAME="sapi-ts"
+
+TE_EXTRA_OPTS="--trc-tag=reuse_stack --tester-req=!NO_REUSE_STACK"
+TE_EXTRA_OPTS="${TE_EXTRA_OPTS} --tester-req=!RPC_RESTART"
+# See bug 77231
+TE_EXTRA_OPTS="${TE_EXTRA_OPTS} --tester-req=!SO_REUSEPORT"

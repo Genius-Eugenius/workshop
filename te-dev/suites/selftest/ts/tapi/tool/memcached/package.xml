@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<package version="1.0">
+
+    <description>Test Suite to test TAPI memcached and memaslap implementation</description>
+
+
+
+    <session>
+        <run>
+            <script name="memcached"/>
+            <arg name="env">
+                <value>{{{'iut_rpcs':IUT},addr:'iut_addr':inet:unicast}}</value>
+            </arg>
+        </run>
+        <run>
+            <script name="memaslap"/>
+            <arg name="env">
+                <value>{{{'iut_rpcs':IUT},addr:'iut_addr':inet:unicast}}</value>
+            </arg>
+            <arg name="key_len_min">
+                <value>128</value>
+            </arg>
+            <arg name="key_len_max">
+                <value>128</value>
+            </arg>
+            <arg name="value_len_min">
+                <value>2048</value>
+            </arg>
+            <arg name="value_len_max">
+                <value>2048</value>
+            </arg>
+        </run>
+        <run>
+            <script name="memtier"/>
+            <arg name="env">
+                <value>{{{'iut_rpcs':IUT},addr:'iut_addr':inet:unicast}}</value>
+            </arg>
+        </run>
+    </session>
+</package>

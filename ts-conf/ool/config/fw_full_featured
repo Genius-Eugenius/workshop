@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+TE_EXTRA_OPTS="${TE_EXTRA_OPTS} --trc-tag=fw_full"
+
+TE_EXTRA_OPTS="${TE_EXTRA_OPTS}  --tester-req=!ZF_ALTS"

@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+export EF_UL_EPOLL=2
+
+TE_EXTRA_OPTS="--trc-tag=ool_epoll:2 --tester-req=!NO_EF_UL_EPOLL_TWO"

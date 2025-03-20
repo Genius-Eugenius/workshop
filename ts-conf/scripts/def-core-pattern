@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Default core pattern to set on TA host
+
+export TE_TA_CORE_PATTERN="/var/tmp/core.te.%h-%p-%t"

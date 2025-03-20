@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+export EF_TCP_URG_MODE="ignore"
+
+TE_EXTRA_OPTS="--trc-tag=urg_ignore --tester-req=!OOB"
+

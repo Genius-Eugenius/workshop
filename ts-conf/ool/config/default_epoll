@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+export TE_RPC_DEFAULT_IOMUX=epoll
+
+TE_EXTRA_OPTS="--trc-tag=default_iomux_epoll"

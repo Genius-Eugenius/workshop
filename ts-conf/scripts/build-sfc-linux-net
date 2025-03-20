@@ -1,0 +1,43 @@
+#! /bin/bash
+# SPDX-License-Identifier: Apache-2.0
+#
+# Helper scripts/to build sfc-linux-net as part of TE build
+#
+
+MAKE_ARGS="${@}"
+
+set -e
+
+LIB_MOD_DIR="lib/modules/$(uname -r)"
+
+rsync -av --delete --exclude='*.o' --exclude='*.mod.c' --exclude='*.ko' \
+    --exclude='*.mod' --exclude='*.cmd' --exclude='*.d' --exclude='*.a' \
+    --exclude=autocompat.h --exclude=modules.order \
+    --exclude=Module.symvers --exclude=.kpath --exclude=build \
+    "${EXT_SOURCES}"/ .
+
+if [ -f ./scripts/onload ] ; then
+    # This is driver from Onload repository
+
+    export PATH=$PATH:${PWD}/scripts/
+
+    ./scripts/mmakebuildtree --driver && \
+        drv_dir=$(./scripts/mmaketool --driverbuild) && \
+        make -C ./build/${drv_dir} ${MAKE_ARGS}
+else
+    # This is driver from sfc-linux-net repository
+
+    # Unfortunately parallel build looks unstable
+    make CONFIG_SFC_EF100=y ${MAKE_ARGS}
+fi
+
+if [ $? -eq 0 ] ; then
+    for ta_type in ${TE_TA_TYPES} ; do
+        DST="${TE_AGENTS_INST}/${ta_type}/${LIB_MOD_DIR}"
+        mkdir -p "$DST"
+        find . -name '*.ko' -type f -exec cp -a {} "${DST}/" \;
+    done
+    exit 0
+else
+    exit 1
+fi

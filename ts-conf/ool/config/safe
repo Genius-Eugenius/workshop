@@ -1,0 +1,2 @@
+# SPDX-License-Identifier: Apache-2.0
+TE_EXTRA_OPTS="--script=ool/profile:safe --trc-tag=ool_iomux_no_fast --trc-tag=ool_epoll:2 --tester-req=!NO_EF_UL_EPOLL_TWO --tester-req=!NO_SAFE --trc-tag=safe_profile"

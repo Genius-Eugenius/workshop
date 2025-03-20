@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# Platform-agnostic options that are used in bond test configurations.
+
+--tester-req=!NO_BOND
+
+--script=scripts/make-bond

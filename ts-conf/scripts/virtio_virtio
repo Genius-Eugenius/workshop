@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Helper script to setup environment to run on a pair of dynamically
+# started VMs using --cfg=virtio_virtio run.sh option (if supported).
+#
+# Most likely you need to define:
+#   - TE_HYPERVISOR - host to create QEMU virtual machines on
+#                     (localhost by default)
+#   - TE_VM_BUILD_HOST - host to build TE test agent type for VM if
+#                        distro on localhost does not match
+#                        (otherwise TA type for VM is build locally)
+#   - TE_VM_SSH_KEY - private SSH key to access VM under root or
+#                     TE_VM_SSH_USER if specified
+#                     (otherwise it will try without SSH key and
+#                     it must work without password)
+#
+
+: ${TE_ID:=$(id -u)}
+
+export TE_VM2VM=true
+
+export TE_IUT_RTE_MACHINE=corei7
+export TE_TST1_RTE_MACHINE=corei7
+
+if test -n "${TE_VM_BUILD_HOST}" ; then
+    export TE_IUT_BUILD_HOST=${TE_VM_BUILD_HOST}
+    export TE_TST1_BUILD_HOST=${TE_VM_BUILD_HOST}
+else
+    export TE_IUT_BUILD=local
+    export TE_IUT_TA_TYPE=linux64
+    export TE_TST1_BUILD=local
+    export TE_TST1_TA_TYPE=linux64
+fi
+
+# Build agent locally
+export TE_IUT_SSH_USER=${TE_VM_SSH_USER}
+export TE_IUT_SSH_KEY="${TE_VM_SSH_KEY}"
+export TE_IUT_SUDO=false
+export TE_IUT_MEM_CHANNELS=1
+export TE_IUT_DPDK_MEM_MB=512
+export TE_IUT_TST1_TAP=tap_i2t_${TE_ID}
+
+# Build agent locally
+export TE_TST1_SSH_USER=${TE_VM_SSH_USER}
+export TE_TST1_SSH_KEY="${TE_VM_SSH_KEY}"
+export TE_TST1_SUDO=false
+export TE_TST1_MEM_CHANNELS=1
+export TE_TST1_DPDK_MEM_MB=512
+export TE_TST1_IUT_TAP=tap_t2i_${TE_ID}
+
+export TE_IUT_TST1_BR=br_i2t_${TE_ID}
+
+# Extra Tx descriptor is required for virtio net header
+export TE_ENV_DPDK_EXTRA_TX_DESCS_PER_PKT=1
+
+export TE_PCI_VENDOR_IUT_TST1="1af4"
+export TE_PCI_DEVICE_IUT_TST1="1000"
+export TE_PCI_INSTANCE_IUT_TST1="0"
+export TE_ENV_IUT_DPDK_DRIVER="${TE_ENV_IUT_DPDK_DRIVER:-uio_pci_generic}"
+export TE_ENV_IUT_NET_DRIVER=virtio-pci
+
+export TE_PCI_VENDOR_TST1_IUT="1af4"
+export TE_PCI_DEVICE_TST1_IUT="1000"
+export TE_PCI_INSTANCE_TST1_IUT="0"
+export TE_ENV_TST_DPDK_DRIVER="${TE_ENV_TST_DPDK_DRIVER:-uio_pci_generic}"
+# Do not set network driver for TST1 since reloading the driver
+# from dpdk-pmd-ts prologue enables corresponding TAP interface
+# offloads back and it breaks some tests.
+#export TE_ENV_TST1_NET_DRIVER=virtio-pci
+
+export TE_IP4_POOL=192.168.1
+export TE_IP6_POOL=fec0:1:1:
+export TE_IP6_ALIEN=fec1:1:1::5555
+
+# Use hypervisor as a log listner by default
+if test -z "${TE_LOG_LISTENER}" -a -z "${TE_LOG_LISTENER_LOCALHOST}" ; then
+    test -z "${TE_HYPERVISOR}" \
+        || export TE_LOG_LISTENER="${TE_HYPERVISOR}"
+    test -z "${TE_HYPERVISOR_LOCALHOST}" \
+        || export TE_LOG_LISTENER_LOCALHOST="${TE_HYPERVISOR_LOCALHOST}"
+    test -z "${TE_HYPERVISOR_SSH_KEY}" \
+        || export TE_LOG_LISTENER_SSH_KEY="${TE_HYPERVISOR_SSH_KEY}"
+    test -z "${TE_HYPERVISOR_SSH_PORT}" \
+        || export TE_LOG_LISTENER_SSH_PORT="${TE_HYPERVISOR_SSH_PORT}"
+    test -z "${TE_HYPERVISOR_SSH_USER}" \
+        || export TE_LOG_LISTENER_SSH_USER="${TE_HYPERVISOR_SSH_USER}"
+fi
+export TE_LOG_LISTENER_IUT=netconsole
+export TE_LOG_LISTENER_TST1=netconsole

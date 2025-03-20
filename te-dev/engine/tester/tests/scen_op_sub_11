@@ -1,0 +1,3 @@
+#! /bin/sh
+# SPDX-License-Identifier: Apache-2.0
+echo -n "[[2,8,A+B]] sub [[1,9,B]] = [[2,8,A]]" | ./scen_op_test

@@ -1,0 +1,283 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+/** @file
+ * @brief TAPI Job options testing
+ *
+ * TAPI Job options testing
+ *
+ */
+
+/** @page jobopt-sample A sample of all types of TAPI Job option types
+ *
+ * @objective Sanity check that options of all types are constructed correctly
+ *
+ * @par Scenario:
+ *
+ */
+
+#define TE_TEST_NAME "jobopt/sample"
+
+#include "te_config.h"
+#ifdef HAVE_SYS_SOCKET_H
+#include <sys/socket.h>
+#endif
+#ifdef HAVE_NETINET_IN_H
+#include <netinet/in.h>
+#endif
+#ifdef HAVE_ARPA_INET_H
+#include <arpa/inet.h>
+#endif
+
+#include "te_enum.h"
+#include "te_sockaddr.h"
+#include "tapi_job_opt.h"
+#include "tapi_test.h"
+
+
+static void
+check_vector(const te_vec *args, size_t exp_len, const char ***exp_strs)
+{
+    size_t i;
+    const char **exp_block;
+
+    if (te_vec_size(args) != exp_len)
+    {
+        TEST_VERDICT("Number of constructed arguments is not as expected: "
+                     "got %zu, expected %zu",
+                     te_vec_size(args), exp_len);
+    }
+
+    for (i = 0, exp_block = exp_strs[0]; i < exp_len - 1; i++)
+    {
+        const char *val = TE_VEC_GET(const char *, args, i);
+
+        if (val == NULL)
+            TEST_VERDICT("%zu'th argument is NULL", i);
+
+        if (strcmp(val, *exp_block) != 0)
+        {
+            TEST_VERDICT("%zu'th argument differs: got '%s', expected '%s'",
+                         i, val, *exp_block);
+        }
+        if (*++exp_block == NULL)
+            exp_block = *++exp_strs;
+    }
+
+    if (TE_VEC_GET(const char *, args, i) != NULL)
+        TEST_VERDICT("The arguments vector is not properly terminated");
+}
+
+int
+main(int argc, char **argv)
+{
+    enum sample_enum {
+        E1,
+        E2,
+        E3,
+    };
+    typedef struct {
+        unsigned int uint;
+        tapi_job_opt_uint_t opt_uint1;
+        tapi_job_opt_uint_t opt_uint2;
+        tapi_job_opt_uint_t opt_uint3;
+        tapi_job_opt_uint_t opt_uint4;
+        tapi_job_opt_uintmax_t opt_uint64;
+        tapi_job_opt_double_t dbl1;
+        tapi_job_opt_double_t dbl2;
+        const char *str;
+        const char *str2;
+        const char *str3;
+        bool flag1;
+        bool flag2;
+        size_t n_array;
+        const char *array[8];
+        struct {
+            tapi_job_opt_uint_t opt_uint;
+            tapi_job_opt_double_t opt_double;
+            const char *opt_str;
+        } structure;
+#ifdef HAVE_NETINET_IN_H
+        const struct sockaddr *addr;
+        te_sockaddr_subnet subnet;
+#endif
+        enum sample_enum e1;
+        bool e2;
+        bool e3;
+        const char **array_ptr;
+    } data_sample;
+
+    static const te_enum_map enum_mapping[] = {
+        {.name = "E1", .value = E1},
+        {.name = "E2", .value = E2},
+        {.name = "E3", .value = E3},
+        TE_ENUM_MAP_END
+    };
+    static const te_enum_map yesno_mapping[] = {
+        {.name = "yes", .value = true},
+        {.name = "no", .value = false},
+        TE_ENUM_MAP_END
+    };
+
+    const tapi_job_opt_bind option_descs[] =
+        TAPI_JOB_OPT_SET(
+            TAPI_JOB_OPT_UINT("--uint", false, NULL, data_sample, uint),
+            TAPI_JOB_OPT_UINT_T("--uint=", true, NULL, data_sample, opt_uint1),
+            TAPI_JOB_OPT_UINT_T("--uint=", true, NULL, data_sample, opt_uint2),
+            TAPI_JOB_OPT_UINT_T_HEX("-h", false, "h", data_sample, opt_uint3),
+            TAPI_JOB_OPT_UINT_T_OCTAL("-o", false, NULL, data_sample,
+                                      opt_uint4),
+            TAPI_JOB_OPT_UINTMAX_T("--uint64=", true, NULL, data_sample,
+                                   opt_uint64),
+            TAPI_JOB_OPT_DOUBLE("-d", false, NULL, data_sample, dbl1),
+            TAPI_JOB_OPT_DOUBLE("-d", false, NULL, data_sample, dbl2),
+            TAPI_JOB_OPT_STRING("-s", false, data_sample, str),
+            TAPI_JOB_OPT_STRING("-s", false, data_sample, str2),
+            TAPI_JOB_OPT_QUOTED_STRING("--quoted-str=", "\"", data_sample, str),
+            TAPI_JOB_OPT_QUOTED_STRING("--quoted-str=", "\"",
+                                       data_sample, str2),
+            TAPI_JOB_OPT_QUOTED_STRING("--quoted-str=", "\"",
+                                       data_sample, str3),
+            TAPI_JOB_OPT_BOOL("--flag1", data_sample, flag1),
+            TAPI_JOB_OPT_BOOL("--flag2", data_sample, flag2),
+            TAPI_JOB_OPT_ARRAY(data_sample, n_array, array,
+                               TAPI_JOB_OPT_STRING("--item=", true,
+                                                   data_sample, array[0])),
+            TAPI_JOB_OPT_EMBED_ARRAY("--items={", true, ",", "}",
+                                     data_sample, n_array, array,
+                                     TAPI_JOB_OPT_STRING(NULL, true,
+                                                         data_sample,
+                                                         array[0])),
+            TAPI_JOB_OPT_ARRAY_PTR(data_sample, n_array, array_ptr,
+                TAPI_JOB_OPT_CONTENT(TAPI_JOB_OPT_STRING, "--arr-ptr-item=",
+                                     true)),
+            TAPI_JOB_OPT_EMBED_ARRAY_PTR("--arr-ptr-items={", true, ",", "}",
+                                         data_sample, n_array, array_ptr,
+                                         TAPI_JOB_OPT_CONTENT(TAPI_JOB_OPT_STRING, NULL, false)),
+            TAPI_JOB_OPT_STRUCT("--struct={", true, ":", "}",
+                                TAPI_JOB_OPT_UINT_T(NULL, false, NULL, data_sample,
+                                                    structure.opt_uint),
+                                TAPI_JOB_OPT_DOUBLE(NULL, false, NULL, data_sample,
+                                                    structure.opt_double),
+                                TAPI_JOB_OPT_STRING(NULL, false, data_sample,
+                                                    structure.opt_str)),
+            TAPI_JOB_OPT_DUMMY("--dummy"),
+#ifdef HAVE_NETINET_IN_H
+            TAPI_JOB_OPT_SOCKADDR_PTR("--ip", false, data_sample, addr),
+            TAPI_JOB_OPT_SOCKPORT_PTR("--port", false, data_sample, addr),
+            TAPI_JOB_OPT_ADDR_PORT_PTR("--addr_port", false, data_sample, addr),
+            TAPI_JOB_OPT_SOCKADDR_SUBNET("--subnet", false,
+                                         data_sample, subnet),
+#endif
+            TAPI_JOB_OPT_ENUM("--enum", false, data_sample, e1, enum_mapping),
+            TAPI_JOB_OPT_ENUM_BOOL("--", true, data_sample, e2, yesno_mapping),
+            TAPI_JOB_OPT_ENUM_BOOL("--", true, data_sample, e3, yesno_mapping)
+            );
+#ifdef HAVE_NETINET_IN_H
+    struct sockaddr_in sample_addr = {
+        .sin_family = AF_INET,
+        .sin_port = htons(8888),
+        .sin_addr = {htonl(INADDR_LOOPBACK)}
+    };
+#endif
+    data_sample option_data = {
+        .uint = 1,
+        .opt_uint1 = TAPI_JOB_OPT_UINT_VAL(2),
+        .opt_uint2 = TAPI_JOB_OPT_UINT_UNDEF,
+        .opt_uint3 = TAPI_JOB_OPT_UINT_VAL(0xdeadbeef),
+        .opt_uint4 = TAPI_JOB_OPT_UINT_VAL(0750),
+        .opt_uint64 = TAPI_JOB_OPT_UINTMAX_VAL(UINT64_MAX),
+        .dbl1 = TAPI_JOB_OPT_DOUBLE_VAL(1.0),
+        .dbl2 = TAPI_JOB_OPT_DOUBLE_UNDEF,
+        .str = "string",
+        .str2 = NULL,
+        .str3 = "",
+        .flag1 = true,
+        .flag2 = false,
+        .n_array = 3,
+        .array = {
+            "value1",
+            "value2",
+            "value3",
+        },
+        .structure = {
+            .opt_uint = TAPI_JOB_OPT_UINT_VAL(123),
+            .opt_double = TAPI_JOB_OPT_DOUBLE_VAL(45.67),
+            .opt_str = "struct_string"
+        },
+#ifdef HAVE_NETINET_IN_H
+        .addr = (const struct sockaddr *)&sample_addr,
+        .subnet = {
+            .addr = (const struct sockaddr *)&sample_addr,
+            .prefix_len = 8,
+        },
+#endif
+        .e1 = E2,
+        .e2 = true,
+        .e3 = false,
+        .array_ptr = option_data.array,
+    };
+    te_vec result_args = TE_VEC_INIT_AUTOPTR(char *);
+    static const char *expected_strs[] = {
+        "sample",
+        "--uint", "1",
+        "--uint=2",
+        "-h", "0xdeadbeefh",
+        "-o", "750",
+        "--uint64=18446744073709551615",
+        "-d", "1.000000",
+        "-s", "string",
+        "--quoted-str=\"string\"",
+        "--quoted-str=\"\"",
+        "--flag1",
+        "--item=value1", "--item=value2", "--item=value3",
+        "--items={value1,value2,value3}",
+        "--arr-ptr-item=value1", "--arr-ptr-item=value2",
+        "--arr-ptr-item=value3",
+        "--arr-ptr-items={value1,value2,value3}",
+        "--struct={123:45.670000:struct_string}",
+        "--dummy",
+#ifdef HAVE_NETINET_IN_H
+        "--ip", "127.0.0.1",
+        "--port", "8888",
+        "--addr_port", "127.0.0.1:8888",
+        "--subnet", "127.0.0.1/8",
+#endif
+        "--enum", "E2",
+        "--yes", "--no",
+        NULL
+    };
+    static const char *extra_strings[] = {
+        "string1",
+        "string2",
+        NULL
+    };
+
+    TEST_START;
+
+    TEST_STEP("Building the argument vector");
+    CHECK_RC(tapi_job_opt_build_args("sample",
+                                     option_descs, &option_data,
+                                     &result_args));
+    TEST_STEP("Checking the vector contains expected items");
+    check_vector(&result_args, TE_ARRAY_LEN(expected_strs),
+                 (const char **[]){expected_strs});
+
+    TEST_STEP("Extending the vector");
+    CHECK_RC(tapi_job_opt_append_strings(extra_strings, &result_args));
+    CHECK_RC(tapi_job_opt_append_args(option_descs, &option_data,
+                                      &result_args));
+
+    TEST_STEP("Checking the extended vector");
+    check_vector(&result_args,
+                 TE_ARRAY_LEN(expected_strs) +
+                 (TE_ARRAY_LEN(extra_strings) - 1) +
+                 (TE_ARRAY_LEN(expected_strs) - 2),
+                 (const char **[]){expected_strs, extra_strings,
+                     expected_strs + 1});
+
+    TEST_SUCCESS;
+
+cleanup:
+    te_vec_free(&result_args);
+
+    TEST_END;
+}

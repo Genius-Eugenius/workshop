@@ -1,0 +1,86 @@
+# SPDX-License-Identifier: Apache-2.0
+TE_EXTRA_OPTS="--trc-tag=v5"
+
+if test -z "${SFC_ONLOAD_GNU}" ; then
+    echo "SFC_ONLOAD_GNU is empty. It should be exported for Onload testing" >&2
+    exit 1
+fi
+
+# Include the file if it really exists - this allows TS not to break.
+# It seems that the following functions may become unavailable on some
+# TE_TS_RIGSDIR implementations: 'get_te_iut_host'.
+if [[ -r "${TE_TS_RIGSDIR}/scripts/lib.run" ]] ; then
+    . ${TE_TS_RIGSDIR}/scripts/lib.run
+fi
+te_iut_host="$(get_te_iut_host)"
+
+stdump="$SFC_ONLOAD_GNU/tools/ip/onload_stackdump"
+if test "x$SFC_ONLOAD_LOCAL" == "xyes" ; then
+    ONLOAD_EF_DEFS=$($SSH $te_iut_host $stdump doc)
+else
+    stdump_remote="/tmp/onload_stackdump"
+    scp "${stdump}" "${te_iut_host}:${stdump_remote}" 1>/dev/null
+    ONLOAD_EF_DEFS=$($SSH $te_iut_host $stdump_remote doc)
+    $SSH ${te_iut_host} "rm -f $stdump_remote"
+fi
+export ONLOAD_EF_DEFS
+
+#######################################
+# Get default EF_* variable value.
+# Arguments:
+#   Variable name
+# Globals:
+#   ONLOAD_EF_DEFS
+# Outputs:
+#   Writes variable value to stdout
+#######################################
+find_ef_default() {
+    name="$1"
+    echo $ONLOAD_EF_DEFS | sed -n "s/.*${name}[^.]*default: \([0-9]*\) .*/\1/p"
+}
+
+# Determining whether Onload was compiled with NDEBUG=1.
+# In this case ool_ndebug tag is added.
+if test "x${SFC_ONLOAD_LOCAL}" == "xyes" ; then
+    LIB_PATH="${SFC_ONLOAD_GNU}/lib/transport/unix/libcitransport0.so"
+else
+    scp "${SFC_ONLOAD_GNU}/lib/transport/unix/libcitransport0.so" "${te_iut_host}:/tmp/libte-iut.so" 1>/dev/null
+    LIB_PATH="/tmp/libte-iut.so"
+fi
+libinfo="$(${SSH} ${te_iut_host} "${LIB_PATH} 2>&1")"
+rc=$?
+if test $rc -ne 0 ; then
+    fail "${LIB_PATH} returned unexepected code: $rc"
+else
+    if [[ "$libinfo" == *\(release\)* ]] ; then
+        TE_EXTRA_OPTS+=" --trc-tag=ool_ndebug --tester-req=!NO_NDEBUG"
+        export SFC_NDEBUG=1
+    elif [[ "$libinfo" != *\(debug\)* ]] ; then
+        fail "cannot obtain type of build from the output: $libinfo"
+    fi
+fi
+if test "x${SFC_ONLOAD_LOCAL}" != "xyes" ; then
+    ssh ${te_iut_host} "rm /tmp/libte-iut.so"
+
+    if [[ $? != 0 ]] ; then
+        fail "Unable to delete $LIB_PATH on ${te_iut_host} via ssh"
+    fi
+fi
+
+if test "$EF_IUT_EF10" = "true" ; then
+    export IUT_TS_TX_TCP=1
+    export IUT_TS_RX_TCP=1
+    export IUT_TS_SYS_ZERO=0
+    export IUT_TS_TX_SW=0
+    export IUT_TS_TX_HW=1
+    export IUT_TS_TX_SW_UDP=0
+    export IUT_TS_TX_SCHED=0
+    export IUT_TS_TX_ACK=0
+    export IUT_TS_OPT_CMSG=1
+fi
+
+# Get initial cplane server parameters to extend the list.
+export SFC_CPLANE_SERVER_PARAMS="$(ssh ${TE_IUT} cat /sys/module/onload/parameters/cplane_server_params 2>/dev/null)"
+if test -z "$SFC_CPLANE_SERVER_PARAMS" ; then
+    unset SFC_CPLANE_SERVER_PARAMS
+fi

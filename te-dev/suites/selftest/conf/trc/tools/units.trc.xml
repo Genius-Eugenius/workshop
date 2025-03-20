@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<test name="units" type="script">
+    <objective>Testing unit conversion correctness</objective>
+    <notes/>
+    <iter result="PASSED">
+    </iter>
+</test>

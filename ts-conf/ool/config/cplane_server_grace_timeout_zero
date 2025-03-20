@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+export SFC_CPLANE_ZERO_GRACE_TIMEOUT=0
+
+TE_EXTRA_OPTS="$TE_EXTRA_OPTS --trc-tag=cplane_server_grace_timeout_zero"
+TE_EXTRA_OPTS="$TE_EXTRA_OPTS --tester-req=!CPLANE_NON_ZERO_GRACE_TIMEOUT"

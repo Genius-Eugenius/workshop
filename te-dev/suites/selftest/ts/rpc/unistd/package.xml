@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<package version="1.0">
+    <description>Package for self-tests of unistd functions</description>
+
+    <session>
+        <var name="env">
+            <value>{{{'pco_iut':IUT}}}</value>
+        </var>
+        <run>
+            <script name="append"/>
+            <arg name="env" ref="env" />
+        </run>
+        <run>
+            <script name="ioctl_blkflsbuf"/>
+            <arg name="env" ref="env" />
+        </run>
+        <run>
+            <script name="mkdir"/>
+            <arg name="env" ref="env" />
+            <arg name="nfiles">
+                <value>42</value>
+            </arg>
+        </run>
+        <run>
+            <script name="pread_pwrite"/>
+            <arg name="env" ref="env" />
+        </run>
+        <run>
+            <script name="truncate" />
+            <arg name="env" ref="env" />
+            <arg name="use_ftruncate">
+                <value>TRUE</value>
+                <value>FALSE</value>
+            </arg>
+            <arg name="length">
+                <value>1M</value>
+            </arg>
+            <arg name="trail_size">
+                <value>1024</value>
+            </arg>
+        </run>
+    </session>
+</package>

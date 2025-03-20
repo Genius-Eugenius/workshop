@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+<test name="redis" type="package">
+    <objective>TAPI redis implementation</objective>
+    <iter result="PASSED">
+        <test name="redis_srv">
+            <objective/>
+            <iter result="PASSED">
+                <arg name="env"/>
+            </iter>
+        </test>
+         <test name="redis_benchmark">
+            <objective/>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="clients"/>
+                <arg name="requests"/>
+                <arg name="size"/>
+                <arg name="keyspacelen"/>
+                <arg name="pipelines"/>
+                <arg name="threads"/>
+                <arg name="tests">GET</arg>
+            </iter>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="clients"/>
+                <arg name="requests"/>
+                <arg name="size"/>
+                <arg name="keyspacelen"/>
+                <arg name="pipelines"/>
+                <arg name="threads"/>
+                <arg name="tests">SET</arg>
+            </iter>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="clients"/>
+                <arg name="requests"/>
+                <arg name="size"/>
+                <arg name="keyspacelen"/>
+                <arg name="pipelines"/>
+                <arg name="threads"/>
+                <arg name="tests">-</arg>
+                <results tags="total_memory_mb&lt;2048">
+                  <result value="SKIPPED">
+                    <verdict>Not enough RAM to run all benchmark tests</verdict>
+                  </result>
+                </results>
+            </iter>
+        </test>
+    </iter>
+</test>

@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<test name="minimal" type="package">
+    <objective>Package for demonstrating minimal tests</objective>
+    <iter result="PASSED">
+        <test name="helloworld" type="script">
+            <objective/>
+            <notes/>
+            <iter result="PASSED">
+                <notes/>
+            </iter>
+        </test>
+        <test name="artifact" type="script">
+            <objective/>
+            <notes/>
+            <iter result="PASSED">
+                <notes/>
+            </iter>
+        </test>
+        <test name="mi_meas_line_graph" type="script">
+            <objective>Demo of using line-graph views with MI measurement artifacts</objective>
+            <notes/>
+            <iter result="PASSED">
+                <notes/>
+            </iter>
+        </test>
+        <test name="mi_meas_highrange" type="script">
+            <objective>Demo of using line-graph views with high-range measurements.</objective>
+            <notes/>
+            <iter result="PASSED">
+                <arg name="n_values" />
+                <notes/>
+            </iter>
+        </test>
+        <test name="mi_meas_multipliers" type="script">
+            <objective>Demo of using all possible measurement multipliers.</objective>
+            <notes/>
+            <iter result="PASSED">
+                <arg name="n_values" />
+                <notes/>
+            </iter>
+        </test>
+        <test name="verdict" type="script">
+            <objective/>
+            <notes/>
+            <iter result="PASSED">
+                <notes/>
+                <results tags="tag1">
+                    <result key="key 1" notes="Expected result with tag1" value="PASSED">
+                        <verdict>Test verdict 1</verdict>
+                        <verdict>Test verdict 2</verdict>
+                    </result>
+                    <result notes="FAILED is also accepted when tag1 is enabled"
+                            key="key 2" value="FAILED"/>
+                </results>
+                <results tags="tag_set_by_prologue">
+                    <result key="key 3" notes="Expected result" value="PASSED">
+                        <verdict>Test verdict 1</verdict>
+                        <verdict>Test verdict 2</verdict>
+                    </result>
+                </results>
+            </iter>
+        </test>
+        <test name="env" type="script">
+            <objective>Get the environment</objective>
+            <iter result="PASSED">
+                <arg name="env">{{{'pco_iut':IUT},if:'iut_if'}}</arg>
+                <notes/>
+            </iter>
+        </test>
+        <test name="parameters" type="script">
+            <objective>Test that various types of parameters are properly handled.</objective>
+            <iter result="PASSED">
+                <arg name="str_param" />
+                <arg name="int_param" />
+                <arg name="uint_param" />
+                <arg name="uint64_param" />
+                <arg name="dbl_param" />
+                <arg name="unit_param" />
+                <arg name="bin_unit_param" />
+                <arg name="true_param" />
+                <arg name="false_param" />
+                <arg name="opt_str_none_param" />
+                <arg name="opt_str_val_param" />
+                <arg name="opt_uint_none_param" />
+                <arg name="opt_uint_val_param" />
+                <arg name="opt_uint64_none_param" />
+                <arg name="opt_uint64_val_param" />
+                <arg name="opt_dbl_none_param" />
+                <arg name="opt_dbl_val_param" />
+                <arg name="opt_unit_none_param" />
+                <arg name="opt_unit_val_param" />
+                <arg name="opt_bin_unit_none_param" />
+                <arg name="opt_bin_unit_val_param" />
+                <arg name="good_result" />
+                <arg name="good_result_noprefix" />
+                <arg name="good_int_result" />
+                <arg name="bad_result" />
+                <arg name="bad_result_nomodule" />
+                <arg name="bad_result_output" />
+                <arg name="bad_int_result" />
+                <notes/>
+            </iter>
+        </test>
+    </iter>
+</test>

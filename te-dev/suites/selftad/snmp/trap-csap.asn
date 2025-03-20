@@ -1,0 +1,5 @@
+-- SPDX-License-Identifier: Apache-2.0
+
+{ snmp:{ security v2c:{community "public"}, version plain:1,
+	  snmp-agent plain:"127.0.0.1", local-port plain:5112, remote-port plain:0}}
+

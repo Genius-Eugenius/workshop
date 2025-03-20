@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<package version="1.0">
+
+    <description>Test package for TAPI Job options</description>
+
+
+
+    <session track_conf="silent">
+        <run>
+            <script name="sample"/>
+        </run>
+    </session>
+</package>

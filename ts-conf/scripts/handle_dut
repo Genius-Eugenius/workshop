@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Determine and add DUT script according to TE_ENV_IUT_DUT
+# and TE_ENV_TST1_DUT variables.
+
+case "$TE_ENV_IUT_DUT" in
+    medford)
+        TE_EXTRA_OPTS+=" --script=dut/medford"
+        ;;
+    ef100_soc)
+        TE_EXTRA_OPTS+=" --script=dut/ef100_soc"
+        TE_EXTRA_OPTS+=" --script=dut/aarch64"
+        TE_EXTRA_OPTS+=" --script=dut/one_sfx_iface"
+        ;;
+    ef100)
+        TE_EXTRA_OPTS+=" --script=dut/ef100"
+        TE_EXTRA_OPTS+=" --script=dut/one_sfx_iface"
+        ;;
+    ef10)
+        TE_EXTRA_OPTS+=" --script=dut/ef10"
+        ;;
+    x3)
+        TE_EXTRA_OPTS+=" --script=dut/x3"
+        ;;
+    x710|e810)
+        TE_EXTRA_OPTS+=" --script=dut/x710-e810"
+        TE_EXTRA_OPTS+=" --script=dut/nonsf"
+        ;;
+    virtio_net)
+        TE_EXTRA_OPTS+=" --script=dut/virtio_net"
+        TE_EXTRA_OPTS+=" --script=dut/nonsf"
+        ;;
+    *)
+        TE_EXTRA_OPTS+=" --script=dut/nonsf"
+        ;;
+esac
+
+case "$TE_ENV_TST1_DUT" in
+    ef100) TE_EXTRA_OPTS+=" --script=dut/ef100_tst" ;;
+esac
+
+if [[ -z "$TE_IUT_TST1_IUT" ]] ; then
+    # Disable tests that require two links on DUT
+    TE_EXTRA_OPTS+=" --tester-req=!ENV-2LINKS-IUT"
+fi

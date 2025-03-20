@@ -1,0 +1,7 @@
+<test name="str_compare_versions" type="script">
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+    <objective>Testing versions comparison function</objective>
+    <notes/>
+    <iter result="PASSED">
+    </iter>
+</test>

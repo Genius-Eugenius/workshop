@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+--script=scripts/lib
+--script=scripts/export_ifnames
+--script=scripts/nic-pci2dut
+--script=scripts/handle_dut
+--script=scripts/detect_num_testers
+--script=scripts/trc-tags
+--script=scripts/iut_os
+--tester-script=tester.script.iut_reqs

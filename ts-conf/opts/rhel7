@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# RHEL7 specific options
+
+# Do not create ipvlan interfaces in tests as
+# it requires linux >= 3.19
+--tester-req=!IPVLAN

@@ -1,0 +1,2 @@
+# SPDX-License-Identifier: Apache-2.0
+TE_EXTRA_OPTS="$TE_EXTRA_OPTS --trc-tag=build_ip6"

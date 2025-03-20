@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+export EF_MCAST_SEND=0
+
+TE_EXTRA_OPTS="--trc-tag=ool_mcast_send:0"

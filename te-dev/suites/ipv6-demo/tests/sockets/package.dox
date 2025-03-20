@@ -1,0 +1,10 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+/** @page IPv6 Socket API Tests
+
+@author TE Maintainers
+
+@par Tests:
+
+-# @ref sockets-send_recv
+
+*/

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<package version="1.0">
+    <description>Check apps implementation</description>
+
+
+    <session>
+        <run track_conf="silent">
+            <package name="nginx"/>
+        </run>
+    </session>
+</package>

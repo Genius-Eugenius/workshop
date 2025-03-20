@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<package version="1.0">
+    <description>Check TAPI implementation</description>
+
+
+    <session>
+        <run>
+            <package name="cache"/>
+        </run>
+
+        <run>
+            <package name="file"/>
+        </run>
+
+        <run>
+            <package name="fio"/>
+        </run>
+
+        <run>
+            <package name="job"/>
+        </run>
+
+        <run>
+            <package name="jobopt"/>
+        </run>
+
+        <run>
+            <package name="tool"/>
+        </run>
+
+        <run>
+            <package name="dns"/>
+        </run>
+
+    <!-- FIXME. Bug11561: Broken with Debian 11
+        <run>
+            <package name="upnp"/>
+        </run>
+    -->
+    </session>
+</package>

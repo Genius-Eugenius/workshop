@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+--opts=opts/unix
+
+--tester-req=!IP6_FULL
+--trc-tag=no-ip6-full

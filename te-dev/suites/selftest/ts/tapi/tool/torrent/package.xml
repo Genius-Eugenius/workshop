@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<package version="1.0">
+
+    <description>Test Suite to test TAPI ctorrent and TAPI bttrack implementation</description>
+
+
+
+    <!-- bttrack is not maintained by its developers anymore -->
+    <req id="BROKEN"/>
+
+    <session track_conf="silent">
+        <prologue>
+            <script name="ctorrent_prologue"/>
+        </prologue>
+
+        <run>
+            <script name="ctorrent"/>
+            <arg name="env">
+                <value>{{{'pco_iut':IUT},addr:'iut_addr':inet:unicast},{{'pco_tst':tester}}}</value>
+            </arg>
+        </run>
+    </session>
+</package>

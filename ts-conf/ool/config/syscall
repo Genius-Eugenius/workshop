@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+export ST_USE_SYSCALL=yes
+
+TE_EXTRA_OPTS="$TE_EXTRA_OPTS --trc-tag=syscall"

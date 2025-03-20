@@ -1,0 +1,12 @@
+#! /bin/bash
+# SPDX-License-Identifier: Apache-2.0
+#
+# Test Environment Builder
+#
+# Script for logging of builder output
+#
+#
+
+while read message ; do
+    te_log_message Engine Builder "$message" ;
+done ;

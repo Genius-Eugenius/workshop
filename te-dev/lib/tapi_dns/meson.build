@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: Apache-2.0
+
+headers += files(
+    'tapi_dns_unbound.h',
+    'tapi_dns_unbound_cfg.h',
+    'tapi_dns_zone_file.h',
+    'tapi_dnsperf.h',
+)
+
+sources += files(
+    'tapi_dns_common.c',
+    'tapi_dns_unbound.c',
+    'tapi_dns_unbound_cfg.c',
+    'tapi_dns_zone_file.c',
+    'tapi_dnsperf.c',
+)
+
+te_libs += [
+    'tapi',
+    'tapi_job',
+]

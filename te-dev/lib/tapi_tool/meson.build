@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: Apache-2.0
+
+headers += files(
+    'tapi_bttrack.h',
+    'tapi_ctorrent.h',
+    'tapi_ethtool.h',
+    'tapi_haproxy.h',
+    'tapi_haproxy_cfg.h',
+    'tapi_memaslap.h',
+    'tapi_memcached.h',
+    'tapi_memtier.h',
+    'tapi_mke2fs.h',
+    'tapi_netperf.h',
+    'tapi_nptcp.h',
+    'tapi_ping.h',
+    'tapi_redis_benchmark.h',
+    'tapi_redis_srv.h',
+    'tapi_sfnt_pingpong.h',
+    'tapi_ssh.h',
+    'tapi_stress.h',
+    'tapi_trex.h',
+    'tapi_wrk.h',
+)
+sources += files(
+    'tapi_bttrack.c',
+    'tapi_ctorrent.c',
+    'tapi_ethtool.c',
+    'tapi_haproxy.c',
+    'tapi_haproxy_cfg.c',
+    'tapi_memaslap.c',
+    'tapi_memcached.c',
+    'tapi_memtier.c',
+    'tapi_mke2fs.c',
+    'tapi_netperf.c',
+    'tapi_nptcp.c',
+    'tapi_ping.c',
+    'tapi_redis_benchmark.c',
+    'tapi_redis_srv.c',
+    'tapi_sfnt_pingpong.c',
+    'tapi_ssh.c',
+    'tapi_stress.c',
+    'tapi_trex.c',
+    'tapi_wrk.c',
+)
+
+te_libs += [
+    'tapi',
+    'tapi_job',
+]

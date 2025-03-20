@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Onload does not use huge pages or compound pages for packet buffers.
+export EF_USE_HUGE_PAGES=0
+export EF_COMPOUND_PAGES_MODE=2
+TE_EXTRA_OPTS="--trc-tag=pkt_nohuge --trc-tag=pkt_nocomp"

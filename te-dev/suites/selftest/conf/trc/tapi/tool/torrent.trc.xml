@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<test name="torrent" type="package">
+    <objective>TAPI torrent implementation</objective>
+    <iter result="PASSED">
+
+        <test name="ctorrent_prologue">
+            <objective/>
+            <iter result="PASSED"/>
+        </test>
+
+        <test name="ctorrent">
+            <objective/>
+            <iter result="PASSED">
+                <arg name="env"/>
+            </iter>
+        </test>
+
+    </iter>
+</test>

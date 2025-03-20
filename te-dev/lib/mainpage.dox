@@ -1,0 +1,34 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+/**@mainpage
+
+@copyright_notice
+
+
+@section contact_information Contact Information
+
+
+@section libraries Libraries links
+
+- @ref confapi
+- @ref loggerten
+- @ref rcfapi
+- @ref rcfrpc
+- @ref asn
+- @ref tapi
+- @ref tapi_arp
+- @ref tapi_bpf
+- @ref tapi_bridge
+- @ref tapi_cli
+- @ref tapi_eth
+- @ref tapi_ipstack
+- @ref tapi_media
+- @ref tapi_performance
+- @ref tapi_packetdrill
+- @ref tapi_rpc
+- @ref tapi_snmp
+- @ref tapi_storage
+- @ref tapi_tad
+- @ref tapi_tcp_states
+- @ref tapi_upnp
+- @ref tapi_wifi
+*/

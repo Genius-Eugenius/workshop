@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<test name="readlink" type="script">
+    <objective>Test for te_readlink_fmt correctness</objective>
+    <notes/>
+    <iter result="PASSED">
+    </iter>
+</test>

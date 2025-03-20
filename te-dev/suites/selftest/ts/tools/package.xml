@@ -1,0 +1,532 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<package version="1.0">
+    <description>Package for self-tests of lib/tool functions</description>
+
+
+    <session>
+        <run>
+            <script name="readlink"/>
+        </run>
+
+        <run>
+            <script name="resolvepath"/>
+        </run>
+
+        <run>
+            <script name="alloc"/>
+            <arg name="n_iterations">
+                <value>1000</value>
+            </arg>
+            <arg name="min_len">
+                <value>1</value>
+            </arg>
+            <arg name="max_len">
+                <value>65536</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="base64"/>
+            <arg name="n_iterations">
+                <value>1000</value>
+            </arg>
+            <arg name="min_len">
+                <value>1</value>
+            </arg>
+            <arg name="max_len">
+                <value>128</value>
+            </arg>
+            <arg name="url_safe">
+                <value>FALSE</value>
+                <value>TRUE</value>
+            </arg>
+        </run>
+
+        <run name="bufs">
+            <session>
+                <run>
+                    <script name="compare_bufs"/>
+                </run>
+
+                <run>
+                    <script name="make_bufs"/>
+                    <arg name="n_iterations">
+                        <value>1000</value>
+                    </arg>
+                    <arg name="min_len">
+                        <value>1</value>
+                    </arg>
+                    <arg name="max_len">
+                        <value>128</value>
+                    </arg>
+                </run>
+            </session>
+        </run>
+
+        <run>
+            <script name="enum_map"/>
+        </run>
+
+        <run name="expansion">
+            <session>
+                <run>
+                    <script name="expand"/>
+                    <arg name="template">
+                        <value>var1=${var1} var2=${var2:-unknown} pos=${0} unknown=${unknown{{:}}:-${var2}} known=${var2:+known} nested=${var2:+${unknown:-${var1}}} notempty=${var2|notempty:-empty} end</value>
+                    </arg>
+                    <arg name="var1" list="">
+                        <value>value1</value>
+                        <value>-</value>
+                    </arg>
+                    <arg name="var2" list="">
+                        <value>value2</value>
+                        <value>-</value>
+                    </arg>
+                    <arg name="posarg" list="">
+                        <value>positional</value>
+                    </arg>
+                    <arg name="expanded" list="">
+                        <value>var1=value1 var2=value2 pos=positional unknown=value2 known=known nested=value1 notempty=value2 end</value>
+                        <value>var1= var2= pos=positional unknown= known=known nested= notempty=empty end</value>
+                    </arg>
+                </run>
+                <run>
+                    <script name="expand_filters" />
+                    <arg name="input" list="">
+                        <value>test~~</value>
+                        <value>test~~</value>
+                        <value>test&#x0a;&#x09;</value>
+                        <value>test string 123.</value>
+                        <value>-</value>
+                        <value>test &#x0a;&#x0d;&#x0a;</value>
+                        <value>test&#x0a;</value>
+                        <value>test &quot;/&#x0a;</value>
+                        <value>test</value>
+                        <value>-</value>
+                        <value> test &#x09;  &#x0a; 123&#x0a; </value>
+                        <value>&#x0a;&#x09;</value>
+                        <value>test &apos; 123</value>
+                        <value>-</value>
+                        <value>test123</value>
+                        <value>test: 123/456~</value>
+                        <value>&lt;tag param=&quot;&amp;lt;&quot;&gt;&#x0a;</value>
+                        <value>klmno</value>
+                    </arg>
+                    <arg name="filter" list="">
+                        <value>base64</value>
+                        <value>base64uri</value>
+                        <value>c</value>
+                        <value>cid</value>
+                        <value>cid</value>
+                        <value>crlf|c</value>
+                        <value>hex</value>
+                        <value>json</value>
+                        <value>length</value>
+                        <value>length</value>
+                        <value>normalize</value>
+                        <value>normalize</value>
+                        <value>shell</value>
+                        <value>shell</value>
+                        <value>upper</value>
+                        <value>uri</value>
+                        <value>xml</value>
+                        <value>upper|hex|upper|base64</value>
+                    </arg>
+                    <arg name="filtered" list="">
+                        <value>dGVzdH5+</value>
+                        <value>dGVzdH5-</value>
+                        <value>test\n\t</value>
+                        <value>test_string_123_</value>
+                        <value>_</value>
+                        <value>test \r\n\r\n</value>
+                        <value>746573740a</value>
+                        <value>&quot;test \&quot;\/\n&quot;</value>
+                        <value>4</value>
+                        <value>0</value>
+                        <value>test 123</value>
+                        <value>-</value>
+                        <value>&apos;test &apos;\&apos;&apos; 123&apos;</value>
+                        <value>&apos;&apos;</value>
+                        <value>TEST123</value>
+                        <value>test%3A%20123%2F456~</value>
+                        <value>&amp;lt;tag param=&amp;quot;&amp;amp;lt;&amp;quot;&amp;gt;&amp;#xa;</value>
+                        <value>NEI0QzRENEU0Rg==</value>
+                    </arg>
+                </run>
+
+                <run>
+                    <script name="expand_list"/>
+                    <arg name="template" list="">
+                        <value>${#var1} ${#var3:-nothing}</value>
+                        <value>${var1} ${var1[0]} ${var1[1]} ${var1[-1]} ${var1[2]} ${var1[${index}]} ${var1[-${index}]} ${var1[10]:-missing}</value>
+                        <value>${var1[]} ${var1[,]} ${var1[ ]}</value>
+                        <value>${var1*${}} ${var1*${var2[${}]:-missing}} ${var3*${}:-missing} ${var1*${var1[${}]|length}} ${var1*${var1[${}]}|length}</value>
+                        <value>${var1[${index|succ|succ}]} ${var1*${|nonzero:+,}${var1[${}]}} ${var1*${|nonzero|pred}} ${var1*${|even:+${var1[${}]}}} ${var1*${|odd:+${var1[${}]}}}</value>
+                    </arg>
+                    <arg name="values1">
+                        <value>a,b,c,d</value>
+                    </arg>
+                    <arg name="values2">
+                        <value>x,y,z</value>
+                    </arg>
+                    <arg name="index_value">
+                        <value>1</value>
+                    </arg>
+                    <arg name="expanded" list="">
+                        <value>4 0</value>
+                        <value>a a b d c b d missing</value>
+                        <value>abcd a,b,c,d a b c d</value>
+                        <value>0123 xyzmissing missing 1111 4</value>
+                        <value>d a,b,c,d 012 ac bd</value>
+                    </arg>
+                </run>
+            </session>
+        </run>
+
+        <run>
+            <script name="extract_glob"/>
+            <arg name="filename">
+                <value>/dir/name.suffix</value>
+            </arg>
+            <arg name="pattern" list="">
+                <value>*</value>
+                <value>/dir/*</value>
+                <value>name.*</value>
+                <value>*.suffix</value>
+                <value>n*x</value>
+                <value>/*/name.suffix</value>
+                <value>nomatch</value>
+                <value>nomatch.*</value>
+                <value>????.*</value>
+                <value>[nN][[:alpha:]][m-x][][:alpha:][:digit:]]*su[f-h][[:alpha:]]\ix</value>
+                <!-- invalid glob patterns won't match -->
+                <value>name.*\</value>
+                <value>name.*[x-</value>
+                <!-- The following values are marked as broken because they would
+                     trigger a fatal error -->
+                <value reqs="BROKEN">*.*</value>
+                <value reqs="BROKEN">name.suffix</value>
+            </arg>
+            <arg name="expect_full" list="">
+                <value>NULL</value>
+                <value>name.suffix</value>
+                <value>NULL</value>
+                <value>NULL</value>
+                <value>NULL</value>
+                <value>dir</value>
+                <value>NULL</value>
+                <value>NULL</value>
+                <value>NULL</value>
+                <value>NULL</value>
+                <value>NULL</value>
+                <value>NULL</value>
+            </arg>
+            <arg name="expect_base" list="">
+                <value>name.suffix</value>
+                <value>NULL</value>
+                <value>suffix</value>
+                <value>name</value>
+                <value>ame.suffi</value>
+                <value>NULL</value>
+                <value>NULL</value>
+                <value>NULL</value>
+                <value>suffix</value>
+                <value>.</value>
+                <value>NULL</value>
+                <value>NULL</value>
+            </arg>
+        </run>
+
+        <run name="files">
+            <session>
+                <run>
+                    <script name="file"/>
+                    <arg name="content">
+                        <value>Test data</value>
+                    </arg>
+                    <arg name="binary">
+                        <value>FALSE</value>
+                        <value>TRUE</value>
+                    </arg>
+                </run>
+                <run>
+                    <script name="file_chunked"/>
+                    <!--
+                        This should be a file on a special filesystem like /proc
+                        but that does not change too frequently
+                    -->
+                    <arg name="pathname">
+                        <value>/proc/self/mounts</value>
+                    </arg>
+                </run>
+            </session>
+        </run>
+
+        <run>
+            <script name="hexdump"/>
+        </run>
+
+        <run>
+            <script name="intset"/>
+        </run>
+
+        <run>
+            <script name="json"/>
+            <arg name="use_file" type="boolean"/>
+        </run>
+
+        <run>
+            <script name="kvpair" />
+            <arg name="n_keys"><value>1000</value></arg>
+            <arg name="min_key_len"><value>2</value></arg>
+            <arg name="max_key_len"><value>1024</value></arg>
+            <arg name="min_value_len"><value>2</value></arg>
+            <arg name="max_value_len"><value>65536</value></arg>
+        </run>
+
+        <run>
+            <script name="lines" />
+            <arg name="n_iterations"><value>100</value></arg>
+            <arg name="max_lines"><value>10</value></arg>
+            <arg name="max_line_size"><value>100</value></arg>
+            <arg name="crlf" type="boolean" />
+        </run>
+
+        <run>
+            <script name="rings"/>
+            <arg name="n_iterations">
+                <value>10000</value>
+            </arg>
+            <arg name="max_ring_size">
+                <value>100</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="scalar_types"/>
+            <arg name="src_type">
+                <value>bool</value>
+                <value>uint8_t</value>
+                <value>uint16_t</value>
+                <value>uint32_t</value>
+                <value>uint64_t</value>
+                <value>unsigned short</value>
+                <value>unsigned int</value>
+                <value>unsigned long</value>
+                <value>size_t</value>
+                <value>uintptr_t</value>
+                <value>uintmax_t</value>
+                <value>int8_t</value>
+                <value>int16_t</value>
+                <value>int32_t</value>
+                <value>int64_t</value>
+                <value>short</value>
+                <value>int</value>
+                <value>long</value>
+                <value>intptr_t</value>
+                <value>intmax_t</value>
+            </arg>
+            <arg name="dst_type">
+                <value>bool</value>
+                <value>uint8_t</value>
+                <value>uint16_t</value>
+                <value>uint32_t</value>
+                <value>uint64_t</value>
+                <value>unsigned short</value>
+                <value>unsigned int</value>
+                <value>unsigned long</value>
+                <value>size_t</value>
+                <value>uintptr_t</value>
+                <value>uintmax_t</value>
+                <value>int8_t</value>
+                <value>int16_t</value>
+                <value>int32_t</value>
+                <value>int64_t</value>
+                <value>short</value>
+                <value>int</value>
+                <value>long</value>
+                <value>intptr_t</value>
+                <value>intmax_t</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="scandir"/>
+            <arg name="n_files">
+                <value>10</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="str_compare_versions"/>
+        </run>
+
+        <run>
+            <script name="string"/>
+        </run>
+
+        <run>
+            <script name="strpbrk_balanced"/>
+            <arg name="opening">
+                <value>(</value>
+            </arg>
+            <arg name="closing">
+                <value>)</value>
+            </arg>
+            <arg name="escape" list="">
+                <value>\</value>
+                <value>\</value>
+                <value>\</value>
+                <value>\</value>
+                <value>-</value>
+                <value>\</value>
+                <value>\</value>
+                <value>\</value>
+                <value>\</value>
+                <value>\</value>
+                <value>\</value>
+                <value>-</value>
+                <value>\</value>
+                <value>\</value>
+                <value>\</value>
+                <value>\</value>
+                <value>\</value>
+                <value>\</value>
+                <value>\</value>
+                <value>\</value>
+                <value>\</value>
+            </arg>
+            <arg name="separator" list="">
+                <value>,;</value>
+                <value>,;</value>
+                <value>,;</value>
+                <value>,;</value>
+                <value>,;</value>
+                <value>,;</value>
+                <value>-</value>
+                <value>,;</value>
+                <value>-</value>
+                <value>-</value>
+                <value>-</value>
+                <value>-</value>
+                <value>,;</value>
+                <value>,;</value>
+                <value>,;</value>
+                <value>,;</value>
+                <value>,;</value>
+                <value>,;</value>
+                <value>,;</value>
+                <value>,;</value>
+                <value>-</value>
+            </arg>
+            <arg name="input" list="">
+                <value>seg1(seg2,seg3)seg4,seg5;(seg6)</value>
+                <value>seg1(seg2,(seg3,seg4))seg5;seg6,((seg7),seg8)seg9</value>
+                <value>seg1\(seg2,seg3\)seg4,seg5\;\(seg6\)</value>
+                <value>seg1\(seg2,seg3\)seg4\\,seg5\\\;\(seg6\\\)</value>
+                <value>seg1\(seg2,seg3\)seg4{,seg5\;\(seg6\)</value>
+                <value>word</value>
+                <value>word</value>
+                <value>(word)</value>
+                <value>(word)</value>
+                <value>prefix(word)</value>
+                <value>\x(word)</value>
+                <value>\x(word)</value>
+                <value>(</value>
+                <value>)</value>
+                <value>(()</value>
+                <value>())</value>
+                <value>(\)</value>
+                <value>\()</value>
+                <value>\</value>
+                <value>\\\</value>
+                <value>x)(x</value>
+            </arg>
+            <arg name="leftmost" list="">
+                <value>,seg5;(seg6)</value>
+                <value>;seg6,((seg7),seg8)seg9</value>
+                <value>,seg3\)seg4,seg5\;\(seg6\)</value>
+                <value>,seg3\)seg4\\,seg5\\\;\(seg6\\\)</value>
+                <value>,seg5\;\(seg6\)</value>
+                <value>ENOENT</value>
+                <value>word</value>
+                <value>ENOENT</value>
+                <value>OK:</value>
+                <value>prefix(word)</value>
+                <value>\x(word)</value>
+                <value>\x(word)</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>x)(x</value>
+            </arg>
+            <arg name="rightmost" list="">
+                <value>;(seg6)</value>
+                <value>,((seg7),seg8)seg9</value>
+                <value>,seg5\;\(seg6\)</value>
+                <value>,seg5\\\;\(seg6\\\)</value>
+                <value>;\(seg6\)</value>
+                <value>ENOENT</value>
+                <value>d</value>
+                <value>ENOENT</value>
+                <value>ENOENT</value>
+                <value>x(word)</value>
+                <value>\x(word)</value>
+                <value>x(word)</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>EILSEQ</value>
+                <value>x</value>
+            </arg>
+        </run>
+
+        <run>
+            <package name="timer"/>
+        </run>
+
+        <run>
+            <package name="trees"/>
+        </run>
+
+        <run>
+            <script name="units"/>
+        </run>
+
+        <run>
+            <script name="uri"/>
+        </run>
+
+        <run name="vectors">
+            <session>
+                <run>
+                    <script name="vector"/>
+                </run>
+
+                <run>
+                    <script name="vector_mem"/>
+                    <arg name="n_iterations">
+                        <value>10000</value>
+                    </arg>
+                    <arg name="max_elements">
+                        <value>100</value>
+                    </arg>
+                </run>
+
+                <run>
+                    <script name="vector_search"/>
+                </run>
+            </session>
+        </run>
+    </session>
+</package>
